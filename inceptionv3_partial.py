@@ -102,8 +102,9 @@ def InceptionV3_top60(inputs, classes=1000, pooling='avg'):
     x = inputs
 
     #x = gaussian_noise_layer(x, .1)
-    stddev = 0.9
-    x = keras.layers.GaussianNoise(stddev)(x)
+    stddev = 0.1
+    #x = keras.layers.GaussianNoise(stddev)(x)
+    x = keras.layers.AlphaDropout(stddev)(x)    
 
     if backend.image_data_format() == 'channels_first':
         channel_axis = 1
