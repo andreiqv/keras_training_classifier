@@ -179,9 +179,9 @@ class GoodsDataset:
             identity = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)
             
             a0 = tf.constant([1.0])
-            a1 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.2)
+            a1 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.0)
             a2 = tf.constant([-50.0])
-            b0 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.2)
+            b0 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.0)
             b1 = tf.constant([1.0])
             b2 = tf.constant([-50.0])
             c0 = tf.constant([0.0])
