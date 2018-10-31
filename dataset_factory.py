@@ -176,13 +176,13 @@ class GoodsDataset:
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             # Transformation
-            identity = tf.constant([1, 0, 0, 0, 1, 0, 0, 0], dtype=tf.float32)
+            identity = tf.constant([1, 0.2, 0.4, 0.2, 1, 0.5, 0.4, 0.2], dtype=tf.float32)
             batch_size = batch
             transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
             print(transform)
             # transform is  vector of length 8 or tensor of size N x 8
             # [a0, a1, a2, b0, b1, b2, c0, c1]
-            transform = tf.constant([1, 0.2, 0.4, 0.2, 1, 0.5, 0.4, 0.2], dtype=tf.float32)
+            #transform = tf.constant([1, 0.2, 0.4, 0.2, 1, 0.5, 0.4, 0.2], dtype=tf.float32)
             images =tf.contrib.image.transform(images, transform)
             # --------
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
@@ -259,7 +259,7 @@ if __name__ == '__main__':
     #
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
         plot_random_nine(images, labels)
-        if i > 5: sys.exit(0)
+        if i > 2: sys.exit(0)
           #plot_random_nine(images, labels, labels_list)
     #     q = 2
 
