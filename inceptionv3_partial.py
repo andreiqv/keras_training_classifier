@@ -103,9 +103,9 @@ def InceptionV3_top60(inputs, classes=1000, pooling='avg'):
 
     #x = gaussian_noise_layer(x, .1)
     #stddev = 0.1
-    #x = keras.layers.GaussianDropout(stddev)(x)
+    #x = keras.layers.GaussianNoise(stddev)(x)
 
-    x = keras.layers.GaussianDropout(0.1)(x)
+    x = keras.layers.GaussianNoise(0.2)(x)
     #x = keras.layers.AlphaDropout(0.05)(x)    
 
     if backend.image_data_format() == 'channels_first':
@@ -125,7 +125,7 @@ def InceptionV3_top60(inputs, classes=1000, pooling='avg'):
             axis=channel_axis,
             name='mixed9_' + str(i))
 
-        x = keras.layers.GaussianDropout(0.1)(x)  #  ADD NOISE
+        x = keras.layers.GaussianNoise(0.1)(x)  #  ADD NOISE
 
         branch3x3dbl = conv2d_bn(x, 448, 1, 1)
         branch3x3dbl = conv2d_bn(branch3x3dbl, 384, 3, 3)
@@ -134,7 +134,7 @@ def InceptionV3_top60(inputs, classes=1000, pooling='avg'):
         branch3x3dbl = layers.concatenate(
             [branch3x3dbl_1, branch3x3dbl_2], axis=channel_axis)
 
-        x = keras.layers.GaussianDropout(0.1)(x)  #  ADD NOISE
+        x = keras.layers.GaussianNoise(0.1)(x)  #  ADD NOISE
 
         branch_pool = layers.AveragePooling2D(
             (3, 3), strides=(1, 1), padding='same')(x)
@@ -144,7 +144,7 @@ def InceptionV3_top60(inputs, classes=1000, pooling='avg'):
             axis=channel_axis,
             name='mixed' + str(9 + i))
 
-    x = keras.layers.GaussianDropout(0.05)(x)  #  ADD NOISE        
+    x = keras.layers.GaussianNoise(0.05)(x)  #  ADD NOISE        
 
     x = layers.GlobalAveragePooling2D(name='avg_pool')(x)
     x = layers.Dense(classes, activation='softmax', name='predictions')(x)
