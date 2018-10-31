@@ -183,7 +183,7 @@ class GoodsDataset:
             a2 = tf.constant([-50.0])
             b0 = tf.random_uniform(shape=(1,), minval=0.2, maxval=0.2)
             b1 = tf.constant([1.0])
-            b2 = tf.constant([0.0])
+            b2 = tf.constant([-50.0])
             c0 = tf.constant([0.0])
             c1 = tf.constant([0.0])
             transform1 = tf.concat(axis=0, values=[a0, a1, a2, b0, b1, b2, c0, c1])
