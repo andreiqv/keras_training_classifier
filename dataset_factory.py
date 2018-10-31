@@ -176,7 +176,7 @@ class GoodsDataset:
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             # Transformation
-            identity = tf.constant([1.0, 0.2, 0.4, 0.2, 1.0, 0.5, 0.0, 0.0], dtype=tf.float32)
+            identity = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)
             batch_size = batch
             transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
             print(transform)
