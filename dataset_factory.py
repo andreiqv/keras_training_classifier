@@ -259,10 +259,9 @@ if __name__ == '__main__':
     #
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
         plot_random_nine(images, labels)
+        if i > 5: sys.exit(0)
           #plot_random_nine(images, labels, labels_list)
     #     q = 2
-
-    sys.exit()
 
     arguments = argparse.ArgumentParser(description="create labels list for dataset paths")
 
