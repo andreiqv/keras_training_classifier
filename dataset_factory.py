@@ -7,6 +7,7 @@ import sys
 import sklearn
 import math
 
+import settings
 from settings import IMAGE_SIZE
 
 # tfe = tf.contrib.eager
@@ -174,7 +175,14 @@ class GoodsDataset:
             angle = tf.random_uniform(shape=(1,), minval=0, maxval=90)
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
+            # Transformation
+            identity = tf.constant([1, 0, 0, 0, 1, 0, 0, 0], dtype=tf.float32)
+            batch_size = batch
+            transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
+            images =tf.contrib.image.transform(images, transform)
+            # --------
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
+            # end of Rotation and Transformation block
 
             images = tf.image.random_hue(images, max_delta=0.05)
             images = tf.image.random_contrast(images, lower=0.9, upper=1.5)
@@ -242,7 +250,8 @@ if __name__ == '__main__':
     #
     #goods_dataset = GoodsDataset("dataset.list", "output/se_classifier_161018.list", (299, 299), 32, 32, 5, 0.1)
     goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", 
-        (299, 299), 32, 32, 5, 0.1)
+        settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
+        settings.valid_percentage)
     #
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
         plot_random_nine(images, labels)
