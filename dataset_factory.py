@@ -180,7 +180,7 @@ class GoodsDataset:
             
             a0 = tf.constant([1.0])
             a1 = tf.random_uniform(shape=(1,), minval=0.2, maxval=0.2)
-            a2 = tf.constant([50.0])
+            a2 = tf.constant([-50.0])
             b0 = tf.random_uniform(shape=(1,), minval=0.2, maxval=0.2)
             b1 = tf.constant([1.0])
             b2 = tf.constant([0.0])
