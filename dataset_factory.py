@@ -179,6 +179,7 @@ class GoodsDataset:
             identity = tf.constant([1, 0, 0, 0, 1, 0, 0, 0], dtype=tf.float32)
             batch_size = batch
             transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
+            print(transform)
             images =tf.contrib.image.transform(images, transform)
             # --------
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
