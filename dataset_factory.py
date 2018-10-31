@@ -176,9 +176,20 @@ class GoodsDataset:
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             # Transformation
-            identity = tf.constant([1.0, 0.2, 0.3, 0.2, 1.0, 0.3, 0.0, 0.0], dtype=tf.float32)
+            identity = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)
+            
+            a0 = tf.constant([1.0])
+            a1 = tf.random_uniform(shape=(1,), minval=0, maxval=0.2)
+            a2 = tf.constant([0.0])
+            b0 = tf.random_uniform(shape=(1,), minval=0, maxval=0.2)
+            b1 = tf.constant([1.0])
+            b2 = tf.constant([0.0])
+            c0 = tf.constant([0.0])
+            c1 = tf.constant([0.0])
+            transform1 = tf.concat(axis=0, values=[a0, a1, a2, b0, b1, b2, c0, c1])
+
             batch_size = batch
-            transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
+            transform = tf.tile(tf.expand_dims( transform1, 0), [batch_size, 1])
             print(transform)
             # transform is  vector of length 8 or tensor of size N x 8
             # [a0, a1, a2, b0, b1, b2, c0, c1]
