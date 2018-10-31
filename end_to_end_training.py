@@ -58,7 +58,7 @@ callbacks = [
 
 #goods_dataset = GoodsDataset("dataset.list", OUTPUT_FOLDER + "/" + OUTPUT_MODEL_NAME + ".txt", 
 #    IMAGE_SIZE, 20, 20, 5, 0.1)
-dataset = GoodsDataset("dataset-181018-ram.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
+goods_dataset = GoodsDataset("dataset-181018-ram.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
                            settings.train_batch, settings.valid_batch, 
                            settings.multiply, settings.valid_percentage)
 
