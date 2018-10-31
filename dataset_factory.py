@@ -180,6 +180,9 @@ class GoodsDataset:
             batch_size = batch
             transform = tf.tile(tf.expand_dims(identity, 0), [batch_size, 1])
             print(transform)
+            # transform is  vector of length 8 or tensor of size N x 8
+            # [a0, a1, a2, b0, b1, b2, c0, c1]
+            transform = tf.constant([1, 0.2, 0.4, 0.2, 1, 0.5, 0.4, 0.2], dtype=tf.float32)
             images =tf.contrib.image.transform(images, transform)
             # --------
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
