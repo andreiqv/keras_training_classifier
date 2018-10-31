@@ -7,7 +7,9 @@ import numpy as np
 # import keras as K
 OUTPUT_FOLDER = "output"
 OUTPUT_MODEL_NAME = "se_recognizer"
-IMAGE_SIZE = (299, 299)
+#IMAGE_SIZE = (299, 299)
+import settings
+from settings import IMAGE_SIZE
 
 
 def freeze_session(session, keep_var_names=None, output_names=None, clear_devices=True):
@@ -54,8 +56,11 @@ callbacks = [
     )
 ]
 
-goods_dataset = GoodsDataset("dataset.list", OUTPUT_FOLDER + "/" + OUTPUT_MODEL_NAME + ".txt", IMAGE_SIZE, 20, 20, 5,
-                             0.1)
+#goods_dataset = GoodsDataset("dataset.list", OUTPUT_FOLDER + "/" + OUTPUT_MODEL_NAME + ".txt", 
+#    IMAGE_SIZE, 20, 20, 5, 0.1)
+dataset = GoodsDataset("dataset-181018-ram.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
+                           settings.train_batch, settings.valid_batch, 
+                           settings.multiply, settings.valid_percentage)
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 # input_shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)

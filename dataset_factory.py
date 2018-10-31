@@ -97,9 +97,13 @@ class GoodsDataset:
         for plu_id in images_dict.keys():
             
             # SORTED:
-            #images_dict[plu_id] = sorted(images_dict[plu_id])
-            # or RANDOM with fix random_state
-            sklearn.utils.shuffle(images_dict[plu_id], random_state=15)
+            if settings.dataset_order == 'sort':
+                images_dict[plu_id] = sorted(images_dict[plu_id])
+            # or RANDOM with fix random_state   
+            elif settings.dataset_order == 'shuffle':
+                sklearn.utils.shuffle(images_dict[plu_id], random_state=15)
+            else:
+                raise Exception('Bad value of dataset_order.')
             
             images_dict[plu_id] = np.array(images_dict[plu_id])
             valid_mask = np.zeros(len(images_dict[plu_id]), dtype=bool)
@@ -161,7 +165,7 @@ class GoodsDataset:
             # angle = tf.random_uniform(shape=(1,), minval=0, maxval=90)
             # images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
 
-            # Rotation
+            # Rotation and transformation
             # print(images.shape)  # = (?, 299, 299, ?)
             print('images.shape:', images.shape)      
             w, h = IMAGE_SIZE
@@ -172,30 +176,26 @@ class GoodsDataset:
             images = tf.pad(images, paddings, "SYMMETRIC")
             #images = tf.image.resize_image_with_crop_or_pad(images, w+d, h+d)
             print('images.shape:', images.shape)
-            angle = tf.random_uniform(shape=(1,), minval=0, maxval=90)
+            angle = tf.random_uniform(shape=(1,), minval=0, maxval=settings.rotation_max_angle)
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             # Transformation
-            identity = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)
-            
+            #transform1 = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)            
+            # transform is  vector of length 8 or tensor of size N x 8
+            # [a0, a1, a2, b0, b1, b2, c0, c1]
             a0 = tf.constant([1.0])
-            a1 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.2)
+            a1 = tf.random_uniform(shape=(1,), minval=0.0, maxval=settings.transform)
             a2 = tf.constant([-30.0])
-            b0 = tf.random_uniform(shape=(1,), minval=0.0, maxval=0.2)
+            b0 = tf.random_uniform(shape=(1,), minval=0.0, maxval=settings.transform)
             b1 = tf.constant([1.0])
             b2 = tf.constant([-30.0])
             c0 = tf.constant([0.0])
             c1 = tf.constant([0.0])
             transform1 = tf.concat(axis=0, values=[a0, a1, a2, b0, b1, b2, c0, c1])
-
-            batch_size = batch
-            transform = tf.tile(tf.expand_dims( transform1, 0), [batch_size, 1])
+            transform = tf.tile(tf.expand_dims( transform1, 0), [batch, 1])
             print(transform)
-            # transform is  vector of length 8 or tensor of size N x 8
-            # [a0, a1, a2, b0, b1, b2, c0, c1]
-            #transform = tf.constant([1, 0.2, 0.4, 0.2, 1, 0.5, 0.4, 0.2], dtype=tf.float32)
             images =tf.contrib.image.transform(images, transform)
-            # --------
+            # ---
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
             # end of Rotation and Transformation block
 
