@@ -1,6 +1,6 @@
 # dataset parameters
 IMAGE_SIZE = (299, 299)
-multiply = 5
+multiply = 2
 valid_percentage = 0.1
 #train_batch = 32
 #valid_batch = 32

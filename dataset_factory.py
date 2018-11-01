@@ -210,7 +210,6 @@ class GoodsDataset:
 
             images = tf.minimum(images, 1.0)
             images = tf.maximum(images, 0.0)
-            #images.set_shape([None, None, None, 3])
             images.set_shape([None, None, None, 3])
             return images, labels
 
