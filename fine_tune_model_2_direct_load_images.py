@@ -14,6 +14,10 @@ from settings import IMAGE_SIZE
 #INPUT_SHAPE = (8, 8, 2048)   # top-30
 INPUT_SHAPE = (8, 8, 1280)   # top-60
 
+def top_6(y_true, y_pred):
+    k = 6
+    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
+
 #dir_prefix = "/home/andrei/work/_tf_records"
 #goods_dataset = InceptionV3Top60tfrecordsDataset(
 #    dir_prefix + "/inceptionv3_top60_train_dataset1810.zlib.tfr",
