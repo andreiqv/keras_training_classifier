@@ -47,8 +47,8 @@ class ImagesDataset:
       images = intermediate_layer_model.predict(images, steps=77)
       return images, labels
 
-    self.train_set = train_set.map(_intermediate_processing, num_parallel_calls=8)
-    self.valid_set = valid_set.map(_intermediate_processing, num_parallel_calls=8)
+    self.train_set = train_set.map(_intermediate_processing) #, num_parallel_calls=8)
+    self.valid_set = valid_set.map(_intermediate_processing) #, num_parallel_calls=8)
 
 goods_dataset = ImagesDataset()
 
