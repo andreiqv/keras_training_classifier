@@ -7,7 +7,7 @@ from dataset_factory import GoodsDataset
 import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
-from keras.optimizers import SGD
+from tensorflow.keras.optimizers import SGD
 
 
 def top_6(y_true, y_pred):
