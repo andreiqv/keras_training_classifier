@@ -44,7 +44,8 @@ class ImagesDataset:
                                            outputs=base_model.layers[output_layer_number].output)
 
     def _intermediate_processing(images, labels):
-      images = intermediate_layer_model.predict(images, steps=77)
+      #images = intermediate_layer_model.predict(images, steps=77)
+      images = intermediate_layer_model.evaluate(images, steps=77)
       return images, labels
 
     self.train_set = train_set.map(_intermediate_processing) #, num_parallel_calls=8)
