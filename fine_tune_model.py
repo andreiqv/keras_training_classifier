@@ -7,6 +7,7 @@ from dataset_factory import GoodsDataset
 import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
+from keras.optimizers import Adam, Adagrad
 
 
 def top_6(y_true, y_pred):
@@ -41,7 +42,7 @@ for i, layer in enumerate(model.layers):
 # for i in range(1, len(model.layers)):
 #     model.layers[i].set_weights(parent_model.layers[248 + i].get_weights())
 
-model.compile(optimizer='adagrad',#'adam',
+model.compile(optimizer=Adagrad(lr=0.005), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
