@@ -213,14 +213,14 @@ class GoodsDataset:
             images.set_shape([None, None, None, 3])
             return images, labels
 
-        dataset = dataset.map(_random_distord, num_parallel_calls=2)
+        dataset = dataset.map(_random_distord, num_parallel_calls=8)
 
         return dataset
 
     def get_train_dataset(self):
         with tf.device("/device:CPU:0"):
             dataset = tf.data.Dataset.from_tensor_slices((self.train_image_paths, self.train_image_labels))
-            dataset = dataset.map(self._parse_function, num_parallel_calls=2)
+            dataset = dataset.map(self._parse_function, num_parallel_calls=8)
             dataset = self._augment_dataset(dataset, self.multiply, self.train_batch)
         return dataset
 

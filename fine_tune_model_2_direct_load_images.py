@@ -26,13 +26,29 @@ def top_6(y_true, y_pred):
 #    bottleneck_shape=INPUT_SHAPE
 #)
 
-class ImagesDataset:  
-  def __init__(self, ):
+class ImagesDataset: 
+  
+  def __init__(self):
+
     goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", 
         settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
         settings.valid_percentage)
-    self.train_set = goods_dataset.get_train_dataset()
-    self.valid_set = goods_dataset.get_valid_dataset()    
+    train_set = goods_dataset.get_train_dataset()
+    valid_set = goods_dataset.get_valid_dataset()    
+
+
+    input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+    base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
+                             input_tensor=input_tensor)
+    intermediate_layer_model = keras.Model(inputs=base_model.input,
+                                           outputs=base_model.layers[output_layer_number].output)
+
+    def _intermediate_processing(images, labels):
+      images = intermediate_layer_model.predict(images)
+      return images, labels
+
+    self.train_set = train_set.map(_intermediate_processing, num_parallel_calls=8)
+    self.valid_set = valid_set.map(_intermediate_processing, num_parallel_calls=8)
 
 goods_dataset = ImagesDataset()
 
