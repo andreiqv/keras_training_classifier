@@ -93,6 +93,7 @@ def generate_tf_records_inceptionv3_top_60(dataset, output_file, output_layer_nu
 
 
 class GoodsTfrecordsDataset:
+    
     def __init__(self, train_file, valid_file, train_batch_size, valid_batch_size, compression=None) -> None:
         self.train_file = train_file
         self.valid_file = valid_file
@@ -133,6 +134,7 @@ class GoodsTfrecordsDataset:
 
 
 class InceptionV3Top60tfrecordsDataset:
+
     def __init__(self, train_file, valid_file, bottleneck_shape=(8, 8, 1280)) -> None:
         self.train_file = train_file
         self.valid_file = valid_file

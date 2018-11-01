@@ -6,6 +6,8 @@ valid_percentage = 0.1
 #valid_batch = 32
 train_batch = 16
 valid_batch = 16
-dataset_order = 'shuffle' # 'sort' or 'shuffle'
-transform_maxval = 0.2 # a1 and b0 coeff. (max values), see https://www.tensorflow.org/api_docs/python/tf/contrib/image/transform
+# 'sort' or 'shuffle'
+dataset_order = 'shuffle' 
+# a1 and b0 coeff. (max values), see https://www.tensorflow.org/api_docs/python/tf/contrib/image/transform
+transform_maxval = 0.2 
 rotation_max_angle = 90
