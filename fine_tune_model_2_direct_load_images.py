@@ -55,7 +55,8 @@ model.compile(optimizer='adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
-print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
+#print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
+print(model.evaluate(goods_dataset.valid_set, steps=77))
 
 callbacks = [
     keras.callbacks.ModelCheckpoint(
@@ -69,10 +70,10 @@ callbacks = [
     )
 ]
 
-model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
+model.fit(goods_dataset.train_set.prefetch(10).repeat(),
           callbacks=callbacks,
           epochs=30,
           steps_per_epoch=1157,
-          validation_data=goods_dataset.valid_set.batch(32).repeat(),
+          validation_data=goods_dataset.valid_set.repeat(),
           validation_steps=77,
           )
