@@ -18,7 +18,7 @@ def top_6(y_true, y_pred):
 keras.backend.set_learning_phase(0)
 
 base_model = keras.models.load_model(
-    "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.pb",
+    "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
     custom_objects={'top_6': top_6})
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
