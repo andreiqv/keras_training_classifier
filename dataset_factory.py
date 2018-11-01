@@ -180,10 +180,9 @@ class GoodsDataset:
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             # Transformation
-            #transform1 = tf.constant([1.0, 0.2, 0.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)            
+            #transform1 = tf.constant([1.0, 0.2, -30.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)            
             # transform is  vector of length 8 or tensor of size N x 8
-            # [a0, a1, a2, b0, b1, b2, c0, c1]
-            
+            # [a0, a1, a2, b0, b1, b2, c0, c1]            
             a0 = tf.constant([1.0])
             a1 = tf.random_uniform(shape=(1,), minval=0.0, maxval=settings.transform_maxval)
             a2 = tf.constant([-30.0])
@@ -193,10 +192,9 @@ class GoodsDataset:
             c0 = tf.constant([0.0])
             c1 = tf.constant([0.0])
             transform1 = tf.concat(axis=0, values=[a0, a1, a2, b0, b1, b2, c0, c1])
-            transform = tf.tile(tf.expand_dims( transform1, 0), [batch, 1])
+            transform = tf.tile(tf.expand_dims(transform1, 0), [batch, 1])
             print('Added transformations:', transform)
-            images =tf.contrib.image.transform(images, transform)
-            
+            images = tf.contrib.image.transform(images, transform)            
             # ---
             images = tf.image.resize_image_with_crop_or_pad(images, w, h)
             # end of Rotation and Transformation block
