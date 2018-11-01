@@ -192,7 +192,7 @@ class GoodsDataset:
             c0 = tf.constant([0.0])
             c1 = tf.constant([0.0])
             transform1 = tf.concat(axis=0, values=[a0, a1, a2, b0, b1, b2, c0, c1])
-            transform = tf.tile(tf.expand_dims(transform1, 0), [?, 1])
+            transform = tf.tile(tf.expand_dims(transform1, 0), [None, 1])
             print('Added transformations:', transform)
             images = tf.contrib.image.transform(images, transform)            
             # ---
