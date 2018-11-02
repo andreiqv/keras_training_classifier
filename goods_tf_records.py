@@ -181,7 +181,7 @@ if __name__ == '__main__':
     dt_train = dataset.get_train_dataset()
     dt_valid = dataset.get_valid_dataset()
 
-    input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+    #input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 
     # base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
     #                          input_tensor=input_tensor)
