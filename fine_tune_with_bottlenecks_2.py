@@ -34,7 +34,7 @@ base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
 x = base_model.output
 #x = GlobalAveragePooling2D()(x)
 #x = layers.Dense(148, activation='relu')(x)
-predictions = layers.Dense(num_classes, activation='softmax')(x)
+predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
 
