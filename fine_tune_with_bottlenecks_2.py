@@ -38,8 +38,12 @@ predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
 
+for layer in model.layers[:249]:
+  layer.trainable = False
+
 #for layer in model.layers[249:]:
 #  layer.trainable = True
+
 
 # for i, layer in enumerate(base_model.layers):
 #     print(i, layer.name)
