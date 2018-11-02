@@ -87,16 +87,37 @@ class GoodsDataset:
                 line = line.replace("\n", "")
                 plu_id = line.split("/")[-2]
 
-                if plu_id not in images_dict:
-                    images_dict[plu_id] = [line]
-                else:
-                    images_dict[plu_id].append(line)
+                def add_line_by_id(_id, line):
+                    if _id in images_dict:
+                        images_dict[_id].append(line)
+                    else:
+                        images_dict[_id] = [line]                	
+
+                similar_goods = [{'38','413','36','17'},\
+                    {'407','31','404','44','313','35'},\
+                    {'37', '46', '424', '40', '4'}]
+
+                flag = False
+                for goods in similar_goods:
+                    if plu_id in goods:
+                        flag = True
+                        for _id in goods:
+                            add_line_by_id(_id, line)
+
+                if not flag:   # as usually
+                    add_line_by_id(plu_id, line)
+
+                #if plu_id not in images_dict:
+                #    images_dict[plu_id] = [line]
+                #else:
+                #    images_dict[plu_id].append(line)
 
         self.classes_count = len(images_dict.keys())
 
         for plu_id in images_dict.keys():
             
             # SORTED:
+            print('Dataset_order: {}'.format(settings.dataset_order))
             if settings.dataset_order == 'sort':
                 images_dict[plu_id] = sorted(images_dict[plu_id])
             # or RANDOM with fix random_state   
