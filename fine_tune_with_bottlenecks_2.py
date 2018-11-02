@@ -49,8 +49,8 @@ model.add(keras.layers.Flatten(input_shape=(2048,)))
 model.add(keras.layers.Dense(148, activation='softmax'))
 """
 
-model = InceptionResNetV2(weights='imagenet', include_top=True, 
-  input_tensor=input_tensor, classes=settings.num_classes)
+model = InceptionResNetV2(weights=None, include_top=True, 
+  input_tensor=input_tensor, classes=148)
 
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
