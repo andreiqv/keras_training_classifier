@@ -28,8 +28,13 @@ input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
 #  input_tensor=input_tensor)
 
-model = InceptionV3(weights='imagenet', include_top=True, pooling='avg', 
-  input_tensor=input_tensor, classes=148)
+base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
+  input_tensor=input_tensor)
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dense(148, activation='relu')(x)
+predictions = Dense(num_classes, activation='softmax')(x)
+model = Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
 
 #for layer in model.layers[249:]:
