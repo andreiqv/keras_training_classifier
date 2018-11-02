@@ -44,11 +44,11 @@ print(new_model.summary())
 for i in range(0, len(base_model.layers)):
     new_model.layers[i + 248].set_weights(base_model.layers[i].get_weights())
 
-print("model inputs")
+print("new model inputs")
 for node in new_model.inputs:
     print(node.op.name)
 
-print("model outputs")
+print("new model outputs")
 for node in new_model.outputs:
     print(node.op.name)
 
@@ -58,4 +58,4 @@ dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SI
 results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
 print(results)
 
-new_model.save("output/inpcetionv3_top60_181018-03-0.869-0.700[0.950]_rnd_adam.pb")
+new_model.save("output/new.pb")
