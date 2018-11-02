@@ -25,9 +25,11 @@ def top_6(y_true, y_pred):
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #
-model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
-  input_tensor=input_tensor)
+#model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
+#  input_tensor=input_tensor)
 
+model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
+  input_tensor=input_tensor)
 print(model.summary())
 
 for layer in model.layers[249:]:
