@@ -10,7 +10,7 @@ def freeze_graph(graph, session, output):
     with graph.as_default():
         graphdef_inf = tf.graph_util.remove_training_nodes(graph.as_graph_def())
         graphdef_frozen = tf.graph_util.convert_variables_to_constants(session, graphdef_inf, output)
-        graph_io.write_graph(graphdef_frozen, "./output", "top60_181018-03-0.869-0.700[0.950]_rnd_adam.pb", as_text=False)
+        graph_io.write_graph(graphdef_frozen, "./output", "inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.pb", as_text=False)
 
 
 def top_6(y_true, y_pred):
@@ -21,7 +21,7 @@ def top_6(y_true, y_pred):
 keras.backend.set_learning_phase(0)
 
 base_model = keras.models.load_model(
-    "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
+    "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
     custom_objects={'top_6': top_6}
 )
 

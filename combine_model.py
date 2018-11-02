@@ -58,4 +58,4 @@ dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SI
 results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
 print(results)
 
-new_model.save("output/new.pb")
+new_model.save("output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5")
