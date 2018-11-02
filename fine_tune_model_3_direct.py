@@ -88,7 +88,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=30,
+          epochs=300,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
