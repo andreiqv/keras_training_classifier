@@ -62,7 +62,7 @@ for layer in model.layers[:249]:
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
-model.compile(optimizer='rmsprop',
+model.compile(optimizer='adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
@@ -88,7 +88,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=300,
+          epochs=30,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
