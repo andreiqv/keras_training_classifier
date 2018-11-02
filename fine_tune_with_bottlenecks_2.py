@@ -28,8 +28,8 @@ input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
 #  input_tensor=input_tensor)
 
-model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
-  input_tensor=input_tensor)
+model = InceptionV3(weights='imagenet', include_top=True, pooling='avg', 
+  input_tensor=input_tensor, classes=148)
 print(model.summary())
 
 #for layer in model.layers[249:]:
@@ -44,8 +44,9 @@ print(model.summary())
 #                                      32, 32, 'ZLIB')
 
 #model = keras.Sequential()
-model.add(keras.layers.Flatten(input_shape=(2048,)))
-model.add(keras.layers.Dense(148, activation='softmax'))
+#model.add(keras.layers.Flatten(input_shape=(2048,)))
+#model.add(keras.layers.Flatten(input_shape=(2048,)))
+#model.add(keras.layers.Dense(148, activation='softmax'))
 
 
 # optimizer = keras.optimizers.RMSprop()
