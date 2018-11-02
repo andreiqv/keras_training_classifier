@@ -12,8 +12,8 @@ from goods_tf_records import GoodsTfrecordsDataset
 
 # tf.enable_eager_execution()
 import settings
-from settings import IMAGE_SIZE
-#IMAGE_SIZE = (299, 299)
+#from settings import IMAGE_SIZE
+IMAGE_SIZE = (299, 299)
 FREEZE_LAYERS = 618
 
 
@@ -32,8 +32,8 @@ model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
   input_tensor=input_tensor)
 print(model.summary())
 
-for layer in model.layers[249:]:
-  layer.trainable = True
+#for layer in model.layers[249:]:
+#  layer.trainable = True
 
 # for i, layer in enumerate(base_model.layers):
 #     print(i, layer.name)
