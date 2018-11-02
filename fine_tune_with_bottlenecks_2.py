@@ -2,6 +2,7 @@
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras import layers
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
@@ -32,8 +33,8 @@ base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
   input_tensor=input_tensor)
 x = base_model.output
 #x = GlobalAveragePooling2D()(x)
-x = keras.Dense(148, activation='relu')(x)
-predictions = Dense(num_classes, activation='softmax')(x)
+#x = layers.Dense(148, activation='relu')(x)
+predictions = layers.Dense(num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
 
