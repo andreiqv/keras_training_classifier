@@ -28,7 +28,6 @@ input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
 #  input_tensor=input_tensor)
 
-"""
 model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
   input_tensor=input_tensor)
 print(model.summary())
@@ -44,13 +43,10 @@ print(model.summary())
 #                                      "./tf_records/inceptionv3_bottlenecks_valid_dataset181018.zlib.tfr",
 #                                      32, 32, 'ZLIB')
 
-model = keras.Sequential()
+#model = keras.Sequential()
 model.add(keras.layers.Flatten(input_shape=(2048,)))
 model.add(keras.layers.Dense(148, activation='softmax'))
-"""
 
-model = InceptionResNetV2(weights=None, include_top=True, 
-  input_tensor=input_tensor, classes=148)
 
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
