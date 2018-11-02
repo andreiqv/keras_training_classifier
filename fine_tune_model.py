@@ -9,13 +9,15 @@ from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 
+import settings
+
 
 def top_6(y_true, y_pred):
     k = 6
     return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
 
 
-IMAGE_SIZE = (299, 299)
+IMAGE_SIZE = settings.IMAGE_SIZE
 #INPUT_SHAPE = (8, 8, 2048)   # top-30
 INPUT_SHAPE = (8, 8, 1280)   # top-60
 
@@ -32,7 +34,7 @@ inputs = keras.layers.Input(shape=INPUT_SHAPE)
 #     "./output/inceptionv3-top30-0.83.hdf5",
 #     custom_objects={'top_6': top_6})
 
-model = InceptionV3_top60(inputs, 148)
+model = InceptionV3_top60(inputs, settings.num_classes)
 
 print(model.summary())
 

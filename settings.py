@@ -1,4 +1,5 @@
 # dataset parameters
+num_classes = 148
 IMAGE_SIZE = (299, 299)
 multiply = 2
 valid_percentage = 0.1

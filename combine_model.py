@@ -7,7 +7,8 @@ from tensorflow.python.framework import graph_io
 import numpy as np
 from dataset_factory import GoodsDataset
 
-IMAGE_SIZE = (299, 299)
+import settings
+from settings import IMAGE_SIZE
 
 
 def top_6(y_true, y_pred):
@@ -25,11 +26,11 @@ input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 
 main_model = keras.applications.InceptionV3(include_top=False,
                                             weights='imagenet',
-                                            classes=148,
+                                            classes=settings.num_classes,
                                             pooling='avg',
                                             input_tensor=input_tensor)
 
-predictions = keras.layers.Dense(148, activation='softmax')(main_model.output)
+predictions = keras.layers.Dense(settings.num_classes, activation='softmax')(main_model.output)
 new_model = keras.Model(inputs=main_model.input, outputs=predictions)
 
 new_model.compile(optimizer='rmsprop',
@@ -44,17 +45,17 @@ for i in range(0, len(base_model.layers)):
     new_model.layers[i + 248].set_weights(base_model.layers[i].get_weights())
 
 print("model inputs")
-for node in base_model.inputs:
+for node in new_model.inputs:
     print(node.op.name)
 
 print("model outputs")
-for node in base_model.outputs:
+for node in new_model.outputs:
     print(node.op.name)
 
 dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
                        32,
                        32, 5, 0.1)
-
 results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
 print(results)
+
 new_model.save("output/inpcetionv3_top60_181018-03-0.869-0.700[0.950]_rnd_adam.pb")
