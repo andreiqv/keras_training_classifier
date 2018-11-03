@@ -54,7 +54,7 @@ def generate_tf_records(dataset, output_file, model):
             time_start = time.time()
 
 
-def generate_tf_records_inceptionv3_top_60(dataset, output_file, output_layer_number=279):
+def generate_tf_records_inceptionv3_top_60(dataset, output_file, output_layer_number):
     # mixed8 output # 248 (8,8,1280)
     # mixed9 output # 279 (8,8,2048)
     input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
@@ -199,9 +199,11 @@ if __name__ == '__main__':
 
     dir_prefix = "/home/andrei/work/_tf_records"
     generate_tf_records_inceptionv3_top_60(dataset.get_train_dataset().prefetch(4),
-                                           dir_prefix + "/inceptionv3_top60_train_dataset1810.zlib.tfr", 248)
+                                           dir_prefix + "/inceptionv3_top60_train_dataset1810.zlib.tfr", 
+                                           output_layer_number=248)
     generate_tf_records_inceptionv3_top_60(dataset.get_valid_dataset().prefetch(4),
-                                           dir_prefix + "/inceptionv3_top60_valid_dataset1810.zlib.tfr", 248)
+                                           dir_prefix + "/inceptionv3_top60_valid_dataset1810.zlib.tfr", 
+                                           output_layer_number=248)
 
     # generate_tf_records(dataset.get_valid_dataset(),
     #                     "tf_records/goods_classifier_valid_noflip_hue_dataset1810.tfrecords")

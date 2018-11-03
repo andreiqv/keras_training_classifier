@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Прямой проход без хеширования промежуточных данных.
+Просто замораживаются первые 249 слоев сети InceptionV3.
+
+"""
+
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
 
 import tensorflow as tf

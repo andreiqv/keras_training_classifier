@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Прямой проход без хеширования промежуточных данных.
+НЕ РАБОТАЕТ. Была попытка первые 279 слоев применять 
+при генерации ImagesDataset.
+
+"""
+
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
@@ -39,7 +48,7 @@ class ImagesDataset:
     input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
     base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
                              input_tensor=input_tensor)
-    output_layer_number=279  
+    output_layer_number=248
     intermediate_layer_model = keras.Model(inputs=base_model.input,
                                            outputs=base_model.layers[output_layer_number].output)
 
