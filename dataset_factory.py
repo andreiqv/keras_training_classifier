@@ -88,7 +88,7 @@ class GoodsDataset:
                 plu_id = line.split("/")[-2]
 
                 
-                def add_line_to_image_dict(_id, line, img_dict):
+                def add_line_to_images_dict(_id, line, img_dict):
                     if _id in img_dict:
                         img_dict[_id].append(line)
                     else:
@@ -97,18 +97,16 @@ class GoodsDataset:
                 similar_goods = [{'38','413','36','17'},\
                     {'407','31','404','44','313','35'},\
                     {'37', '46', '424', '40', '4', '103'}]
-
-                similar_goods = {}
                     
                 flag = False
                 for goods in similar_goods:
                     if plu_id in goods:
                         flag = True
                         for _id in goods:
-                            add_line_to_image_dict(_id, line, images_dict)
+                            add_line_to_images_dict(_id, line, images_dict)
 
                 if not flag:   # as usually
-                    add_line_to_image_dict(plu_id, line, images_dict)
+                    add_line_to_images_dict(plu_id, line, images_dict)
 
                 """    
 
