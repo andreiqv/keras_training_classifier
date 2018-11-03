@@ -87,7 +87,7 @@ class GoodsDataset:
                 line = line.replace("\n", "")
                 plu_id = line.split("/")[-2]
 
-                """
+                
                 def add_line_by_id(_id, line):
                     if _id in images_dict:
                         images_dict[_id].append(line)
@@ -115,7 +115,8 @@ class GoodsDataset:
                     images_dict[plu_id] = [line]
                 else:
                     images_dict[plu_id].append(line)
-
+                """
+                    
         self.classes_count = len(images_dict.keys())
 
         for plu_id in images_dict.keys():
