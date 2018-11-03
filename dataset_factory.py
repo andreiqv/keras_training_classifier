@@ -88,16 +88,15 @@ class GoodsDataset:
                 plu_id = line.split("/")[-2]
 
                 
-                """
                 def add_line_to_image_dict(_id, line, img_dict):
                     if _id in img_dict:
                         img_dict[_id].append(line)
                     else:
                         img_dict[_id] = [line]                	
 
-                #similar_goods = [{'38','413','36','17'},\
-                #    {'407','31','404','44','313','35'},\
-                #    {'37', '46', '424', '40', '4', '103'}]
+                similar_goods = [{'38','413','36','17'},\
+                    {'407','31','404','44','313','35'},\
+                    {'37', '46', '424', '40', '4', '103'}]
 
                 similar_goods = {}
                     
@@ -110,13 +109,15 @@ class GoodsDataset:
 
                 if not flag:   # as usually
                     add_line_to_image_dict(plu_id, line, images_dict)
+
                 """    
 
                 if plu_id not in images_dict:
                     images_dict[plu_id] = [line]
                 else:
                     images_dict[plu_id].append(line)
-                
+                """
+
                     
         self.classes_count = len(images_dict.keys())
 
