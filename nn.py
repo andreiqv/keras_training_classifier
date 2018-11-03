@@ -169,9 +169,9 @@ def get_InceptionV3_whole_model():
     x = first_layers_model.output
     x = InceptionV3_top60_layers(x, classes=settings.num_classes, pooling='avg')
 
-    #for layer in model.layers[:249]:
-    #    layer.trainable = False
-
     model = keras.Model(inputs=base_model.input, outputs=x, name='inception_v3_whole_model')
+
+    for layer in model.layers[:249]:
+        layer.trainable = False
 
     return model
