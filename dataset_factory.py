@@ -178,7 +178,7 @@ class GoodsDataset:
         image_decoded = tf.image.decode_jpeg(image_string)
         image_resized = tf.image.resize_images(image_decoded, [self.image_size[1], self.image_size[0]],
                                                method=tf.image.ResizeMethod.BICUBIC)
-        image = tf.cast(image_resized, tf.float32) / tf.constant(256.0)
+        image = tf.cast(image_resized, tf.float32) / tf.constant(255.0)
 
         return image, label,
 
