@@ -8,6 +8,8 @@ valid_dir = settings.data_dir + '/valid'
 train_batch_size = settings.train_batch_size
 valid_batch_size = settings.valid_batch_size
 
+#------------------------
+# data preparing
 
 train_datagen = ImageDataGenerator(
 	rescale=1./255,
@@ -33,7 +35,8 @@ valid_generator = valid_datagen.flow_from_directory(
 	batch_size=train_batch_size,
 	class_mode='binary')
 
-#---------------
+#--------------------------------------------
+# model building
 
 from keras import models
 from keras import layers
@@ -48,21 +51,31 @@ model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 print(model.summary())
 
+print('model.trainable_weights:', len(model.trainable_weights))
+conv_base.trainable = False
+print('model.trainable_weights:', len(model.trainable_weights))
+
+# ----------------------------------------------
+# Training
+
 
 model.compile(loss='binary_crossentropy',
 			optimizer=optimizers.RMSprop(lr=2e-5),
 			metrics=['acc'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
+validation_steps = math.ceil(valid_generator.n / valid_generator.batch_size)
 print('train data size:', train_generator.n)
 print('train steps per epoch:', train_steps_per_epoch)
+print('valid data size:', valid_generator.n)
+print('validation_steps:', validation_steps)
 
 history = model.fit_generator(
 	train_generator,
 	steps_per_epoch=train_steps_per_epoch,
 	epochs=30,
 	validation_data=valid_generator,
-	validation_steps=50)
+	validation_steps=validation_steps)
 
 
 
