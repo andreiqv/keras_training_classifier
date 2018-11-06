@@ -31,6 +31,6 @@ def copy_top_weights_to_model(source_top_model, target_model, start_layer=249):
 def reset_weights(model, start_layer=249):
 	layers = model.layers
 	session = K.get_session()
-	for i in range(start_layer, len(layers))
+	for i in range(start_layer, len(layers)):
 		if hasattr(layers[i], 'kernel_initializer'):
 			layers[i].kernel.initializer.run(session=session)
