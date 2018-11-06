@@ -227,8 +227,6 @@ class GoodsDataset:
             # angle = tf.random_uniform(shape=(1,), minval=0, maxval=90)
             # images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
 
-            """
-
             # Rotation and transformation
             # print(images.shape)  # = (?, 299, 299, ?)
             print('images.shape:', images.shape)      
@@ -262,7 +260,7 @@ class GoodsDataset:
             images = tf.contrib.image.transform(images, transform1)            
             images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # ---            
-            zoom = 1.05
+            zoom = 1.1
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
             batch_size = images.shape[0]
@@ -271,7 +269,7 @@ class GoodsDataset:
             images = tf.image.resize_images(images, [h, w])            
             # ---
             # end of Rotation and Transformation block
-            """
+            
 
             images = tf.image.random_hue(images, max_delta=0.05)
             images = tf.image.random_contrast(images, lower=0.9, upper=1.5)
