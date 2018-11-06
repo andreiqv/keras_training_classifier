@@ -75,9 +75,6 @@ source_top60_model = keras.models.load_model(
 nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=start_training_layer)
 print('Weights of top60 was copied.')
 
-results = base_model.evaluate(goods_dataset.get_images_for_label(94).batch(16).repeat(), steps=6)
-print(results)
-
 for layer in model.layers[:start_training_layer]:
     layer.trainable = False
 
@@ -127,7 +124,10 @@ goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels",
   settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
   settings.valid_percentage)
 train_dataset = goods_dataset.get_train_dataset()
-valid_dataset = goods_dataset.get_valid_dataset()   
+valid_dataset = goods_dataset.get_valid_dataset()
+
+results = model.evaluate(goods_dataset.get_images_for_label(94).batch(16).repeat(), steps=6)
+print(results)
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
