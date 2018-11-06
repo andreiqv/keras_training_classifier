@@ -11,6 +11,15 @@ Epoch 1/300
 - val_loss: 3.2239 - val_acc: 0.3697 - val_top_6: 0.6985
 
 
+
+--
+all false trainable:
+Epoch 1/50
+1157/1157 [==============================] - 728s 629ms/step
+ - loss: 2.3668 - acc: 0.4468 - top_6: 0.7863 
+ - val_loss: 1.0607 - val_acc: 0.6993 - val_top_6: 0.9509
+
+
 """
 
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
@@ -64,6 +73,10 @@ source_top60_model = keras.models.load_model(
 
 #nn_utils.copy_model_weights(source_model, model, start_layer=start_training_layer)
 nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=start_training_layer)
+print('Weights of top60 was copied.')
+
+results = base_model.evaluate(goods_dataset.get_images_for_label(94).batch(16).repeat(), steps=6)
+print(results)
 
 for layer in model.layers[:start_training_layer]:
     layer.trainable = False
