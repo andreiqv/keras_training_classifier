@@ -222,8 +222,9 @@ class GoodsDataset:
             #print('Added transformations:', transform)
             images = tf.contrib.image.transform(images, transform1)            
             # ---
-            w_crop = math.ceil(IMAGE_SIZE[0] / 1.2)
-            h_crop = math.ceil(IMAGE_SIZE[1] / 1.2)
+            crop_koeff = 2.0
+            w_crop = math.ceil(IMAGE_SIZE[0] / crop_koeff)
+            h_crop = math.ceil(IMAGE_SIZE[1] / crop_koeff)
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             # ---
