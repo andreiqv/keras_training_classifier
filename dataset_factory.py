@@ -225,9 +225,9 @@ class GoodsDataset:
             w_crop = math.ceil(IMAGE_SIZE[0] / 1.2)
             h_crop = math.ceil(IMAGE_SIZE[1] / 1.2)
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
-            images = tf.image.resize_images(images, w, h)
+            images = tf.image.resize_images(images, [h, w])
             # ---
-            images = tf.image.resize_image_with_crop_or_pad(images, w, h)
+            images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # end of Rotation and Transformation block
 
             images = tf.image.random_hue(images, max_delta=0.05)
