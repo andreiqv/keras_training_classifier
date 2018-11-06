@@ -55,15 +55,17 @@ source_model = keras.models.load_model(
 )
 
 def copyModelToModel(model_source, model_target, certain_layer=""):        
-    for l_tg,l_sr in zip(model_target.layers,model_source.layers):
-        wk0 = l_sr.get_weights()
-        l_tg.set_weights(wk0)
-        if l_tg.name==certain_layer:
+    for target_layer, sourse_layer in zip(target_model.layers, source_model.layers):
+        weights = sourse_layer.get_weights()
+        target_layer,.set_weights(weights)
+        if target_layer,.name == certain_layer:
             break
     print("model source was copied into model target") 
 
-#for layer in model.layers[249:]:
-#  layer.trainable = True
+for i, layer in enumerate(model.layers[249:]):
+	weights = sourse_model.layers[i].get_weights()
+	layer.set_weights(weights)
+  	layer.trainable = True
 
 
 # for i, layer in enumerate(base_model.layers):
