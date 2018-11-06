@@ -19,6 +19,7 @@ from dataset_factory import GoodsDataset
 import numpy as np
 from goods_tf_records import GoodsTfrecordsDataset
 
+from nn_utils import copy_model_weights
 
 # tf.enable_eager_execution()
 import settings

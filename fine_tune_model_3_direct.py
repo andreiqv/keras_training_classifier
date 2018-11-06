@@ -53,9 +53,7 @@ for layer in model.layers[:249]:
 
 source_model = keras.models.load_model(
     "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
-    custom_objects={'top_6': top_6}
-)
-
+    custom_objects={'top_6': top_6})
 copy_model_weights(source_model, model, start_layer=249)
 
 """
