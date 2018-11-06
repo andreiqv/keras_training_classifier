@@ -62,10 +62,12 @@ def copyModelToModel(model_source, model_target, certain_layer=""):
             break
     print("model source was copied into model target") 
 
-for i, layer in enumerate(model.layers[249:]):
+num_layers = len(model.layers)
+print(num_layers, ' layers')
+for i in range(249, num_layers):
     weights = sourse_model.layers[i].get_weights()
-    layer.set_weights(weights)
-    layer.trainable = True
+    model.layers[i].set_weights(weights)
+    model.layers[i].trainable = True
 
 
 # for i, layer in enumerate(base_model.layers):
