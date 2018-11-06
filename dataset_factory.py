@@ -221,6 +221,7 @@ class GoodsDataset:
             #transform = tf.tile(tf.expand_dims(transform1, 0), [batch, 1])
             #print('Added transformations:', transform)
             images = tf.contrib.image.transform(images, transform1)            
+            images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # ---
             crop_koeff = 2.0
             w_crop = math.ceil(IMAGE_SIZE[0] / crop_koeff)
@@ -228,7 +229,6 @@ class GoodsDataset:
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             # ---
-            images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # end of Rotation and Transformation block
 
             images = tf.image.random_hue(images, max_delta=0.05)
