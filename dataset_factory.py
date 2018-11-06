@@ -40,6 +40,7 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_xticks([])
         ax.set_yticks([])
 
+    """
 
     w, h = IMAGE_SIZE
     zoom = 1.2
@@ -70,6 +71,7 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_yticks([])
 
     plt.show()
+    """
 
 
 class GoodsDataset:
@@ -332,7 +334,17 @@ if __name__ == '__main__':
         settings.valid_percentage)
     #
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
+
         plot_random_nine(images, labels)
+
+	    w, h = IMAGE_SIZE
+	    zoom = 1.2
+	    w_crop = math.ceil(w / zoom)
+	    h_crop = math.ceil(h / zoom)
+	    crop_images = tf.random_crop(images, [1, h_crop, w_crop, 3])
+	    crop_images = tf.image.resize_images(crop_images, [h, w])  
+	    plot_random_nine(crop_images, labels)
+
         if i > 2: 
         	sys.exit(0)
           #plot_random_nine(images, labels, labels_list)
