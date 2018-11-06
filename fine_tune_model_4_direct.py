@@ -19,6 +19,7 @@ from dataset_factory import GoodsDataset
 import numpy as np
 from goods_tf_records import GoodsTfrecordsDataset
 
+import nn_utils
 from nn_utils import copy_model_weights
 
 # tf.enable_eager_execution()
@@ -50,12 +51,13 @@ model = get_InceptionV3_whole_model()
 print(model.summary())
 start_training_layer = 249
 
-source_model = keras.models.load_model(
+top60_model = keras.models.load_model(
     "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
     custom_objects={'top_6': top_6}
 )
 
-copy_model_weights(source_model, model, start_layer=start_training_layer)
+#nn_utils.copy_model_weights(source_model, model, start_layer=start_training_layer)
+nn_utils.copy_top_weights_to_model(source_model, model, start_layer=start_training_layer)
 
 for layer in model.layers[:start_training_layer]:
   layer.trainable = False
