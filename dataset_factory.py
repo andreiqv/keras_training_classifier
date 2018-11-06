@@ -41,7 +41,7 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_yticks([])
 
     w, h = IMAGE_SIZE
-    zoom = 1.2
+    zoom = 1.5
     w_crop = math.ceil(w / zoom)
     h_crop = math.ceil(h / zoom)
     images = tf.random_crop(images, [settings.train_batch, h_crop, w_crop, 3])
