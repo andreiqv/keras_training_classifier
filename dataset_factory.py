@@ -223,7 +223,7 @@ class GoodsDataset:
             images = tf.contrib.image.transform(images, transform1)            
             images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # ---
-            crop_koeff = 2.0
+            crop_koeff = 1.2
             w_crop = math.ceil(w / crop_koeff)
             h_crop = math.ceil(h / crop_koeff)
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
