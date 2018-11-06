@@ -65,7 +65,7 @@ def copyModelToModel(model_source, model_target, certain_layer=""):
 num_layers = len(model.layers)
 print(num_layers, ' layers')
 for i in range(249, num_layers):
-    weights = sourse_model.layers[i].get_weights()
+    weights = source_model.layers[i].get_weights()
     model.layers[i].set_weights(weights)
     model.layers[i].trainable = True
 
