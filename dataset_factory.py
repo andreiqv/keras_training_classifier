@@ -21,7 +21,7 @@ def plot_random_nine(images, labels, names=[]):
     fig, axes = plt.subplots(3, 3)
     fig.subplots_adjust(hspace=0.3, wspace=0.3)
     idx = np.arange(0, int(images.shape[0]))
-    np.random.shuffle(idx)
+    #np.random.shuffle(idx)
     idx = idx[:9]
 
     for i, ax in enumerate(axes.flat):
@@ -50,7 +50,7 @@ def plot_random_nine(images, labels, names=[]):
     fig, axes = plt.subplots(3, 3)
     fig.subplots_adjust(hspace=0.3, wspace=0.3)
     idx = np.arange(0, int(images.shape[0]))
-    np.random.shuffle(idx)
+    #np.random.shuffle(idx)
     idx = idx[:9]
     for i, ax in enumerate(axes.flat):
         original = images[idx[i]]
