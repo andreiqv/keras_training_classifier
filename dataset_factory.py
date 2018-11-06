@@ -28,7 +28,7 @@ def plot_random_nine(images, labels, names=[]):
     zoom = 1.2
     w_crop = math.ceil(w / zoom)
     h_crop = math.ceil(h / zoom)
-    crop_images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
+    crop_images = tf.random_crop(images, [1, h_crop, w_crop, 3])
     crop_images = tf.image.resize_images(crop_images, [h, w])    
 
     for i, ax in enumerate(axes.flat):
