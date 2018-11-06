@@ -5,6 +5,10 @@
 Последние 60 слоев берутся из inceptionv3_partial.py
 Замораживаются первые 249 слоев сети InceptionV3.
 
+Epoch 1/300
+1157/1157 [==============================] - 1105s 955ms/step - loss: 1.5288 - acc: 0.5829 - top_6: 0.8920 - val_loss: 3.2239 - val_acc: 0.3697 - val_top_6: 0.6985
+
+
 """
 
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
@@ -60,8 +64,10 @@ source_top60_model = keras.models.load_model(
 nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=start_training_layer)
 
 for layer in model.layers[:start_training_layer]:
-  layer.trainable = False
+    layer.trainable = False
 
+for layer in model.layers:
+    layer.trainable = False
 
 #for layer in model.layers[249:]:
 #  layer.trainable = True
@@ -90,7 +96,7 @@ model.compile(optimizer='adagrad',    #'rmsprop',
 
 callbacks = [
     keras.callbacks.ModelCheckpoint(
-        "./checkpoints/inceptionv3-181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}].hdf5",
+        "./checkpoints/FINE_TUNE_MODEL_4_DIRECT_inceptionv3-181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}].hdf5",
         save_best_only=True,
         monitor='val_top_6',
         mode='max'
@@ -110,7 +116,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=300,
+          epochs=50,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
