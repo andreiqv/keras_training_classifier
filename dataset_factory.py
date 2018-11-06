@@ -40,6 +40,9 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_xticks([])
         ax.set_yticks([])
 
+    plt.show()    
+
+    """
     w, h = IMAGE_SIZE
     zoom = 1.5
     w_crop = math.ceil(w / zoom)
@@ -66,8 +69,8 @@ def plot_random_nine(images, labels, names=[]):
         ax.imshow(im)
         ax.set_xticks([])
         ax.set_yticks([])
-
     plt.show()
+    """
     
 
 
@@ -123,6 +126,7 @@ class GoodsDataset:
                     else:
                         img_dict[_id] = [line]                	
 
+                """
                 similar_goods = [{'38','413','36','17'},\
                     {'407','31','404','44','313','35'},\
                     {'37', '46', '424', '40', '4', '103'}]
@@ -133,6 +137,7 @@ class GoodsDataset:
                         flag = True
                         for _id in goods:
                             add_line_to_images_dict(_id, line, images_dict)
+                """
 
                 if not flag:   # as usually
                     add_line_to_images_dict(plu_id, line, images_dict)
