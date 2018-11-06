@@ -232,7 +232,7 @@ class GoodsDataset:
             w, h = IMAGE_SIZE
             a = max(w, h)
             d = math.ceil(a * (math.sqrt(2) - 1) / 2)
-            print('d =', d)
+            print('paddings d =', d)
             paddings = tf.constant([[0, 0], [d, d], [d, d], [0, 0]])
             images = tf.pad(images, paddings, "SYMMETRIC")
             #images = tf.image.resize_image_with_crop_or_pad(images, w+d, h+d)
@@ -261,7 +261,7 @@ class GoodsDataset:
             zoom = 1.2
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
-            images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
+            images = tf.random_crop(images, [None, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             
             # ---
