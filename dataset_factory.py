@@ -261,7 +261,7 @@ class GoodsDataset:
             zoom = 1.2
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
-            images = tf.random_crop(images, [1, h_crop, w_crop, 3])
+            images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             
             # ---
