@@ -19,7 +19,7 @@ def top_6(y_true, y_pred):
 keras.backend.set_learning_phase(0)
 
 base_model = keras.models.load_model(
-    "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
+    "./output/top60_181018-04-0.546-0.325[0.680]_rnd_adam.hdf5",
     custom_objects={'top_6': top_6})
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
@@ -58,4 +58,4 @@ dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SI
 results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
 print(results)
 
-new_model.save("output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5")
+new_model.save("output/inception_top60_181018-04-0.546-0.325[0.680]_rnd_adam.hdf5")
