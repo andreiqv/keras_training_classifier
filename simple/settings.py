@@ -1,6 +1,8 @@
 #export CUDA_VISIBLE_DEVICES=3
 import os
 
+num_classes = 148
+
 if os.path.exists('.local'):
 	data_dir = '/w/WORK/ineru/06_scales/_dataset/splited'
 	train_batch_size = 2

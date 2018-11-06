@@ -49,6 +49,19 @@ print(model.summary())
 for layer in model.layers[:249]:
   layer.trainable = False
 
+source_model = keras.models.load_model(
+    "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
+    custom_objects={'top_6': top_6}
+)
+
+def copyModelToModel(model_source, model_target, certain_layer=""):        
+    for l_tg,l_sr in zip(model_target.layers,model_source.layers):
+        wk0 = l_sr.get_weights()
+        l_tg.set_weights(wk0)
+        if l_tg.name==certain_layer:
+            break
+    print("model source was copied into model target") 
+
 #for layer in model.layers[249:]:
 #  layer.trainable = True
 
