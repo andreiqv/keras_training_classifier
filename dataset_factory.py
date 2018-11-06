@@ -42,7 +42,7 @@ def plot_random_nine(images, labels, names=[]):
 
     plt.show()    
 
-    """
+    
     w, h = IMAGE_SIZE
     zoom = 1.5
     w_crop = math.ceil(w / zoom)
@@ -70,7 +70,7 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_xticks([])
         ax.set_yticks([])
     plt.show()
-    """
+    
     
 
 
@@ -257,11 +257,13 @@ class GoodsDataset:
             images = tf.contrib.image.transform(images, transform1)            
             images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # ---
+            """
             zoom = 1.2
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
+            """
             # ---
             # end of Rotation and Transformation block
 
