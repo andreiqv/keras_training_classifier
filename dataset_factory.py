@@ -227,6 +227,8 @@ class GoodsDataset:
             # angle = tf.random_uniform(shape=(1,), minval=0, maxval=90)
             # images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
 
+            """
+
             # Rotation and transformation
             # print(images.shape)  # = (?, 299, 299, ?)
             print('images.shape:', images.shape)      
@@ -242,7 +244,6 @@ class GoodsDataset:
             images = tf.contrib.image.rotate(images, angle * math.pi / 180, interpolation='BILINEAR')
             #images = tf.image.crop_to_bounding_box(images, d, d, s+d, s+d)
             
-            """
             # Transformation
             #transform1 = tf.constant([1.0, 0.2, -30.0, 0.2, 1.0, 0.0, 0.0, 0.0], dtype=tf.float32)            
             # transform is  vector of length 8 or tensor of size N x 8
@@ -264,13 +265,13 @@ class GoodsDataset:
             zoom = 1.05
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
+            batch_size = images.shape[0]
             images = tf.random_crop(images, [h_crop, w_crop, 3])
-            """
-            
+
             images = tf.image.resize_images(images, [h, w])            
             # ---
             # end of Rotation and Transformation block
-
+            """
 
             images = tf.image.random_hue(images, max_delta=0.05)
             images = tf.image.random_contrast(images, lower=0.9, upper=1.5)
