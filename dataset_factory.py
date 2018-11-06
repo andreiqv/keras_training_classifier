@@ -40,35 +40,35 @@ def plot_random_nine(images, labels, names=[]):
         ax.set_xticks([])
         ax.set_yticks([])
 
-    plt.show()    
-
     
-    w, h = IMAGE_SIZE
-    zoom = 1.5
-    w_crop = math.ceil(w / zoom)
-    h_crop = math.ceil(h / zoom)
-    images = tf.random_crop(images, [settings.train_batch, h_crop, w_crop, 3])
-    images = tf.image.resize_images(images, [h, w])
+    if True:    
+        w, h = IMAGE_SIZE
+        zoom = 1.5
+        w_crop = math.ceil(w / zoom)
+        h_crop = math.ceil(h / zoom)
+        images = tf.random_crop(images, [settings.train_batch, h_crop, w_crop, 3])
+        images = tf.image.resize_images(images, [h, w])
 
-    fig, axes = plt.subplots(3, 3)
-    fig.subplots_adjust(hspace=0.3, wspace=0.3)
-    idx = np.arange(0, int(images.shape[0]))
-    #np.random.shuffle(idx)
-    idx = idx[:9]
-    for i, ax in enumerate(axes.flat):
-        original = images[idx[i]]
-        label = np.argmax(labels[idx[i], :])
+        fig, axes = plt.subplots(3, 3)
+        fig.subplots_adjust(hspace=0.3, wspace=0.3)
+        idx = np.arange(0, int(images.shape[0]))
+        #np.random.shuffle(idx)
+        idx = idx[:9]
+        for i, ax in enumerate(axes.flat):
+            original = images[idx[i]]
+            label = np.argmax(labels[idx[i], :])
 
-        np_image = np.uint8(original * 255)  # [..., [0,1,2]]
-        im = Image.fromarray(np_image).resize((140, 120), Image.BILINEAR)
-        #fnt = ImageFont.truetype('Alice-Regular.ttf', 12)
-        draw = ImageDraw.Draw(im)
-        #draw.text((5, 5), str(label), font=fnt, fill=(255, 255, 255, 128))
-        #draw.text((5, 5), names[label], font=fnt, fill=(255, 255, 255, 128))
-        del draw
-        ax.imshow(im)
-        ax.set_xticks([])
-        ax.set_yticks([])
+            np_image = np.uint8(original * 255)  # [..., [0,1,2]]
+            im = Image.fromarray(np_image).resize((140, 120), Image.BILINEAR)
+            #fnt = ImageFont.truetype('Alice-Regular.ttf', 12)
+            draw = ImageDraw.Draw(im)
+            #draw.text((5, 5), str(label), font=fnt, fill=(255, 255, 255, 128))
+            #draw.text((5, 5), names[label], font=fnt, fill=(255, 255, 255, 128))
+            del draw
+            ax.imshow(im)
+            ax.set_xticks([])
+            ax.set_yticks([])
+    
     plt.show()
     
     
@@ -144,7 +144,6 @@ class GoodsDataset:
                     add_line_to_images_dict(plu_id, line, images_dict)
 
                 """    
-
                 if plu_id not in images_dict:
                     images_dict[plu_id] = [line]
                 else:
