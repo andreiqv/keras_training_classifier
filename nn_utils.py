@@ -1,4 +1,4 @@
-def copyModelToModel(model_source, model_target, certain_layer=""):        
+def copyModelToModel(source_model, target_model, certain_layer=""):        
 	for target_layer, sourse_layer in zip(target_model.layers, source_model.layers):
 		weights = sourse_layer.get_weights()
 		target_layer.set_weights(weights)
