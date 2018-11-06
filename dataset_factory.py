@@ -24,6 +24,12 @@ def plot_random_nine(images, labels, names=[]):
     np.random.shuffle(idx)
     idx = idx[:9]
 
+    zoom = 1.2
+    w_crop = math.ceil(w / zoom)
+    h_crop = math.ceil(h / zoom)
+    crop_images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
+    crop_images = tf.image.resize_images(crop_images, [h, w])    
+
     for i, ax in enumerate(axes.flat):
         original = images[idx[i]]
         label = np.argmax(labels[idx[i], :])
@@ -39,6 +45,8 @@ def plot_random_nine(images, labels, names=[]):
         ax.imshow(im)
         ax.set_xticks([])
         ax.set_yticks([])
+
+
     plt.show()
 
 
@@ -223,9 +231,9 @@ class GoodsDataset:
             images = tf.contrib.image.transform(images, transform1)            
             images = tf.image.resize_image_with_crop_or_pad(images, h, w)
             # ---
-            crop_koeff = 1.2
-            w_crop = math.ceil(w / crop_koeff)
-            h_crop = math.ceil(h / crop_koeff)
+            zoom = 1.2
+            w_crop = math.ceil(w / zoom)
+            h_crop = math.ceil(h / zoom)
             images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             # ---
@@ -303,7 +311,8 @@ if __name__ == '__main__':
     #
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
         plot_random_nine(images, labels)
-        if i > 2: sys.exit(0)
+        if i > 2: 
+        	sys.exit(0)
           #plot_random_nine(images, labels, labels_list)
     #     q = 2
 
