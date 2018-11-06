@@ -63,7 +63,8 @@ def copyModelToModel(model_source, model_target, certain_layer=""):
     print("model source was copied into model target") 
 
 num_layers = len(model.layers)
-print(num_layers, ' layers')
+print(num_layers, ' layers in our model')
+print(len(source_model.layers), ' layers in source model')
 for i in range(249, num_layers):
     weights = source_model.layers[i].get_weights()
     model.layers[i].set_weights(weights)
