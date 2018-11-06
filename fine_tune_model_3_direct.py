@@ -47,14 +47,16 @@ x = base_model.output
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
-
-for layer in model.layers[:249]:
-  layer.trainable = False
+start_training_layer = 249
 
 source_model = keras.models.load_model(
     "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
-    custom_objects={'top_6': top_6})
-copy_model_weights(source_model, model, start_layer=249)
+    custom_objects={'top_6': top_6}
+)
+copy_model_weights(source_model, model, start_layer=start_training_layer)
+
+for layer in model.layers[:start_training_layer]:
+  layer.trainable = False
 
 """
 num_layers = len(model.layers)

@@ -16,3 +16,10 @@ def copy_model_weights(source_model, target_model, start_layer=249):
 		target_model.layers[i].set_weights(weights)
 		target_model.layers[i].trainable = True
 
+
+def reset_weights(model, start_layer=249):
+	layers = model.layers
+	session = K.get_session()
+	for i in range(start_layer, len(layers))
+		if hasattr(layers[i], 'kernel_initializer'):
+			layers[i].kernel.initializer.run(session=session)
