@@ -44,7 +44,7 @@ for i, layer in enumerate(model.layers):
 # for i in range(1, len(model.layers)):
 #     model.layers[i].set_weights(parent_model.layers[248 + i].get_weights())
 
-model.compile(optimizer=Adam(lr=0.01), #'adagrad',#'adam',
+model.compile(optimizer='adagrad', #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
