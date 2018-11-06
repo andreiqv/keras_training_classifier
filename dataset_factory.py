@@ -337,13 +337,13 @@ if __name__ == '__main__':
 
         plot_random_nine(images, labels)
 
-	    w, h = IMAGE_SIZE
-	    zoom = 1.2
-	    w_crop = math.ceil(w / zoom)
-	    h_crop = math.ceil(h / zoom)
-	    crop_images = tf.random_crop(images, [1, h_crop, w_crop, 3])
-	    crop_images = tf.image.resize_images(crop_images, [h, w])  
-	    plot_random_nine(crop_images, labels)
+        w, h = IMAGE_SIZE
+        zoom = 1.2
+        w_crop = math.ceil(w / zoom)
+        h_crop = math.ceil(h / zoom)
+        crop_images = tf.random_crop(images, [1, h_crop, w_crop, 3])
+        crop_images = tf.image.resize_images(crop_images, [h, w])  
+        plot_random_nine(crop_images, labels)
 
         if i > 2: 
         	sys.exit(0)
