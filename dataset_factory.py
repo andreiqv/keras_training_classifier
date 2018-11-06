@@ -126,10 +126,12 @@ class GoodsDataset:
                     else:
                         img_dict[_id] = [line]                	
 
-                """
-                similar_goods = [{'38','413','36','17'},\
-                    {'407','31','404','44','313','35'},\
-                    {'37', '46', '424', '40', '4', '103'}]
+                
+                #similar_goods = [{'38','413','36','17'},\
+                #    {'407','31','404','44','313','35'},\
+                #    {'37', '46', '424', '40', '4', '103'}]
+
+                similar_goods = []
                     
                 flag = False
                 for goods in similar_goods:
@@ -137,8 +139,7 @@ class GoodsDataset:
                         flag = True
                         for _id in goods:
                             add_line_to_images_dict(_id, line, images_dict)
-                """
-
+                
                 if not flag:   # as usually
                     add_line_to_images_dict(plu_id, line, images_dict)
 
