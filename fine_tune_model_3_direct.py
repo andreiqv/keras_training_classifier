@@ -57,7 +57,7 @@ source_model = keras.models.load_model(
 def copyModelToModel(model_source, model_target, certain_layer=""):        
     for target_layer, sourse_layer in zip(target_model.layers, source_model.layers):
         weights = sourse_layer.get_weights()
-        target_layer,.set_weights(weights)
+        target_layer.set_weights(weights)
         if target_layer,.name == certain_layer:
             break
     print("model source was copied into model target") 
