@@ -48,6 +48,12 @@ def plot_random_nine(images, labels, names=[]):
     images = tf.random_crop(images, [1, h_crop, w_crop, 3])
     images = tf.image.resize_images(images, [h, w])    
 
+
+    fig, axes = plt.subplots(3, 3)
+    fig.subplots_adjust(hspace=0.3, wspace=0.3)
+    idx = np.arange(0, int(images.shape[0]))
+    np.random.shuffle(idx)
+    idx = idx[:9]
     for i, ax in enumerate(axes.flat):
         original = images[idx[i]]
         label = np.argmax(labels[idx[i], :])
@@ -59,7 +65,6 @@ def plot_random_nine(images, labels, names=[]):
         #draw.text((5, 5), str(label), font=fnt, fill=(255, 255, 255, 128))
         #draw.text((5, 5), names[label], font=fnt, fill=(255, 255, 255, 128))
         del draw
-
         ax.imshow(im)
         ax.set_xticks([])
         ax.set_yticks([])
