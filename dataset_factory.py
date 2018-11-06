@@ -23,7 +23,6 @@ def plot_random_nine(images, labels, names=[]):
     idx = np.arange(0, int(images.shape[0]))
     np.random.shuffle(idx)
     idx = idx[:9]
-    print(len(images))
 
     for i, ax in enumerate(axes.flat):
         original = images[idx[i]]
