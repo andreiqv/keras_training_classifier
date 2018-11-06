@@ -52,7 +52,7 @@ print(model.summary())
 start_training_layer = 249
 
 source_top60_model = keras.models.load_model(
-    "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
+    "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
     custom_objects={'top_6': top_6}
 )
 
