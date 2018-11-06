@@ -26,7 +26,7 @@ def copy_top_weights_to_model(source_top_model, target_model, start_layer=249):
 		print(i_source+1, i_target)
 		weights = source_top_model.layers[i_source+1].get_weights()
 		print('source layer:', source_top_model.layers[i_source].name)
-		#print('weights.shape:', weights)
+		print('len(weights):', len(weights))
 		print('target layer:', target_model.layers[i_target].name)
 		target_model.layers[i_target].trainable = True
 		target_model.layers[i_target].set_weights(weights)
