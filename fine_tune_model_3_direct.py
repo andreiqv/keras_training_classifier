@@ -18,6 +18,8 @@ from dataset_factory import GoodsDataset
 import numpy as np
 from goods_tf_records import GoodsTfrecordsDataset
 
+from nn_utils import copy_model_weights
+
 
 # tf.enable_eager_execution()
 import settings
@@ -54,14 +56,9 @@ source_model = keras.models.load_model(
     custom_objects={'top_6': top_6}
 )
 
-def copyModelToModel(model_source, model_target, certain_layer=""):        
-    for target_layer, sourse_layer in zip(target_model.layers, source_model.layers):
-        weights = sourse_layer.get_weights()
-        target_layer.set_weights(weights)
-        if target_layer.name == certain_layer:
-            break
-    print("model source was copied into model target") 
+copy_model_weights(source_model, model, start_layer=249)
 
+"""
 num_layers = len(model.layers)
 print(len(source_model.layers), 'layers in source model')
 print(num_layers, 'layers in target model')
@@ -69,7 +66,7 @@ for i in range(249, num_layers):
     weights = source_model.layers[i].get_weights()
     model.layers[i].set_weights(weights)
     model.layers[i].trainable = True
-
+"""
 
 # for i, layer in enumerate(base_model.layers):
 #     print(i, layer.name)
