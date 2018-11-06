@@ -218,7 +218,8 @@ class GoodsDataset:
         return image, label,
 
     def _augment_dataset(self, dataset, multiply, batch):
-        dataset = dataset.repeat(multiply).batch(batch)
+        
+        dataset = dataset.repeat(multiply)
 
         def _random_distord(images, labels):
             images = tf.image.random_flip_left_right(images)
@@ -261,7 +262,7 @@ class GoodsDataset:
             zoom = 1.2
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
-            images = tf.random_crop(images, [batch, h_crop, w_crop, 3])
+            images = tf.random_crop(images, [1, h_crop, w_crop, 3])
             images = tf.image.resize_images(images, [h, w])
             
             # ---
@@ -278,6 +279,7 @@ class GoodsDataset:
             return images, labels
 
         dataset = dataset.map(_random_distord, num_parallel_calls=8)
+        dataset = dataset.batch(batch)
 
         return dataset
 
