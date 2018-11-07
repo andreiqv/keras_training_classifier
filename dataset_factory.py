@@ -219,7 +219,7 @@ class GoodsDataset:
 
     def _augment_dataset(self, dataset, multiply, batch):
         
-        dataset = dataset.repeat(multiply).batch(batch)
+        dataset = dataset.repeat(multiply)
 
         def _random_distord(images, labels):
             images = tf.image.random_flip_left_right(images)
@@ -234,7 +234,7 @@ class GoodsDataset:
             a = max(w, h)
             d = math.ceil(a * (math.sqrt(2) - 1) / 2)
             print('paddings d =', d)
-            paddings = tf.constant([[0, 0], [d, d], [d, d], [0, 0]])
+            paddings = tf.constant([[d, d], [d, d], [0, 0]])
             images = tf.pad(images, paddings, "SYMMETRIC")
             #images = tf.image.resize_image_with_crop_or_pad(images, w+d, h+d)
             print('images.shape:', images.shape)
@@ -263,11 +263,8 @@ class GoodsDataset:
             zoom = 1.1
             w_crop = math.ceil(w / zoom)
             h_crop = math.ceil(h / zoom)
-            #batch_size = int(images.shape[0])
-            #print(images.shape)
-            batch_size = 32
-            #print(batch_size)
-            images = tf.random_crop(images, [batch_size, h_crop, w_crop, 3])
+            batch_size = images.shape[0]
+            images = tf.random_crop(images, [h_crop, w_crop, 3])
 
             images = tf.image.resize_images(images, [h, w])            
             # ---
@@ -281,11 +278,11 @@ class GoodsDataset:
 
             images = tf.minimum(images, 1.0)
             images = tf.maximum(images, 0.0)
-            images.set_shape([None, None, None, 3])
+            images.set_shape([None, None, 3])
             return images, labels
 
         dataset = dataset.map(_random_distord, num_parallel_calls=8)
-        #dataset = dataset.batch(batch)
+        dataset = dataset.batch(batch)
 
         return dataset
 
