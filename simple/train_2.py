@@ -85,8 +85,10 @@ for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
 print('model.trainable_weights:', len(model.trainable_weights))
+#  if num_last_trainable_layers = 60
+#  model.trainable_weights: 190
+#  model.trainable_weights: 35
 
-sys.exit()
 
 """
 model = models.Sequential()
