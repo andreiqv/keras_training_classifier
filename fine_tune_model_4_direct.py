@@ -78,8 +78,8 @@ print('Weights of top60 was copied.')
 for layer in model.layers[:start_training_layer]:
     layer.trainable = False
 
-#for layer in model.layers:
-#    layer.trainable = False
+for layer in model.layers:
+    layer.trainable = False
 
 #for layer in model.layers[249:]:
 #  layer.trainable = True
