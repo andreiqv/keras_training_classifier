@@ -17,6 +17,5 @@ dataset_list = 'dataset-181018.list'
 labels_list = 'dataset-181018.labels'
 
 #num_classes = 148
-f = open(labels_list)
-num_classes = len([None for x in f.readlines() if len(x.strip()) > 0])
+num_classes = len([None for x in open(labels_list).readlines() if len(x.strip())>0])
 print('num_classes:', num_classes)
