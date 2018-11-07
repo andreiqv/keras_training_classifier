@@ -332,7 +332,7 @@ class GoodsDataset:
 
 if __name__ == '__main__':
 
-    #tf.enable_eager_execution()
+    tf.enable_eager_execution()
 
     # labels_list = []
     # with open("131018.labels", "r") as labels_file:
