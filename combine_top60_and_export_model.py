@@ -10,12 +10,20 @@ from dataset_factory import GoodsDataset
 import settings
 from settings import IMAGE_SIZE
 
-model_name = 'top60_181018-04-0.546-0.325[0.680]_rnd_adam'
+model_name = 'top60_181018-07-0.996-0.664[0.924]_rnd_adam.hdf5'
 
 
 def top_6(y_true, y_pred):
     k = 6
     return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
+
+def freeze_graph(graph, session, output):
+    with graph.as_default():
+        graphdef_inf = tf.graph_util.remove_training_nodes(graph.as_graph_def())
+        graphdef_frozen = tf.graph_util.convert_variables_to_constants(session, graphdef_inf, output)
+        graph_io.write_graph(graphdef_frozen,\
+            "./output", "inception_{}.pb".format(model_name), as_text=False)
+
 
 
 keras.backend.set_learning_phase(0)
@@ -46,6 +54,7 @@ print(new_model.summary())
 for i in range(0, len(base_model.layers)):
     new_model.layers[i + 248].set_weights(base_model.layers[i].get_weights())
 
+"""
 print("new model inputs")
 for node in new_model.inputs:
     print(node.op.name)
@@ -53,6 +62,7 @@ for node in new_model.inputs:
 print("new model outputs")
 for node in new_model.outputs:
     print(node.op.name)
+"""
 
 dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
                        32,
@@ -61,3 +71,17 @@ results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
 print(results)
 
 new_model.save("output/inception_{0}.hdf5".format(model_name))
+
+
+session = keras.backend.get_session()
+
+print("model inputs")
+for node in new_model.inputs:
+    print(node.op.name)
+
+print("model outputs")
+for node in new_model.outputs:
+    print(node.op.name)
+
+freeze_graph(session.graph, session,\
+    [out.op.name for out in new_model.outputs])
