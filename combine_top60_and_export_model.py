@@ -64,14 +64,15 @@ for node in new_model.outputs:
     print(node.op.name)
 """
 
-dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
+do_evaluate = False
+if do_evaluate:
+    dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
                        32,
                        32, 5, 0.1)
-results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
-print(results)
+    results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
+    print(results)
 
 new_model.save("output/inception_{0}.hdf5".format(model_name))
-
 
 session = keras.backend.get_session()
 
@@ -82,6 +83,8 @@ for node in new_model.inputs:
 print("model outputs")
 for node in new_model.outputs:
     print(node.op.name)
+
+print('num_layers:', len(new_model.layers))
 
 freeze_graph(session.graph, session,\
     [out.op.name for out in new_model.outputs])
