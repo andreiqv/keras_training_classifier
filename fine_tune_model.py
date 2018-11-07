@@ -53,7 +53,7 @@ print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 callbacks = [
     keras.callbacks.ModelCheckpoint(
         "./checkpoints/top60_181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}]_rnd_adam.hdf5",
-        save_best_only=False,
+        save_best_only=True,
         monitor='val_top_6',
         mode='max'
     ),
