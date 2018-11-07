@@ -1,6 +1,7 @@
 import argparse
 import numpy as np
 import tensorflow as tf
+from tensorflow import keras
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 import sys
