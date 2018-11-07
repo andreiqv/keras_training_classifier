@@ -4,8 +4,6 @@ multiply = 5
 valid_percentage = 0.1
 train_batch = 32
 valid_batch = 32
-#train_batch = 32
-#valid_batch = 32
 
 # 'sort' or 'shuffle'
 dataset_order = 'shuffle' 
@@ -15,7 +13,6 @@ rotation_max_angle = 90
 
 dataset_list = 'dataset-181018.list'
 labels_list = 'dataset-181018.labels'
-
 #num_classes = 148
 num_classes = len([None for x in open(labels_list).readlines() if len(x.strip())>0])
 print('num_classes:', num_classes)
