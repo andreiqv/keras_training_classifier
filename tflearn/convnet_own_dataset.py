@@ -26,11 +26,13 @@ from tflearn.data_utils import image_preloader
 train_dataset_file = 'dataset-181018.list' 
 val_dataset_file = 'dataset-181018.list'
 
-(X, Y), (X_test, Y_test) = cifar10.load_data()
+#(X, Y), (X_test, Y_test) = cifar10.load_data()
 X, Y = image_preloader(train_dataset_file, image_shape=(32, 32),       #use the 'image_preloader'                    
 	mode='file', categorical_labels=True, normalize=True)
 X_val, Y_val = image_preloader(val_dataset_file, image_shape=(32, 32),
 	mode='file', categorical_labels=True, normalize=True)
+X_val, Y_val = X_test, Y_test
+
 
 nb_classes = 148
 X, Y = shuffle(X, Y)
