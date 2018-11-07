@@ -51,7 +51,6 @@ img_aug = ImageAugmentation()
 img_aug.add_random_flip_leftright()
 img_aug.add_random_rotation(max_angle=25.)
 
-
 print('Convolutional network building')
 # Convolutional network building
 network = input_data(shape=[None, 32, 32, 3],
@@ -72,4 +71,4 @@ network = regression(network, optimizer='adam',
 # Train using classifier
 model = tflearn.DNN(network, tensorboard_verbose=0)
 model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
-          show_metric=True, batch_size=96, run_id='cifar10_cnn')
+          show_metric=True, batch_size=12, run_id='cifar10_cnn')
