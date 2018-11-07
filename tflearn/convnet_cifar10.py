@@ -22,9 +22,10 @@ from tflearn.data_augmentation import ImageAugmentation
 # Data loading and preprocessing
 from tflearn.datasets import cifar10
 (X, Y), (X_test, Y_test) = cifar10.load_data()
-X, Y = shuffle(X, Y)
-Y = to_categorical(Y)
 nb_classes = 10
+
+X, Y = shuffle(X, Y)
+Y = to_categorical(Y, nb_classes)
 Y_test = to_categorical(Y_test, nb_classes)
 
 # Real-time data preprocessing
