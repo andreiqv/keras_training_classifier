@@ -8,6 +8,10 @@ import sys
 import sklearn
 import math
 
+from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+
 import settings
 from settings import IMAGE_SIZE
 
