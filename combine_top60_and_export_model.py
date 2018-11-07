@@ -10,7 +10,7 @@ from dataset_factory import GoodsDataset
 import settings
 from settings import IMAGE_SIZE
 
-model_name = 'top60_181018-07-0.996-0.664[0.924]_rnd_adam.hdf5'
+model_name = 'top60_181018-07-0.996-0.664[0.924]_rnd_adam'
 
 
 def top_6(y_true, y_pred):
