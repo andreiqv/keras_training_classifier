@@ -23,6 +23,20 @@ Epoch 3/50 - 994s 859ms/step - loss: 2.2185 - acc: 0.4771 - top_6: 0.8094
  - val_loss: 1.0639 - val_acc: 0.6995 - val_top_6: 0.9509
 
 
+обучать последние 10 слоев:
+Epoch 1/50
+1157/1157 [==============================] - 753s 651ms/step - loss: 1.6911 - acc: 0.5556 - top_6: 0.8710 - val_loss: 1.1406 - val_acc: 0.6757 - val_top_6: 0.9351
+Epoch 2/50
+1157/1157 [==============================] - 649s 561ms/step - loss: 1.4247 - acc: 0.5921 - top_6: 0.8971 - val_loss: 1.1161 - val_acc: 0.6742 - val_top_6: 0.9357
+Epoch 3/50
+1157/1157 [==============================] - 647s 559ms/step - loss: 1.3506 - acc: 0.6108 - top_6: 0.9057 - val_loss: 1.1025 - val_acc: 0.6754 - val_top_6: 0.9378
+Epoch 4/50
+1157/1157 [==============================] - 651s 563ms/step - loss: 1.3249 - acc: 0.6150 - top_6: 0.9090 - val_loss: 1.0839 - val_acc: 0.6823 - val_top_6: 0.9390
+Epoch 5/50
+1157/1157 [==============================] - 655s 566ms/step - loss: 1.3133 - acc: 0.6145 - top_6: 0.9110 - val_loss: 1.0971 - val_acc: 0.6823 - val_top_6: 0.9365
+
+
+
 """
 
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
