@@ -172,7 +172,7 @@ class InceptionV3Top60tfrecordsDataset:
 
 if __name__ == '__main__':
 
-    #tf.enable_eager_execution()
+    tf.enable_eager_execution()
 
     dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
                            settings.train_batch, settings.valid_batch, 
