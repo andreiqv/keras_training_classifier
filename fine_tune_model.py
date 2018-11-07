@@ -64,7 +64,7 @@ callbacks = [
 
 model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           callbacks=callbacks,
-          epochs=30,
+          epochs=20,
           steps_per_epoch=1157,
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
