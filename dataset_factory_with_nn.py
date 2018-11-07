@@ -291,6 +291,15 @@ class GoodsDataset:
 
     def _produce_bottlenecks(self, images, labels):
 
+        input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+        base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
+                             input_tensor=input_tensor)
+        output_layer_number=248
+        intermediate_layer_model = keras.Model(inputs=base_model.input,
+                             outputs=base_model.layers[output_layer_number].output)
+
+        images = intermediate_layer_model.predict(images, steps=77)
+
         return images, labels
         
 
@@ -366,7 +375,7 @@ if __name__ == '__main__':
     #
 
     tf.enable_eager_execution()
-    
+
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
 
         #plot_random_nine(images, labels)
