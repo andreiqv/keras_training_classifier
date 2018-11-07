@@ -14,10 +14,13 @@ Epoch 1/300
 
 --
 all false trainable:
-Epoch 1/50
-1157/1157 [==============================] - 728s 629ms/step
- - loss: 2.3668 - acc: 0.4468 - top_6: 0.7863 
- - val_loss: 1.0607 - val_acc: 0.6993 - val_top_6: 0.9509
+[1.639923135439555, 0.3680555572112401, 0.9791666666666666]
+Epoch 1/50 - 1055s 912ms/step - loss: 2.1915 - acc: 0.4807 - top_6: 0.8107 
+ - val_loss: 1.0686 - val_acc: 0.6972 - val_top_6: 0.9501
+Epoch 2/50 - 992s 857ms/step - loss: 2.1883 - acc: 0.4818 - top_6: 0.8103 
+ - val_loss: 1.0649 - val_acc: 0.6983 - val_top_6: 0.9505
+Epoch 3/50 - 994s 859ms/step - loss: 2.2185 - acc: 0.4771 - top_6: 0.8094 
+ - val_loss: 1.0639 - val_acc: 0.6995 - val_top_6: 0.9509
 
 
 """
@@ -75,10 +78,11 @@ source_top60_model = keras.models.load_model(
 nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=start_training_layer)
 print('Weights of top60 was copied.')
 
-for layer in model.layers[:start_training_layer]:
-    layer.trainable = False
+#for layer in model.layers[:start_training_layer]:
+#    layer.trainable = False
 
-for layer in model.layers:
+num_layers = len(model.layers)
+for layer in model.layers[:num_layers-10]:
     layer.trainable = False
 
 #for layer in model.layers[249:]:
