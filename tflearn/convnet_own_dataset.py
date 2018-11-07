@@ -28,9 +28,9 @@ val_dataset_file = '/home/andrei/Data/Datasets/Scales/splited/valid'
 
 #(X, Y), (X_test, Y_test) = cifar10.load_data()
 X, Y = image_preloader(train_dataset_file, mode='folder', image_shape=(32, 32),       #use the 'image_preloader'                    
-	mode='file', categorical_labels=True, normalize=True)
+	categorical_labels=True, normalize=True)
 X_val, Y_val = image_preloader(val_dataset_file, mode='folder', image_shape=(32, 32),
-	mode='file', categorical_labels=True, normalize=True)
+	categorical_labels=True, normalize=True)
 X_test, Y_test = X_val, Y_val
 
 nb_classes = 148
