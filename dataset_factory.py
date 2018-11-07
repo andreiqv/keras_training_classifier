@@ -266,7 +266,6 @@ class GoodsDataset:
             #batch_size = int(images.shape[0])
             #print(images.shape)
             batch_size = tf.size(images) / (3*h*w)
-            #print(batch_size)
             images = tf.random_crop(images, [batch_size, h_crop, w_crop, 3])
 
             images = tf.image.resize_images(images, [h, w])            
@@ -335,6 +334,19 @@ if __name__ == '__main__':
 
     #tf.enable_eager_execution()
 
+    arguments = argparse.ArgumentParser(description="create labels list for dataset paths")
+    arguments.add_argument("--data", type=str, default=None,
+                           help="a list of paths of images")
+    arguments.add_argument("--labels", type=str, default=None,
+                           help="name of the output labels list")
+    arguments = arguments.parse_args()
+
+    if arguments.data and arguments.labels:
+        GoodsDataset.generate_labels_list(arguments.data, arguments.labels)
+        print('the list of labels was created.')
+        sys.exit()
+
+
     # labels_list = []
     # with open("131018.labels", "r") as labels_file:
     #     for line in labels_file:
@@ -364,14 +376,4 @@ if __name__ == '__main__':
           #plot_random_nine(images, labels, labels_list)
     #     q = 2
 
-    arguments = argparse.ArgumentParser(description="create labels list for dataset paths")
 
-    arguments.add_argument("--data", type=str, default="dataset.list",
-                           help="a list of paths of images")
-
-    arguments.add_argument("--labels", type=str, default="labels.list",
-                           help="name of the output labels list")
-
-    arguments = arguments.parse_args()
-
-    #GoodsDataset.generate_labels_list(arguments.data, arguments.labels)
