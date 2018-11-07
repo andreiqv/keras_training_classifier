@@ -85,6 +85,7 @@ for layer in model.layers[:num_layers-num_last_trainable_layers]:
 
 print('model.trainable_weights:', len(model.trainable_weights))
 
+sys.exit()
 
 """
 model = models.Sequential()
