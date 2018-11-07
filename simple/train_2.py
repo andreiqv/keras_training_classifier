@@ -66,7 +66,7 @@ print(model.summary())
 """
 
 x = conv_base.output
-#x = Flatten()(x)
+x = Flatten()(x)
 #x = Dense(1024, activation="relu")(x)
 #x = Dropout(0.5)(x)
 #x = Dense(1024, activation="relu")(x)
