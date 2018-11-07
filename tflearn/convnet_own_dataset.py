@@ -23,16 +23,15 @@ from tflearn.data_augmentation import ImageAugmentation
 from tflearn.data_utils import image_preloader
 
 #from tflearn.datasets import cifar10
-train_dataset_file = 'dataset-181018.list' 
-val_dataset_file = 'dataset-181018.list'
+train_dataset_file = '/home/andrei/Data/Datasets/Scales/splited/train' 
+val_dataset_file = '/home/andrei/Data/Datasets/Scales/splited/valid'
 
 #(X, Y), (X_test, Y_test) = cifar10.load_data()
-X, Y = image_preloader(train_dataset_file, image_shape=(32, 32),       #use the 'image_preloader'                    
+X, Y = image_preloader(train_dataset_file, mode='folder', image_shape=(32, 32),       #use the 'image_preloader'                    
 	mode='file', categorical_labels=True, normalize=True)
-X_val, Y_val = image_preloader(val_dataset_file, image_shape=(32, 32),
+X_val, Y_val = image_preloader(val_dataset_file, mode='folder', image_shape=(32, 32),
 	mode='file', categorical_labels=True, normalize=True)
-X_val, Y_val = X_test, Y_test
-
+X_test, Y_test = X_val, Y_val
 
 nb_classes = 148
 X, Y = shuffle(X, Y)
