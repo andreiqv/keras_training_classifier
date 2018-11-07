@@ -22,7 +22,7 @@ def freeze_graph(graph, session, output):
         graphdef_frozen = tf.graph_util.convert_variables_to_constants(session, graphdef_inf, output)
         graph_io.write_graph(graphdef_frozen,\
             "./output", "inception_{}.pb".format(model_name), as_text=False)
-
+        print('Model was saved.')
 
 
 keras.backend.set_learning_phase(0)
@@ -63,14 +63,6 @@ for node in new_model.outputs:
     print(node.op.name)
 """
 
-do_evaluate = False
-if do_evaluate:
-    dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
-                       32,
-                       32, 5, 0.1)
-    results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
-    print(results)
-
 new_model.save("output/inception_{0}.hdf5".format(model_name))
 
 session = keras.backend.get_session()
@@ -87,3 +79,12 @@ print('num_layers:', len(new_model.layers))
 
 freeze_graph(session.graph, session,\
     [out.op.name for out in new_model.outputs])
+
+
+do_evaluate = True
+if do_evaluate:
+    dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", (IMAGE_SIZE[0], IMAGE_SIZE[1]),
+                       32,
+                       32, 5, 0.1)
+    results = new_model.evaluate(dataset.get_valid_dataset(), steps=77)
+    print(results)
