@@ -267,7 +267,7 @@ class GoodsDataset:
             #print(images.shape)
             batch_size = tf.size(images) / (3*h*w)
             #print(batch_size)
-            images = tf.random_crop(images, [32, h_crop, w_crop, 3])
+            images = tf.random_crop(images, [batch_size, h_crop, w_crop, 3])
 
             images = tf.image.resize_images(images, [h, w])            
             # ---
@@ -333,7 +333,7 @@ class GoodsDataset:
 
 if __name__ == '__main__':
 
-    tf.enable_eager_execution()
+    #tf.enable_eager_execution()
 
     # labels_list = []
     # with open("131018.labels", "r") as labels_file:
