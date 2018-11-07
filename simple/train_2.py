@@ -4,6 +4,7 @@ from keras import optimizers
 
 #import tensorflow as tf
 
+import sys
 import math
 import settings
 train_dir = settings.data_dir + '/train'
