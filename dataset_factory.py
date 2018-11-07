@@ -267,7 +267,7 @@ class GoodsDataset:
             #print(images.shape)
             batch_size = tf.size(images.shape) / (3*h*w)
             #print(batch_size)
-            images = tf.random_crop(images, [batch_size, h_crop, w_crop, 3])
+            images = tf.random_crop(images, [32, h_crop, w_crop, 3])
 
             images = tf.image.resize_images(images, [h, w])            
             # ---
