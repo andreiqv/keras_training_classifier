@@ -55,7 +55,7 @@ model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
               metrics=['accuracy', top_6],
               distribute=distribution)
 
-print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
+#print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
 callbacks = [
     keras.callbacks.ModelCheckpoint(
