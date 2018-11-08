@@ -122,7 +122,7 @@ for layer in model.layers[:num_layers-num_last_trainable_layers]:
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
-model.compile(optimizer=Adagrad(lr=0.001), #'adagrad',    #'rmsprop',
+model.compile(optimizer=Adagrad(lr=0.0002), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
@@ -156,3 +156,22 @@ model.fit(train_dataset.prefetch(2).repeat(),
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
           )
+
+
+"""
+1) num_last_trainable_layers = 60
+optimizer=Adagrad(lr=0.001)
+
+Epoch 1/50
+1157/1157 [==============================] - 770s 665ms/step - loss: 1.9875 - acc: 0.4700 - top_6: 0.8023 - val_loss: 2.9080 - val_acc: 0.4233 - val_top_6: 0.7297
+Epoch 2/50
+1157/1157 [==============================] - 732s 633ms/step - loss: 1.7136 - acc: 0.5227 - top_6: 0.8451 - val_loss: 2.9081 - val_acc: 0.4110 - val_top_6: 0.7262
+Epoch 3/50
+1157/1157 [==============================] - 734s 635ms/step - loss: 1.6264 - acc: 0.5377 - top_6: 0.8615 - val_loss: 2.9565 - val_acc: 0.4118 - val_top_6: 0.7185
+Epoch 4/50
+1157/1157 [==============================] - 733s 634ms/step - loss: 1.5851 - acc: 0.5468 - top_6: 0.8658 - val_loss: 2.8856 - val_acc: 0.4281 - val_top_6: 0.7226
+Epoch 5/50
+1157/1157 [==============================] - 734s 634ms/step - loss: 1.5577 - acc: 0.5500 - top_6: 0.8708 - val_loss: 2.9554 - val_acc: 0.4150 - val_top_6: 0.7165
+
+
+"""
