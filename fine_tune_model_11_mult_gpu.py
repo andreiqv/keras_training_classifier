@@ -86,7 +86,7 @@ goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels",
 train_dataset = goods_dataset.get_train_dataset()
 valid_dataset = goods_dataset.get_valid_dataset()  
 
-print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
+#print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
