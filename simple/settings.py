@@ -10,5 +10,5 @@ if os.path.exists('.local'):
 
 else:
 	data_dir = '/home/andrei/Data/Datasets/Scales/splited'
-	train_batch_size = 1
-	valid_batch_size = 1
+	train_batch_size = 16
+	valid_batch_size = 16
