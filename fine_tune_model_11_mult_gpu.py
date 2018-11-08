@@ -9,7 +9,10 @@ from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 from tensorflow.python.training import gradient_descent
-optimizer = gradient_descent.GradientDescentOptimizer(0.001)
+from tensorflow.keras.utils.training_utils import multi_gpu_model
+
+#optimizer = gradient_descent.GradientDescentOptimizer(0.001)
+
 """
 NotImplementedError: Only TF native optimizers are supported with DistributionStrategy.
 """
