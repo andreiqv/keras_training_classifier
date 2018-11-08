@@ -278,8 +278,11 @@ class GoodsDataset:
             images = tf.image.random_brightness(images, max_delta=0.1)
             images = tf.image.random_saturation(images, lower=1.0, upper=1.5)
 
-            images = tf.minimum(images, 1.0)
-            images = tf.maximum(images, 0.0)
+            #images = tf.image.per_image_standardization(images)
+            images = tf.map_fn(lambda frame: tf.image.per_image_standardization(frame), images)
+            #images = tf.minimum(images, 1.0)
+            #images = tf.maximum(images, 0.0)
+
             images.set_shape([None, None, None, 3])
             return images, labels
 
