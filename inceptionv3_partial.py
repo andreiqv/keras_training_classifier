@@ -1,5 +1,6 @@
 from tensorflow import keras
 from tensorflow.keras import layers
+from tensorflow.keras import regularizers
 import tensorflow as tf
 
 backend = keras.backend
@@ -47,6 +48,9 @@ def conv2d_bn(x,
         strides=strides,
         padding=padding,
         use_bias=False,
+        #
+        kernel_regularizer=regularizers.l1(0.01), # ADDED
+        #
         name=conv_name)(x)
     x = layers.BatchNormalization(axis=bn_axis, scale=False, name=bn_name)(x)
     x = layers.Activation('relu', name=name)(x)

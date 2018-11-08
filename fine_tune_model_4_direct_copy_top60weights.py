@@ -35,8 +35,6 @@ Epoch 4/50
 Epoch 5/50
 1157/1157 [==============================] - 655s 566ms/step - loss: 1.3133 - acc: 0.6145 - top_6: 0.9110 - val_loss: 1.0971 - val_acc: 0.6823 - val_top_6: 0.9365
 
-
-
 """
 
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
@@ -170,6 +168,7 @@ Epoch 3/50 - loss: 1.6264 - acc: 0.5377 - top_6: 0.8615 - val_loss: 2.9565 - val
 Epoch 4/50 - loss: 1.5851 - acc: 0.5468 - top_6: 0.8658 - val_loss: 2.8856 - val_acc: 0.4281 - val_top_6: 0.7226
 Epoch 5/50 - loss: 1.5577 - acc: 0.5500 - top_6: 0.8708 - val_loss: 2.9554 - val_acc: 0.4150 - val_top_6: 0.7165
 
+
 (старая аугментация  344s 297ms/step)
 Adagrad(lr=0.0002) 
 Epoch 1/50 - loss: 1.1296 - acc: 0.6702 - top_6: 0.9373 - val_loss: 3.9620 - val_acc: 0.3709 - val_top_6: 0.7147
@@ -179,7 +178,7 @@ Epoch 4/50 - loss: 0.9318 - acc: 0.7146 - top_6: 0.9559 - val_loss: 3.9380 - val
 Epoch 5/50 - loss: 0.9098 - acc: 0.7200 - top_6: 0.9582 - val_loss: 3.9248 - val_acc: 0.3599 - val_top_6: 0.7091
 
 2) num_last_trainable_layers = 5
-(старая аугментация  344s 297ms/step)
+Cтарая аугментация:
 optimizer=Adagrad(lr=0.001)
 Epoch 1/30 - loss: 1.4343 - acc: 0.6053 - top_6: 0.9029 - val_loss: 1.0382 - val_acc: 0.6989 - val_top_6: 0.9485
 Epoch 2/30 - loss: 1.3089 - acc: 0.6311 - top_6: 0.9137 - val_loss: 1.0326 - val_acc: 0.7004 - val_top_6: 0.9464
@@ -187,6 +186,7 @@ Epoch 3/30 - loss: 1.2674 - acc: 0.6352 - top_6: 0.9199 - val_loss: 1.0301 - val
 Epoch 4/30 - loss: 1.2353 - acc: 0.6449 - top_6: 0.9231 - val_loss: 1.0360 - val_acc: 0.7004 - val_top_6: 0.9460
 
 Новая аугментация:
+optimizer=Adagrad(lr=0.001)
 Epoch 1/30 - loss: 1.8551 - acc: 0.5239 - top_6: 0.8482 - val_loss: 1.0392 - val_acc: 0.7033 - val_top_6: 0.9489
 Epoch 2/30 - loss: 1.7007 - acc: 0.5512 - top_6: 0.8660 - val_loss: 1.0471 - val_acc: 0.6934 - val_top_6: 0.9468
 Epoch 3/30 - loss: 1.6342 - acc: 0.5606 - top_6: 0.8739 - val_loss: 1.0452 - val_acc: 0.6946 - val_top_6: 0.9452
@@ -195,5 +195,19 @@ Epoch 5/30 - loss: 1.5738 - acc: 0.5695 - top_6: 0.8800 - val_loss: 1.0426 - val
 Epoch 6/30 - loss: 1.5458 - acc: 0.5740 - top_6: 0.8831 - val_loss: 1.0427 - val_acc: 0.6921 - val_top_6: 0.9460
 Epoch 7/30 - loss: 1.5330 - acc: 0.5778 - top_6: 0.8853 - val_loss: 1.0408 - val_acc: 0.6958 - val_top_6: 0.9452
 Epoch 8/30 - loss: 1.5175 - acc: 0.5772 - top_6: 0.8862 - val_loss: 1.0512 - val_acc: 0.6913 - val_top_6: 0.9448
+
+---------
+
+3) Новая аугментация
+num_last_trainable_layers = 60
+optimizer=Adagrad(lr=0.001)
+
+Epoch 1/30
+1157/1157 [==============================] - 732s 632ms/step - loss: 1.2379 - acc: 0.6404 - top_6: 0.9242 - val_loss: 3.5119 - val_acc: 0.3713 - val_top_6: 0.7273
+Epoch 2/30
+1157/1157 [==============================] - 695s 600ms/step - loss: 1.0710 - acc: 0.6774 - top_6: 0.9421 - val_loss: 3.5143 - val_acc: 0.3687 - val_top_6: 0.7188
+Epoch 3/30
+1157/1157 [==============================] - 695s 601ms/step - loss: 1.0318 - acc: 0.6849 - top_6: 0.9464 - val_loss: 3.3129 - val_acc: 0.3854 - val_top_6: 0.7456
+
 
 """
