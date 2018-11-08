@@ -74,7 +74,7 @@ model.add(Dense(64))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes))
-model.add(Activation('sigmoid'))
+#model.add(Activation('sigmoid'))
 
 
 print('model.trainable_weights:', len(model.trainable_weights))
@@ -85,8 +85,8 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # Training
 
 
-model.compile(loss='categorical_crossentropy' # 'binary_crossentropy',
-			optimizer='rmsprop' # optimizer=optimizers.RMSprop(lr=2e-5),
+model.compile(loss='categorical_crossentropy', # 'binary_crossentropy',
+			optimizer='rmsprop', # optimizer=optimizers.RMSprop(lr=2e-5),
 			metrics=['acc'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
