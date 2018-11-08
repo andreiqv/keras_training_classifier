@@ -82,7 +82,7 @@ def top_6(y_true, y_pred):
 from nn import get_InceptionV3_whole_model
 model = get_InceptionV3_whole_model()
 print(model.summary())
-start_training_layer = 249
+starting_copied_layer = 249
 
 source_top60_model = keras.models.load_model(
     "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
@@ -90,10 +90,10 @@ source_top60_model = keras.models.load_model(
 )
 
 #nn_utils.copy_model_weights(source_model, model, start_layer=start_training_layer)
-nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=start_training_layer)
+nn_utils.copy_top_weights_to_model(source_top60_model, model, start_layer=starting_copied_layer)
 print('Weights of top60 was copied.')
 
-#for layer in model.layers[:start_training_layer]:
+#for layer in model.layers[:init_copied_layer]:
 #    layer.trainable = False
 
 num_layers = len(model.layers)
