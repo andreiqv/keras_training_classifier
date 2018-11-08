@@ -1,6 +1,7 @@
 import tensorflow as tf
 #from tensorflow import keras
 import keras
+from keras import layers
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
 from keras.applications.resnet50 import ResNet50
 from keras.applications.inception_v3 import InceptionV3
