@@ -1,13 +1,13 @@
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
-from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.applications.inception_v3 import InceptionV3
+#from tensorflow import keras
+from keras.applications.inception_resnet_v2 import InceptionResNetV2
+from keras.applications.resnet50 import ResNet50
+from applications.inception_v3 import InceptionV3
 from dataset_factory import GoodsDataset
 import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
-from tensorflow.keras.optimizers import SGD, Adam, Adagrad
+from keras.optimizers import SGD, Adam, Adagrad
 from tensorflow.python.training import gradient_descent
 from keras.utils.training_utils import multi_gpu_model
 
