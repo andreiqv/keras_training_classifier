@@ -57,24 +57,24 @@ print(model.summary())
 """
 
 model = models.Sequential()
-model.add(Conv2D(32, (3, 3), input_shape=(3,) + IMAGE_SHAPE))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Conv2D(32, (3, 3), input_shape=(3,) + IMAGE_SHAPE))
+model.add(layers.Activation('relu'))
+model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Conv2D(32, (3, 3)))
+model.add(layers.Activation('relu'))
+model.addlayers.(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Conv2D(64, (3, 3)))
+model.add(layers.Activation('relu'))
+model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
-model.add(Dense(64))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes))
-#model.add(Activation('sigmoid'))
+model.add(layers.Flatten())  # this converts our 3D feature maps to 1D feature vectors
+model.add(layers.Dense(64))
+model.add(layers.Activation('relu'))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(num_classes))
+#model.add(layers.Activation('sigmoid'))
 
 
 print('model.trainable_weights:', len(model.trainable_weights))
