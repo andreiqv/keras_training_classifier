@@ -318,7 +318,7 @@ class GoodsDataset:
             dataset = dataset.map(self._parse_function, num_parallel_calls=8)
             dataset = self._augment_dataset(dataset, self.multiply, self.train_batch)
         with tf.device("/device:GPU:0"):            
-            dataset = dataset.map(self._produce_bottlenecks, num_parallel_calls=8)
+            dataset = dataset.map(self._produce_bottlenecks)
 
         return dataset
 
