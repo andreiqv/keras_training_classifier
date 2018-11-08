@@ -55,8 +55,8 @@ source_model = keras.models.load_model(
 )
 copy_model_weights(source_model, model, start_layer=start_training_layer)
 
-#for layer in model.layers[:start_training_layer]:
-#  layer.trainable = False
+for layer in model.layers[:start_training_layer]:
+  layer.trainable = False
 
 """
 num_layers = len(model.layers)
