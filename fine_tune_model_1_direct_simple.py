@@ -47,7 +47,12 @@ x = base_model.output
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
-start_training_layer = 249
+#start_training_layer = 249
+
+num_layers = len(model.layers)
+num_last_trainable_layers = 60
+for layer in model.layers[:num_layers-num_last_trainable_layers]:
+    layer.trainable = False
 
 #source_model = keras.models.load_model(
 #    "./output/inception_top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
