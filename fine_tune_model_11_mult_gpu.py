@@ -28,13 +28,6 @@ def top_6(y_true, y_pred):
 IMAGE_SIZE = settings.IMAGE_SIZE
 #INPUT_SHAPE = (8, 8, 2048)   # top-30
 
-dir_prefix = "/home/andrei/work/_tf_records"
-goods_dataset = InceptionV3Top60tfrecordsDataset(
-    dir_prefix + "/inceptionv3_top60_train_dataset1810.zlib.tfr",
-    dir_prefix + "/inceptionv3_top60_valid_dataset1810.zlib.tfr",
-    bottleneck_shape=INPUT_SHAPE
-)
-
 # parent_model = keras.models.load_model(
 #     "./output/inceptionv3-top30-0.83.hdf5",
 #     custom_objects={'top_6': top_6})
