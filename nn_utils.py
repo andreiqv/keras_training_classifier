@@ -29,7 +29,7 @@ def copy_top_weights_to_model(source_top_model, target_model, start_layer=249):
 		
 		weights = source_layer.get_weights()
 		target_layer.set_weights(weights)
-		print('weights: {}: {}; {} -> {}'.format(len(weights), source_layer.input_shap, source_layer.name, target_layer.name))
+		print('weights: {}: {}; {} -> {}'.format(len(weights), source_layer.input_shape, source_layer.name, target_layer.name))
 		#print('source layer:', source_layer.name, ', input_shape =', source_layer.input_shape)
 		#print('target layer:', target_layer.name, ', input_shape =', target_layer.input_shape)
 		#target_layer.trainable = True
