@@ -63,7 +63,7 @@ model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
 model.add(layers.Conv2D(32, (3, 3)))
 model.add(layers.Activation('relu'))
-model.addlayers.(MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
 model.add(layers.Conv2D(64, (3, 3)))
 model.add(layers.Activation('relu'))
