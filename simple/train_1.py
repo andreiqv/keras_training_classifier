@@ -57,7 +57,7 @@ print(model.summary())
 """
 
 model = models.Sequential()
-model.add(layers.Conv2D(32, (3, 3), input_shape=(3,150,150))
+model.add(layers.Conv2D(32, (3, 3), input_shape=(3,150,150)))
 model.add(layers.Activation('relu'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 
