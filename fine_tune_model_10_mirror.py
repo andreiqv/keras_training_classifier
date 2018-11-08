@@ -48,7 +48,8 @@ for i, layer in enumerate(model.layers):
 #     model.layers[i].set_weights(parent_model.layers[248 + i].get_weights())
 
 from tensorflow.python.training import gradient_descent
-optimizer = gradient_descent.GradientDescentOptimizer(0.01)
+#optimizer = gradient_descent.GradientDescentOptimizer(0.01)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.2)
 distribution = tf.contrib.distribute.MirroredStrategy()
 
 model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',

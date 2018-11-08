@@ -303,10 +303,10 @@ class GoodsDataset:
         base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
                              input_tensor=input_tensor)
         output_layer_number=248
-        intermediate_layer_model = keras.Model(inputs=base_model.input,
+        initial_layers_model = keras.Model(inputs=base_model.input,
                              outputs=base_model.layers[output_layer_number].output)
 
-        images = intermediate_layer_model.predict(images, steps=77)
+        images = initial_layers_model.predict(images, steps=77)
 
         return images, labels
         
