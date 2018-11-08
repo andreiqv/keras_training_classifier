@@ -27,7 +27,6 @@ def top_6(y_true, y_pred):
 
 IMAGE_SIZE = settings.IMAGE_SIZE
 #INPUT_SHAPE = (8, 8, 2048)   # top-30
-INPUT_SHAPE = (8, 8, 1280)   # top-60
 
 dir_prefix = "/home/andrei/work/_tf_records"
 goods_dataset = InceptionV3Top60tfrecordsDataset(
@@ -36,13 +35,24 @@ goods_dataset = InceptionV3Top60tfrecordsDataset(
     bottleneck_shape=INPUT_SHAPE
 )
 
-inputs = keras.layers.Input(shape=INPUT_SHAPE)
-
 # parent_model = keras.models.load_model(
 #     "./output/inceptionv3-top30-0.83.hdf5",
 #     custom_objects={'top_6': top_6})
 
-model = InceptionV3_top60(inputs, settings.num_classes)
+input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+#
+#model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
+#  input_tensor=input_tensor)
+
+base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
+  input_tensor=input_tensor)
+x = base_model.output
+#x = GlobalAveragePooling2D()(x)
+#x = layers.Dense(148, activation='relu')(x)
+predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
+model = keras.Model(inputs=base_model.input, outputs=predictions)
+print(model.summary())
+start_training_layer = 249
 
 print(model.summary())
 
@@ -64,22 +74,32 @@ model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
 
 print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
+
 callbacks = [
     keras.callbacks.ModelCheckpoint(
-        "./checkpoints/top60_181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}]_rnd_adam.hdf5",
+        "./checkpoints/inceptionv3-181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}].hdf5",
         save_best_only=True,
         monitor='val_top_6',
         mode='max'
     ),
     keras.callbacks.TensorBoard(
-        log_dir='./tensorboard-top60',
+        log_dir='./tensorboard-incv4',
+        write_images=True,
     )
 ]
 
-model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
+
+goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", 
+  settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
+  settings.valid_percentage)
+train_dataset = goods_dataset.get_train_dataset()
+valid_dataset = goods_dataset.get_valid_dataset()   
+
+model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=20,
+          epochs=300,
           steps_per_epoch=1157,
-          validation_data=goods_dataset.valid_set.batch(32).repeat(),
+          validation_data=valid_dataset.repeat(),
           validation_steps=77,
           )
+
