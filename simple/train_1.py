@@ -11,6 +11,9 @@ valid_batch_size = settings.valid_batch_size
 #------------------------
 # data preparing
 
+IMAGE_SHAPE = (150,150)
+num_classes = 148
+
 train_datagen = ImageDataGenerator(
 	rescale=1./255,
 	rotation_range=40,
@@ -25,13 +28,13 @@ valid_datagen = ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(
 	train_dir,
-	target_size=(150,150),
+	target_size=IMAGE_SHAPE,
 	batch_size=train_batch_size,
 	class_mode='binary')
 
 valid_generator = valid_datagen.flow_from_directory(
 	valid_dir,
-	target_size=(150,150),
+	target_size=IMAGE_SHAPE,
 	batch_size=train_batch_size,
 	class_mode='binary')
 
@@ -42,6 +45,7 @@ from keras import models
 from keras import layers
 from keras.applications import VGG16
 
+"""
 conv_base = VGG16(weights='imagenet', include_top=False, input_shape=(150,150,3))
 
 model = models.Sequential()
@@ -50,6 +54,28 @@ model.add(layers.Flatten())
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 print(model.summary())
+"""
+
+model = Sequential()
+model.add(Conv2D(32, (3, 3), input_shape=(3,) + IMAGE_SHAPE))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(32, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(64, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Flatten())  # this converts our 3D feature maps to 1D feature vectors
+model.add(Dense(64))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+model.add(Dense(num_classes))
+model.add(Activation('sigmoid'))
+
 
 print('model.trainable_weights:', len(model.trainable_weights))
 conv_base.trainable = False
@@ -59,8 +85,8 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # Training
 
 
-model.compile(loss='binary_crossentropy',
-			optimizer=optimizers.RMSprop(lr=2e-5),
+model.compile(loss='categorical_crossentropy' # 'binary_crossentropy',
+			optimizer='rmsprop' # optimizer=optimizers.RMSprop(lr=2e-5),
 			metrics=['acc'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
