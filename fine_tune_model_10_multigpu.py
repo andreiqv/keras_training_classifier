@@ -8,7 +8,9 @@ import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
-
+"""
+NotImplementedError: Only TF native optimizers are supported with DistributionStrategy.
+"""
 import settings
 
 
@@ -46,7 +48,7 @@ for i, layer in enumerate(model.layers):
 
 distribution = tf.contrib.distribute.MirroredStrategy()
 
-model.compile(optimizer='adagrad', #'adagrad',#'adam',
+model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6],
               distribute=distribution)
