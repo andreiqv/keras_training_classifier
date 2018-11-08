@@ -101,6 +101,8 @@ num_last_trainable_layers = 5
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
+print('model.trainable_weights:', len(model.trainable_weights))
+
 #for layer in model.layers[249:]:
 #  layer.trainable = True
 
@@ -175,5 +177,9 @@ Epoch 2/50 - loss: 0.9970 - acc: 0.6970 - top_6: 0.9491 - val_loss: 3.9317 - val
 Epoch 3/50 - loss: 0.9595 - acc: 0.7074 - top_6: 0.9526 - val_loss: 3.9356 - val_acc: 0.3660 - val_top_6: 0.7127
 Epoch 4/50 - loss: 0.9318 - acc: 0.7146 - top_6: 0.9559 - val_loss: 3.9380 - val_acc: 0.3595 - val_top_6: 0.7099
 Epoch 5/50 - loss: 0.9098 - acc: 0.7200 - top_6: 0.9582 - val_loss: 3.9248 - val_acc: 0.3599 - val_top_6: 0.7091
+
+
+2) num_last_trainable_layers = 5
+
 
 """
