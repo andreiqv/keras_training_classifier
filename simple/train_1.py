@@ -56,7 +56,7 @@ model.add(layers.Dense(1, activation='sigmoid'))
 print(model.summary())
 """
 
-model = Sequential()
+model = models.Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=(3,) + IMAGE_SHAPE))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
