@@ -2,7 +2,7 @@ import tensorflow as tf
 #from tensorflow import keras
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
 from keras.applications.resnet50 import ResNet50
-from applications.inception_v3 import InceptionV3
+from keras.applications.inception_v3 import InceptionV3
 from dataset_factory import GoodsDataset
 import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
