@@ -48,9 +48,9 @@ from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
-from dataset_factory import GoodsDataset
+from dataset_factory_old import GoodsDataset
 import numpy as np
-from goods_tf_records import GoodsTfrecordsDataset
+#from goods_tf_records import GoodsTfrecordsDataset
 
 import nn_utils
 from nn_utils import copy_model_weights
