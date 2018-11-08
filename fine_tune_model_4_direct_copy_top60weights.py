@@ -97,7 +97,7 @@ print('Weights of top60 was copied.')
 #    layer.trainable = False
 
 num_layers = len(model.layers)
-num_last_trainable_layers = 20
+num_last_trainable_layers = 5
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
@@ -151,7 +151,7 @@ print(results)
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=50,
+          epochs=30,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
@@ -159,22 +159,21 @@ model.fit(train_dataset.prefetch(2).repeat(),
 
 
 """
-1) num_last_trainable_layers = 60
-optimizer=Adagrad(lr=0.001)
-
-(новаая аугментация с вращ и транс.)
+1) num_last_trainable_layers = 60 
+optimizer=Adagrad(lr=0.001) 
+(новая аугментация с вращ и транс. - 734s 634ms/step)
 Epoch 1/50 - loss: 1.9875 - acc: 0.4700 - top_6: 0.8023 - val_loss: 2.9080 - val_acc: 0.4233 - val_top_6: 0.7297
-Epoch 2/50 - 732s 633ms/step - loss: 1.7136 - acc: 0.5227 - top_6: 0.8451 - val_loss: 2.9081 - val_acc: 0.4110 - val_top_6: 0.7262
-Epoch 3/50 - 734s 635ms/step - loss: 1.6264 - acc: 0.5377 - top_6: 0.8615 - val_loss: 2.9565 - val_acc: 0.4118 - val_top_6: 0.7185
-Epoch 4/50 - 733s 634ms/step - loss: 1.5851 - acc: 0.5468 - top_6: 0.8658 - val_loss: 2.8856 - val_acc: 0.4281 - val_top_6: 0.7226
-Epoch 5/50 - 734s 634ms/step - loss: 1.5577 - acc: 0.5500 - top_6: 0.8708 - val_loss: 2.9554 - val_acc: 0.4150 - val_top_6: 0.7165
+Epoch 2/50 - loss: 1.7136 - acc: 0.5227 - top_6: 0.8451 - val_loss: 2.9081 - val_acc: 0.4110 - val_top_6: 0.7262
+Epoch 3/50 - loss: 1.6264 - acc: 0.5377 - top_6: 0.8615 - val_loss: 2.9565 - val_acc: 0.4118 - val_top_6: 0.7185
+Epoch 4/50 - loss: 1.5851 - acc: 0.5468 - top_6: 0.8658 - val_loss: 2.8856 - val_acc: 0.4281 - val_top_6: 0.7226
+Epoch 5/50 - loss: 1.5577 - acc: 0.5500 - top_6: 0.8708 - val_loss: 2.9554 - val_acc: 0.4150 - val_top_6: 0.7165
 
-
-Adagrad(lr=0.0002) (старая аугментация)
-Epoch 1/50 - 344s 297ms/step - loss: 1.1296 - acc: 0.6702 - top_6: 0.9373 - val_loss: 3.9620 - val_acc: 0.3709 - val_top_6: 0.7147
-Epoch 2/50 - 310s 268ms/step - loss: 0.9970 - acc: 0.6970 - top_6: 0.9491 - val_loss: 3.9317 - val_acc: 0.3688 - val_top_6: 0.7107
-Epoch 3/50 - 308s 266ms/step - loss: 0.9595 - acc: 0.7074 - top_6: 0.9526 - val_loss: 3.9356 - val_acc: 0.3660 - val_top_6: 0.7127
-Epoch 4/50 - 310s 268ms/step - loss: 0.9318 - acc: 0.7146 - top_6: 0.9559 - val_loss: 3.9380 - val_acc: 0.3595 - val_top_6: 0.7099
-Epoch 5/50 - 308s 266ms/step - loss: 0.9098 - acc: 0.7200 - top_6: 0.9582 - val_loss: 3.9248 - val_acc: 0.3599 - val_top_6: 0.7091
+(старая аугментация  344s 297ms/step)
+Adagrad(lr=0.0002) 
+Epoch 1/50 - loss: 1.1296 - acc: 0.6702 - top_6: 0.9373 - val_loss: 3.9620 - val_acc: 0.3709 - val_top_6: 0.7147
+Epoch 2/50 - loss: 0.9970 - acc: 0.6970 - top_6: 0.9491 - val_loss: 3.9317 - val_acc: 0.3688 - val_top_6: 0.7107
+Epoch 3/50 - loss: 0.9595 - acc: 0.7074 - top_6: 0.9526 - val_loss: 3.9356 - val_acc: 0.3660 - val_top_6: 0.7127
+Epoch 4/50 - loss: 0.9318 - acc: 0.7146 - top_6: 0.9559 - val_loss: 3.9380 - val_acc: 0.3595 - val_top_6: 0.7099
+Epoch 5/50 - loss: 0.9098 - acc: 0.7200 - top_6: 0.9582 - val_loss: 3.9248 - val_acc: 0.3599 - val_top_6: 0.7091
 
 """
