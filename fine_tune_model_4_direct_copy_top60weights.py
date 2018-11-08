@@ -48,7 +48,7 @@ from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
-from dataset_factory_old import GoodsDataset
+from dataset_factory import GoodsDataset
 import numpy as np
 #from goods_tf_records import GoodsTfrecordsDataset
 
@@ -180,6 +180,13 @@ Epoch 5/50 - loss: 0.9098 - acc: 0.7200 - top_6: 0.9582 - val_loss: 3.9248 - val
 
 
 2) num_last_trainable_layers = 5
-
-
+optimizer=Adagrad(lr=0.001)
+Epoch 1/30
+1157/1157 [==============================] - 291s 252ms/step - loss: 1.4343 - acc: 0.6053 - top_6: 0.9029 - val_loss: 1.0382 - val_acc: 0.6989 - val_top_6: 0.9485
+Epoch 2/30
+1157/1157 [==============================] - 259s 224ms/step - loss: 1.3089 - acc: 0.6311 - top_6: 0.9137 - val_loss: 1.0326 - val_acc: 0.7004 - val_top_6: 0.9464
+Epoch 3/30
+1157/1157 [==============================] - 258s 223ms/step - loss: 1.2674 - acc: 0.6352 - top_6: 0.9199 - val_loss: 1.0301 - val_acc: 0.6996 - val_top_6: 0.9440
+Epoch 4/30
+1157/1157 [==============================] - 259s 224ms/step - loss: 1.2353 - acc: 0.6449 - top_6: 0.9231 - val_loss: 1.0360 - val_acc: 0.7004 - val_top_6: 0.9460
 """
