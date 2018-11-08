@@ -202,12 +202,9 @@ Epoch 8/30 - loss: 1.5175 - acc: 0.5772 - top_6: 0.8862 - val_loss: 1.0512 - val
 num_last_trainable_layers = 60
 optimizer=Adagrad(lr=0.001)
 
-Epoch 1/30
-1157/1157 [==============================] - 732s 632ms/step - loss: 1.2379 - acc: 0.6404 - top_6: 0.9242 - val_loss: 3.5119 - val_acc: 0.3713 - val_top_6: 0.7273
-Epoch 2/30
-1157/1157 [==============================] - 695s 600ms/step - loss: 1.0710 - acc: 0.6774 - top_6: 0.9421 - val_loss: 3.5143 - val_acc: 0.3687 - val_top_6: 0.7188
-Epoch 3/30
-1157/1157 [==============================] - 695s 601ms/step - loss: 1.0318 - acc: 0.6849 - top_6: 0.9464 - val_loss: 3.3129 - val_acc: 0.3854 - val_top_6: 0.7456
+Epoch 1/30 - loss: 1.2379 - acc: 0.6404 - top_6: 0.9242 - val_loss: 3.5119 - val_acc: 0.3713 - val_top_6: 0.7273
+Epoch 2/30 - loss: 1.0710 - acc: 0.6774 - top_6: 0.9421 - val_loss: 3.5143 - val_acc: 0.3687 - val_top_6: 0.7188
+Epoch 3/30 - loss: 1.0318 - acc: 0.6849 - top_6: 0.9464 - val_loss: 3.3129 - val_acc: 0.3854 - val_top_6: 0.7456
 
 
 """

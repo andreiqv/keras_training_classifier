@@ -49,7 +49,7 @@ def conv2d_bn(x,
         padding=padding,
         use_bias=False,
         #
-        kernel_regularizer=regularizers.l1(0.01), # ADDED
+        #kernel_regularizer=regularizers.l1(0.01), # ADDED
         #
         name=conv_name)(x)
     x = layers.BatchNormalization(axis=bn_axis, scale=False, name=bn_name)(x)
