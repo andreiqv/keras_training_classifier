@@ -165,7 +165,7 @@ class InceptionV3Top60tfrecordsDataset:
             return bottleneck, label_tensor
 
         dataset = tf.data.TFRecordDataset(file_name, buffer_size=10 * 1024 * 1024, 
-            compression_type='ZLIB', num_parallel_reads=4) # added  num_parallel_calls
+            compression_type='ZLIB', num_parallel_reads=40) # added  num_parallel_calls
 
         dataset = dataset.map(_convert_tfrecord_to_tensor, num_parallel_calls=8)
         return dataset
