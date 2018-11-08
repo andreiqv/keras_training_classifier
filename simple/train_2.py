@@ -106,7 +106,7 @@ model.add(layers.Dense(settings.num_classes, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy', #loss='binary_crossentropy',
 			#optimizer='adagrad', 
-			optimizer=optimizers.RMSprop(lr=0.001),
+			optimizer=optimizers.RMSprop(lr=0.01),
 			metrics=['accuracy'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
