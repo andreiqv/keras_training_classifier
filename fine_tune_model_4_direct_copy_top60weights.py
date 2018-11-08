@@ -47,6 +47,7 @@ from tensorflow.keras import layers
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 from dataset_factory import GoodsDataset
 import numpy as np
 from goods_tf_records import GoodsTfrecordsDataset
@@ -121,7 +122,7 @@ for layer in model.layers[:num_layers-num_last_trainable_layers]:
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
-model.compile(optimizer='adagrad',    #'rmsprop',
+model.compile(optimizer=Adagrad(lr=0.001), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
