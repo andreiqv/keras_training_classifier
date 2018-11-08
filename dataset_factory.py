@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Старый вариант factory без crop, rotate и transforms.
+"""
+
 import argparse
 import numpy as np
 import tensorflow as tf
