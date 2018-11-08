@@ -61,7 +61,7 @@ for i, layer in enumerate(model.layers):
 G = 2
 model = multi_gpu_model(model, gpus=G)
 
-model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
+model.compile(optimizer='adagrad', #Adagrad(lr=0.01), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
               #distribute=distribution)
