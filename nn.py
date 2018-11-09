@@ -157,12 +157,16 @@ def InceptionV3_top60_layers(x, classes=1000, pooling='avg'):
 
 
 def get_InceptionV3_whole_model():
+    """ Combain together two parts of networks:
+    1-st part - 248 layers from InceptionV3
+    2-nd part - InceptionV3_top60_layers
+    """
 
     input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
     base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
                              input_tensor=input_tensor)
     
-    output_layer_number=248    
+    output_layer_number = 248    
     first_layers_model = keras.Model(inputs=base_model.input,
                                outputs=base_model.layers[output_layer_number].output)
 
@@ -171,7 +175,7 @@ def get_InceptionV3_whole_model():
 
     model = keras.Model(inputs=base_model.input, outputs=x, name='inception_v3_whole_model')
 
-    for layer in model.layers[:249]:
-        layer.trainable = False
+    #for layer in model.layers[:249]:
+    #    layer.trainable = False
 
     return model

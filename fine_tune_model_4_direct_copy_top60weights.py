@@ -144,7 +144,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 results = model.evaluate(goods_dataset.get_images_for_label(94).batch(16).repeat(), steps=6)
 print(results)
 
-model.fit(train_dataset.prefetch(2).repeat(),
+model.fit(train_dataset.prefetch(5).repeat(), # was prefetch(2)
           callbacks=callbacks,
           epochs=30,
           steps_per_epoch=1157,
