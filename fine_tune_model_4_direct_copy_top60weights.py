@@ -122,7 +122,7 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
-model.compile(optimizer=Adagrad(lr=0.001), #'adagrad',    #'rmsprop',
+model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 
@@ -202,9 +202,10 @@ Epoch 8/30 - loss: 1.5175 - acc: 0.5772 - top_6: 0.8862 - val_loss: 1.0512 - val
 num_last_trainable_layers = 60
 optimizer=Adagrad(lr=0.001)
 
-Epoch 1/30 - loss: 1.2379 - acc: 0.6404 - top_6: 0.9242 - val_loss: 3.5119 - val_acc: 0.3713 - val_top_6: 0.7273
-Epoch 2/30 - loss: 1.0710 - acc: 0.6774 - top_6: 0.9421 - val_loss: 3.5143 - val_acc: 0.3687 - val_top_6: 0.7188
-Epoch 3/30 - loss: 1.0318 - acc: 0.6849 - top_6: 0.9464 - val_loss: 3.3129 - val_acc: 0.3854 - val_top_6: 0.7456
+Epoch 1/30 - loss: 1.2307 - acc: 0.6386 - top_6: 0.9250 - val_loss: 3.5862 - val_acc: 0.3649 - val_top_6: 0.7196
+Epoch 2/30 - loss: 1.0732 - acc: 0.6739 - top_6: 0.9410 - val_loss: 3.4367 - val_acc: 0.3759 - val_top_6: 0.7309
+Epoch 10/30 - loss: 0.8951 - acc: 0.7235 - top_6: 0.9600 - val_loss: 3.0816 - val_acc: 0.4007 - val_top_6: 0.7614
+Epoch 28/30 - loss: 0.7834 - acc: 0.7549 - top_6: 0.9703 - val_loss: 2.8955 - val_acc: 0.4104 - val_top_6: 0.7772
 
 
 """
