@@ -42,8 +42,10 @@ for i, layer in enumerate(model.layers):
     print(i, layer.name)
 
 print('model.trainable_weights:', len(model.trainable_weights))
-for layer in model.layers[:30]:
+num_freeze_layers = 30
+for layer in model.layers[:num_freeze_layers]:
     layer.trainable = False
+print('{} layers was frozen'.format(num_freeze_layers))
 print('model.trainable_weights:', len(model.trainable_weights))
 
 
