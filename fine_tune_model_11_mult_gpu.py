@@ -1,24 +1,26 @@
 import tensorflow as tf
-#from tensorflow import keras
-import keras
-from keras import layers
-from keras.applications.inception_resnet_v2 import InceptionResNetV2
-from keras.applications.resnet50 import ResNet50
-from keras.applications.inception_v3 import InceptionV3
-from dataset_factory import GoodsDataset
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+
+from tensorflow.keras.optimizers import SGD, Adam, Adagrad
+from tensorflow.python.training import gradient_descent
+from tensorflow.keras.utils import multi_gpu_model
+
 import numpy as np
+from dataset_factory import GoodsDataset
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
 from goods_tf_records import InceptionV3Top60tfrecordsDataset
-from keras.optimizers import SGD, Adam, Adagrad
-from tensorflow.python.training import gradient_descent
-from keras.utils.training_utils import multi_gpu_model
+import settings
 
 #optimizer = gradient_descent.GradientDescentOptimizer(0.001)
 
 """
 NotImplementedError: Only TF native optimizers are supported with DistributionStrategy.
 """
-import settings
+
 
 
 def top_6(y_true, y_pred):
