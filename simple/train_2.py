@@ -18,8 +18,7 @@ INPUT_SHAPE = IMAGE_SIZE + (3,)
 #------------------------
 # data preparing
 
-train_datagen = ImageDataGenerator(rescale=1./255)
-"""
+train_datagen = ImageDataGenerator(
 	rescale=1./255,
 	rotation_range=40,
 	width_shift_range=0.2,
