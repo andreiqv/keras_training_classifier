@@ -54,8 +54,8 @@ from keras.applications.inception_v3 import InceptionV3
 
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-#conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
-conv_base = VGG16(weights='imagenet', include_top=False, input_tensor=input_tensor)
+conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
+#conv_base = VGG16(weights='imagenet', include_top=False, input_tensor=input_tensor)
 
 """
 model = models.Sequential()
