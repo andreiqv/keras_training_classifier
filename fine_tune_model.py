@@ -71,12 +71,14 @@ model.fit(goods_dataset.train_set.batch(100).prefetch(5).repeat(),
           validation_steps=77,
           )
 
-num_freeze_layers = 30
+
+#-----------------------------------------------
+
+num_freeze_layers = 50
 for layer in model.layers[:num_freeze_layers]:
     layer.trainable = False
 print('the first {} layers was frozen'.format(num_freeze_layers))
 print('model.trainable_weights:', len(model.trainable_weights))
-
 
 model.compile(optimizer='adagrad', #'adagrad',#'adam',
               loss='categorical_crossentropy',

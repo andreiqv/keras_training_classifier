@@ -94,6 +94,7 @@ num_last_trainable_layers = 30
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
+print('num_last_trainable_layers:', num_last_trainable_layers)
 print('model.trainable_weights:', len(model.trainable_weights))
 
 #for layer in model.layers[249:]:
