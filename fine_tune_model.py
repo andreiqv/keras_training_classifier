@@ -65,7 +65,7 @@ callbacks = [
 
 model.fit(goods_dataset.train_set.batch(100).prefetch(5).repeat(),
           callbacks=callbacks,
-          epochs=2,
+          epochs=10,
           steps_per_epoch=1157,
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
@@ -80,7 +80,7 @@ for layer in model.layers[:num_freeze_layers]:
 print('the first {} layers was frozen'.format(num_freeze_layers))
 print('model.trainable_weights:', len(model.trainable_weights))
 
-model.compile(optimizer='adagrad', #'adagrad',#'adam',
+model.compile(optimizer=Adagrad(lr=0.002), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
 model.fit(goods_dataset.train_set.batch(100).prefetch(5).repeat(),
