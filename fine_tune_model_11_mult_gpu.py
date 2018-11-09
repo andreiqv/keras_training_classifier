@@ -93,7 +93,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 
 #print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
-model.fit(train_dataset.prefetch(2).repeat(),
+model.fit(train_dataset.prefetch(32).repeat(),
           #callbacks=callbacks,
           epochs=30,
           steps_per_epoch=1157,
