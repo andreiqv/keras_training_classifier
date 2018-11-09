@@ -63,7 +63,7 @@ callbacks = [
     )
 ]
 
-model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
+model.fit(goods_dataset.train_set.batch(100).prefetch(5).repeat(),
           callbacks=callbacks,
           epochs=2,
           steps_per_epoch=1157,
@@ -81,7 +81,7 @@ print('model.trainable_weights:', len(model.trainable_weights))
 model.compile(optimizer='adagrad', #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6])
-model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
+model.fit(goods_dataset.train_set.batch(100).prefetch(5).repeat(),
           callbacks=callbacks,
           epochs=5,
           steps_per_epoch=1157,

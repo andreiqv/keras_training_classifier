@@ -40,15 +40,17 @@ input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #model = InceptionResNetV2(weights='imagenet', include_top=False, pooling='avg', 
 #  input_tensor=input_tensor)
 
-base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
-  input_tensor=input_tensor)
+with tf.device('/cpu:0'):
+    base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg', 
+        input_tensor=input_tensor)
+
 x = base_model.output
 #x = GlobalAveragePooling2D()(x)
 #x = layers.Dense(148, activation='relu')(x)
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions)
 print(model.summary())
-start_training_layer = 249
+#start_training_layer = 249
 
 print(model.summary())
 
@@ -60,8 +62,8 @@ for i, layer in enumerate(model.layers):
 
 #distribution = tf.contrib.distribute.MirroredStrategy()
 
-G = 2
-model = multi_gpu_model(model, gpus=G)
+num_gpus = 2
+model = multi_gpu_model(model, gpus=num_gpus)
 
 model.compile(optimizer='adagrad', #Adagrad(lr=0.01), #'adagrad',#'adam',
               loss='categorical_crossentropy',
@@ -92,7 +94,7 @@ valid_dataset = goods_dataset.get_valid_dataset()
 
 model.fit(train_dataset.prefetch(2).repeat(),
           callbacks=callbacks,
-          epochs=300,
+          epochs=30,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
