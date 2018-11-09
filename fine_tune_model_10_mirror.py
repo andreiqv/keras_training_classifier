@@ -55,7 +55,8 @@ distribution = tf.contrib.distribute.MirroredStrategy()
 model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6],
-              distribute=distribution)
+              #distribute=distribution,
+              )
 
 #print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
