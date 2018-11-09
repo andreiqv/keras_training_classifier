@@ -83,7 +83,7 @@ print('model.trainable_weights:', len(model.trainable_weights))
 
 num_layers = len(model.layers)
 print('num_layers:', num_layers)
-num_last_trainable_layers = 5
+num_last_trainable_layers = 30
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
@@ -135,6 +135,10 @@ history = model.fit_generator(
 на gpus=3:
 Epoch 1/30 - 430s 333ms/step 
 - loss: 13.5555 - acc: 0.1584 - val_loss: 13.5042 - val_acc: 0.1622
+
+num_last_trainable_layers = 5
+Epoch 10/30 - 353s 274ms/step - loss: 13.5579 - acc: 0.1588 - val_loss: 13.5042 - val_acc: 0.1622
+
 
 """
 
