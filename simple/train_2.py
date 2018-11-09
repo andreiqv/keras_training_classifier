@@ -2,6 +2,8 @@ import keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 
+# ImageDataGenerator works BAD
+
 #import tensorflow as tf
 
 import sys

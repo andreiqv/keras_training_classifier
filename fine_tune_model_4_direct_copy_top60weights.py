@@ -90,11 +90,13 @@ print('Weights of top60 was copied.')
 #    layer.trainable = False
 
 num_layers = len(model.layers)
-num_last_trainable_layers = 100
-for layer in model.layers[:num_layers-num_last_trainable_layers]:
-    layer.trainable = False
+print('num_layers:', num_layers)
 
-print('num_last_trainable_layers:', num_last_trainable_layers)
+#num_last_trainable_layers = 100
+#for layer in model.layers[:num_layers-num_last_trainable_layers]:
+#   layer.trainable = False
+#print('num_last_trainable_layers:', num_last_trainable_layers)
+
 print('model.trainable_weights:', len(model.trainable_weights))
 
 #for layer in model.layers[249:]:
@@ -149,7 +151,7 @@ print(results)
 
 model.fit(train_dataset.prefetch(16).repeat(), # was prefetch(2)
           callbacks=callbacks,
-          epochs=30,
+          epochs=200,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
@@ -234,30 +236,22 @@ Epoch 1/30 - 699s 604ms/step
 5) num_last_trainable_layers = 100
 optimizer=Adagrad(lr=0.01)
 
-- dataset_factory_old (нет трансформаций)
-Epoch 1/30
-1157/1157 [==============================] - 485s 419ms/step - loss: 1.3931 - acc: 0.6225 - top_6: 0.9060 - val_loss: 3.5710 - val_acc: 0.3466 - val_top_6: 0.7447
-Epoch 2/30
-1157/1157 [==============================] - 471s 407ms/step - loss: 0.7755 - acc: 0.7610 - top_6: 0.9696 - val_loss: 2.7913 - val_acc: 0.4463 - val_top_6: 0.7949
-Epoch 3/30
-1157/1157 [==============================] - 471s 407ms/step - loss: 0.5772 - acc: 0.8219 - top_6: 0.9833 - val_loss: 2.7061 - val_acc: 0.4480 - val_top_6: 0.8099
-Epoch 4/30
-1157/1157 [==============================] - 471s 407ms/step - loss: 0.4422 - acc: 0.8624 - top_6: 0.9912 - val_loss: 2.6197 - val_acc: 0.4691 - val_top_6: 0.8188
-Epoch 5/30
-1157/1157 [==============================] - 470s 406ms/step - loss: 0.3277 - acc: 0.9031 - top_6: 0.9958 - val_loss: 3.1972 - val_acc: 0.4561 - val_top_6: 0.7831
-Epoch 6/30
-1157/1157 [==============================] - 470s 406ms/step - loss: 0.2584 - acc: 0.9258 - top_6: 0.9978 - val_loss: 4.5506 - val_acc: 0.3753 - val_top_6: 0.6986
-Epoch 7/30
-1157/1157 [==============================] - 469s 405ms/step - loss: 0.2058 - acc: 0.9434 - top_6: 0.9988 - val_loss: 3.0081 - val_acc: 0.4987 - val_top_6: 0.7960
-Epoch 8/30
-1157/1157 [==============================] - 470s 406ms/step - loss: 0.1460 - acc: 0.9629 - top_6: 0.9995 - val_loss: 3.1998 - val_acc: 0.4792 - val_top_6: 0.7900
-Epoch 9/30
-1157/1157 [==============================] - 469s 405ms/step - loss: 0.1145 - acc: 0.9725 - top_6: 0.9996 - val_loss: 3.2998 - val_acc: 0.4894 - val_top_6: 0.8074
-Epoch 10/30
-1157/1157 [==============================] - 469s 405ms/step - loss: 0.1003 - acc: 0.9760 - top_6: 0.9997 - val_loss: 3.5567 - val_acc: 0.4744 - val_top_6: 0.7831
-Epoch 11/30
-1157/1157 [==============================] - 470s 406ms/step - loss: 0.0660 - acc: 0.9867 - top_6: 0.9999 - val_loss: 3.6276 - val_acc: 0.4654 - val_top_6: 0.7843
+- dataset_factory_old (нет трансформаций) 485s 419ms/step
+Epoch 1/30 - loss: 1.3931 - acc: 0.6225 - top_6: 0.9060 - val_loss: 3.5710 - val_acc: 0.3466 - val_top_6: 0.7447
+Epoch 2/30 - loss: 0.7755 - acc: 0.7610 - top_6: 0.9696 - val_loss: 2.7913 - val_acc: 0.4463 - val_top_6: 0.7949
+Epoch 3/30 - loss: 0.5772 - acc: 0.8219 - top_6: 0.9833 - val_loss: 2.7061 - val_acc: 0.4480 - val_top_6: 0.8099
+Epoch 6/30 - loss: 0.2584 - acc: 0.9258 - top_6: 0.9978 - val_loss: 4.5506 - val_acc: 0.3753 - val_top_6: 0.6986
+Epoch 11/30- loss: 0.0660 - acc: 0.9867 - top_6: 0.9999 - val_loss: 3.6276 - val_acc: 0.4654 - val_top_6: 0.7843
 
+
+- dataset_factory (c трансформациями) - 735s 635ms/step
+Epoch 1/30 - loss: 1.6209 - acc: 0.5673 - top_6: 0.8772 - val_loss: 2.6795 - val_acc: 0.4172 - val_top_6: 0.7601
+Epoch 2/30 - loss: 1.0545 - acc: 0.6798 - top_6: 0.9449 - val_loss: 2.0644 - val_acc: 0.4948 - val_top_6: 0.8298
+Epoch 3/30 - loss: 0.9018 - acc: 0.7178 - top_6: 0.9590 - val_loss: 2.1674 - val_acc: 0.4895 - val_top_6: 0.8165
+Epoch 4/30 - loss: 0.8214 - acc: 0.7424 - top_6: 0.9667 - val_loss: 2.3390 - val_acc: 0.4825 - val_top_6: 0.8018
+Epoch 5/30 - loss: 0.7465 - acc: 0.7652 - top_6: 0.9736 - val_loss: 2.1591 - val_acc: 0.5073 - val_top_6: 0.8367
+Epoch 10/30 - loss: 0.5476 - acc: 0.8229 - top_6: 0.9872 - val_loss: 2.4015 - val_acc: 0.4968 - val_top_6: 0.8225
+Epoch 12/30 - loss: 0.4717 - acc: 0.8482 - top_6: 0.9913 - val_loss: 2.3134 - val_acc: 0.5154 - val_top_6: 0.8327
 
 
 """
