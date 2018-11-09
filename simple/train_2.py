@@ -124,7 +124,7 @@ print('validation_steps:', validation_steps)
 history = model.fit_generator(
 	train_generator,
 	steps_per_epoch=train_steps_per_epoch,
-	epochs=30,
+	epochs=300,
 	validation_data=valid_generator,
 	validation_steps=validation_steps)
 
