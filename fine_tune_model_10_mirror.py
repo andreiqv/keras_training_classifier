@@ -87,5 +87,8 @@ model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
 Epoch 1/20 - 199s 172ms/step - loss: 4.2596 - acc: 0.4212 - top_6: 0.7040 
                  - val_loss: 3.9561 - val_acc: 0.4460 - val_top_6: 0.7476
 
+2) с mirror:
+Epoch 1/20 - 356s 308ms/step - loss: 3.7931 - acc: 0.4881 - top_6: 0.7474 
+- val_loss: 4.9878 - val_acc: 0.0225 - val_top_6: 0.0556
 
 """

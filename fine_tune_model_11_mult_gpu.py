@@ -7,7 +7,6 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 from tensorflow.python.training import gradient_descent
-from tensorflow.keras.utils import multi_gpu_model
 
 import numpy as np
 from dataset_factory import GoodsDataset
@@ -62,6 +61,7 @@ for i, layer in enumerate(model.layers):
 
 #distribution = tf.contrib.distribute.MirroredStrategy()
 
+from tensorflow.keras.utils import multi_gpu_model
 num_gpus = 2
 model = multi_gpu_model(model, gpus=num_gpus)
 
