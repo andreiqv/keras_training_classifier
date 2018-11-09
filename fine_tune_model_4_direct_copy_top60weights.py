@@ -119,7 +119,7 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
 from tensorflow.keras.utils import multi_gpu_model
-model = multi_gpu_model(model, gpus=2)
+model = multi_gpu_model(model, gpus=4)
 
 model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
