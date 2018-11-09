@@ -41,6 +41,12 @@ print(model.summary())
 for i, layer in enumerate(model.layers):
     print(i, layer.name)
 
+print('model.trainable_weights:', len(model.trainable_weights))
+for layer in model.layers[:30]:
+    layer.trainable = False
+print('model.trainable_weights:', len(model.trainable_weights))
+
+
 # for i in range(1, len(model.layers)):
 #     model.layers[i].set_weights(parent_model.layers[248 + i].get_weights())
 
