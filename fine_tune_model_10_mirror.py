@@ -59,6 +59,7 @@ model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
 
 #print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
+"""
 callbacks = [
     keras.callbacks.ModelCheckpoint(
         "./checkpoints/top60_181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}]_rnd_adam.hdf5",
@@ -70,6 +71,7 @@ callbacks = [
         log_dir='./tensorboard-top60',
     )
 ]
+"""
 
 model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           callbacks=callbacks,
