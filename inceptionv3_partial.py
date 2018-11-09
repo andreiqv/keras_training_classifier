@@ -6,7 +6,7 @@ import tensorflow as tf
 backend = keras.backend
 
 #regularization = None
-regularization = regularizers.l1(0.001)
+regularization = regularizers.l1(0.0001)
 
 
 def gaussian_noise_layer(input_layer, std):
