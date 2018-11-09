@@ -90,7 +90,7 @@ print('Weights of top60 was copied.')
 #    layer.trainable = False
 
 num_layers = len(model.layers)
-num_last_trainable_layers = 60
+num_last_trainable_layers = 30
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
@@ -204,5 +204,8 @@ Epoch 28/30 - loss: 0.7834 - acc: 0.7549 - top_6: 0.9703 - val_loss: 2.8955 - va
 
 
 optimizer=Adagrad(lr=0.01)
+Epoch 1/30 - loss: 1.4073 - acc: 0.6039 - top_6: 0.9043 - val_loss: 3.1335 - val_acc: 0.3705 - val_top_6: 0.7110
+Epoch 2/30 - loss: 1.0566 - acc: 0.6791 - top_6: 0.9431 - val_loss: 2.9609 - val_acc: 0.3895 - val_top_6: 0.7412
+Epoch 3/30 - loss: 0.9562 - acc: 0.7067 - top_6: 0.9535 - val_loss: 3.1973 - val_acc: 0.3521 - val_top_6: 0.7152
 
 """
