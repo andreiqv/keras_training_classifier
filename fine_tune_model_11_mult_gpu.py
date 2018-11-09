@@ -70,6 +70,7 @@ model.compile(optimizer='adagrad', #Adagrad(lr=0.01), #'adagrad',#'adam',
               metrics=['accuracy', top_6])
               #distribute=distribution)
 
+"""
 callbacks = [
     keras.callbacks.ModelCheckpoint(
         "./checkpoints/inceptionv3-181018-{epoch:02d}-{acc:.3f}-{val_acc:.3f}[{val_top_6:.3f}].hdf5",
@@ -82,7 +83,7 @@ callbacks = [
         write_images=True,
     )
 ]
-
+"""
 
 goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", 
   settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
@@ -93,10 +94,13 @@ valid_dataset = goods_dataset.get_valid_dataset()
 #print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
 
 model.fit(train_dataset.prefetch(2).repeat(),
-          callbacks=callbacks,
+          #callbacks=callbacks,
           epochs=30,
           steps_per_epoch=1157,
           validation_data=valid_dataset.repeat(),
           validation_steps=77,
           )
 
+"""
+2/1157 - ETA: 21:11:31 - loss: 7.2362 - acc: 0.0312 - top_6: 0.0625
+"""
