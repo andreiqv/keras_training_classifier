@@ -55,7 +55,7 @@ distribution = tf.contrib.distribute.MirroredStrategy()
 model.compile(optimizer=optimizer, #Adagrad(lr=0.01), #'adagrad',#'adam',
               loss='categorical_crossentropy',
               metrics=['accuracy', top_6],
-              #distribute=distribution,
+              distribute=distribution,
               )
 
 #print(model.evaluate(goods_dataset.valid_set.batch(32), steps=77))
@@ -81,3 +81,11 @@ model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
           )
+
+"""
+1) без mirror strategy:
+Epoch 1/20 - 199s 172ms/step - loss: 4.2596 - acc: 0.4212 - top_6: 0.7040 
+                 - val_loss: 3.9561 - val_acc: 0.4460 - val_top_6: 0.7476
+
+
+"""
