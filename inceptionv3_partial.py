@@ -5,6 +5,8 @@ import tensorflow as tf
 
 backend = keras.backend
 
+regularization = regularizers.l1(0.001)
+
 def gaussian_noise_layer(input_layer, std):
     noise = tf.random_normal(shape=tf.shape(input_layer), mean=0.0, stddev=std, dtype=tf.float32) 
     return input_layer + noise
@@ -49,7 +51,7 @@ def conv2d_bn(x,
         padding=padding,
         use_bias=False,
         #
-        #kernel_regularizer=regularizers.l1(0.001), # ADDED
+        kernel_regularizer=regularization, # ADDED
         #
         name=conv_name)(x)
     x = layers.BatchNormalization(axis=bn_axis, scale=False, name=bn_name)(x)
@@ -94,7 +96,8 @@ def InceptionV3_top30(inputs, classes=1000, pooling='avg'):
         name='mixed' + str(10))
 
     x = layers.GlobalAveragePooling2D(name='avg_pool')(x)
-    x = layers.Dense(classes, activation='softmax', name='predictions')(x)
+    x = layers.Dense(classes, activation='softmax', name='predictions',
+        kernel_regularizer=regularization)(x)
 
     model = keras.Model(inputs, x, name='inception_v3_top30')
     return model
