@@ -90,7 +90,7 @@ print('Weights of top60 was copied.')
 #    layer.trainable = False
 
 num_layers = len(model.layers)
-num_last_trainable_layers = 30
+num_last_trainable_layers = 100
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
 
@@ -119,7 +119,7 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
 from tensorflow.keras.utils import multi_gpu_model
-model = multi_gpu_model(model, gpus=4)
+model = multi_gpu_model(model, gpus=2)
 
 model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',

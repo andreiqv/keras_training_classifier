@@ -91,8 +91,6 @@ Epoch 1/20 - 199s 172ms/step - loss: 4.2596 - acc: 0.4212 - top_6: 0.7040
 Epoch 1/20 - 356s 308ms/step - loss: 3.7931 - acc: 0.4881 - top_6: 0.7474 
 - val_loss: 4.9878 - val_acc: 0.0225 - val_top_6: 0.0556
 
-Epoch 1/30
-1291/1291 [==============================] - 430s 333ms/step - loss: 13.5555 - acc: 0.1584 - val_loss: 13.5042 - val_acc: 0.1622
 
 
 """
