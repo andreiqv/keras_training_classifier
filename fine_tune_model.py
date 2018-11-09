@@ -65,7 +65,7 @@ callbacks = [
 
 model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           callbacks=callbacks,
-          epochs=1,
+          epochs=2,
           steps_per_epoch=1157,
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
@@ -83,7 +83,7 @@ model.compile(optimizer='adagrad', #'adagrad',#'adam',
               metrics=['accuracy', top_6])
 model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           callbacks=callbacks,
-          epochs=1,
+          epochs=5,
           steps_per_epoch=1157,
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
