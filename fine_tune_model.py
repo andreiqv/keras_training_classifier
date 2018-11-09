@@ -40,14 +40,7 @@ print(model.summary())
 
 for i, layer in enumerate(model.layers):
     print(i, layer.name)
-
 print('model.trainable_weights:', len(model.trainable_weights))
-num_freeze_layers = 30
-for layer in model.layers[:num_freeze_layers]:
-    layer.trainable = False
-print('{} layers was frozen'.format(num_freeze_layers))
-print('model.trainable_weights:', len(model.trainable_weights))
-
 
 # for i in range(1, len(model.layers)):
 #     model.layers[i].set_weights(parent_model.layers[248 + i].get_weights())
@@ -72,7 +65,25 @@ callbacks = [
 
 model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
           callbacks=callbacks,
-          epochs=50,
+          epochs=1,
+          steps_per_epoch=1157,
+          validation_data=goods_dataset.valid_set.batch(32).repeat(),
+          validation_steps=77,
+          )
+
+num_freeze_layers = 30
+for layer in model.layers[:num_freeze_layers]:
+    layer.trainable = False
+print('the first {} layers was frozen'.format(num_freeze_layers))
+print('model.trainable_weights:', len(model.trainable_weights))
+
+
+model.compile(optimizer='adagrad', #'adagrad',#'adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy', top_6])
+model.fit(goods_dataset.train_set.batch(100).prefetch(10).repeat(),
+          callbacks=callbacks,
+          epochs=1,
           steps_per_epoch=1157,
           validation_data=goods_dataset.valid_set.batch(32).repeat(),
           validation_steps=77,
