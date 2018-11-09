@@ -104,6 +104,10 @@ model.add(layers.Dense(settings.num_classes, activation='softmax'))
 #def top_6(y_true, y_pred):    
 #    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k=6)
 
+from tensorflow.keras.utils import multi_gpu_model
+num_gpus = 3
+model = multi_gpu_model(model, gpus=num_gpus)
+
 model.compile(loss='categorical_crossentropy', #loss='binary_crossentropy',
 			#optimizer='adagrad', 
 			optimizer=optimizers.RMSprop(lr=0.01),

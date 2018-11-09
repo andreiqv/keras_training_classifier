@@ -222,4 +222,8 @@ Epoch 3/30 - loss: 1.0501 - acc: 0.6793 - top_6: 0.9448 - val_loss: 1.1757 - val
 Epoch 6/30 - loss: 0.9210 - acc: 0.7164 - top_6: 0.9569 - val_loss: 1.1942 - val_acc: 0.6593 - val_top_6: 0.9294
 Epoch 10/30- loss: 0.8422 - acc: 0.7362 - top_6: 0.9657 - val_loss: 1.1846 - val_acc: 0.6710 - val_top_6: 0.9290
 
+тоже самое с multi-gpu (gpus=3) - 721s 623ms/step
+Epoch 1/30 - loss: 1.5800 - acc: 0.5678 - top_6: 0.8869 - val_loss: 1.1963 - val_acc: 0.6538 - val_top_6: 0.9282
+
+
 """
