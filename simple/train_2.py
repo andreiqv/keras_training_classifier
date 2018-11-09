@@ -18,7 +18,8 @@ INPUT_SHAPE = IMAGE_SIZE + (3,)
 #------------------------
 # data preparing
 
-train_datagen = ImageDataGenerator(
+train_datagen = ImageDataGenerator(rescale=1./255)
+"""
 	rescale=1./255,
 	rotation_range=40,
 	width_shift_range=0.2,
@@ -27,6 +28,7 @@ train_datagen = ImageDataGenerator(
 	zoom_range=0.2,
 	horizontal_flip=True,
 	fill_mode='nearest')
+"""
 
 valid_datagen = ImageDataGenerator(rescale=1./255)
 
@@ -109,8 +111,8 @@ num_gpus = 3
 model = multi_gpu_model(model, gpus=num_gpus)
 
 model.compile(loss='categorical_crossentropy', #loss='binary_crossentropy',
-			#optimizer='adagrad', 
-			optimizer=optimizers.RMSprop(lr=0.01),
+			optimizer='adagrad', 
+			#optimizer=optimizers.RMSprop(lr=0.01),
 			metrics=['accuracy'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
