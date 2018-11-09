@@ -138,7 +138,6 @@ callbacks = [
     )
 ]
 
-
 goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels", 
   settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
   settings.valid_percentage)

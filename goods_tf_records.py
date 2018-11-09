@@ -3,7 +3,7 @@ from tensorflow import keras
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
-from dataset_factory import GoodsDataset
+from dataset_factory_old import GoodsDataset
 import time
 import numpy as np
 
