@@ -83,7 +83,7 @@ print(model.summary())
 starting_copied_layer = 249
 
 
-copy_weights = False:
+copy_weights = False
 if copy_weights:
     source_top60_model = keras.models.load_model(
         "./output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5",
