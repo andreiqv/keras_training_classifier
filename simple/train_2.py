@@ -106,9 +106,8 @@ model.add(layers.Dense(settings.num_classes, activation='softmax'))
 #def top_6(y_true, y_pred):    
 #    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k=6)
 
-from keras.utils import multi_gpu_model
-num_gpus = 3
-model = multi_gpu_model(model, gpus=num_gpus)
+#from keras.utils import multi_gpu_model
+#model = multi_gpu_model(model, gpus=3)
 
 model.compile(loss='categorical_crossentropy', #loss='binary_crossentropy',
 			optimizer='adagrad', 
@@ -130,5 +129,12 @@ history = model.fit_generator(
 	validation_steps=validation_steps)
 
 
+"""
+на gpus=1:
 
+на gpus=3:
+Epoch 1/30 - 430s 333ms/step 
+- loss: 13.5555 - acc: 0.1584 - val_loss: 13.5042 - val_acc: 0.1622
+
+"""
 
