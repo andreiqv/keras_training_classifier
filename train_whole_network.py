@@ -44,6 +44,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.applications.vgg19 import VGG19
 from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.densenet import DenseNet121
 
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 from dataset_factory import GoodsDataset
@@ -61,15 +62,16 @@ FREEZE_LAYERS = 618
 
 
 def top_6(y_true, y_pred):
-    k = 6
-    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
+    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, 6)
 
 
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 #conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = ResNet50(weights='imagenet', include_top=False, input_tensor=input_tensor)
-conv_base = VGG19(weights='imagenet', include_top=False, input_tensor=input_tensor)
+#conv_base = VGG19(weights='imagenet', include_top=False, input_tensor=input_tensor)
+conv_base = DenseNet121(weights='imagenet', include_top=False, input_tensor=input_tensor)
+
 
 """
 model = models.Sequential()
@@ -108,8 +110,10 @@ print('model.trainable_weights:', len(model.trainable_weights))
 # optimizer = keras.optimizers.RMSprop()
 # optimizer = tf.train.GradientDescentOptimizer(0.2)
 
+"""
 from tensorflow.keras.utils import multi_gpu_model
 model = multi_gpu_model(model, gpus=2)
+"""
 
 model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',    #'rmsprop',
               loss='categorical_crossentropy',
@@ -147,6 +151,12 @@ model.fit(train_dataset.prefetch(16).repeat(), # was prefetch(2)
 
 
 """
+1) VGG19: 
+num_layers: 24
+model.trainable_weights: 34
+
+Epoch 1/200
+868s 751ms/step - loss: 13.5427 - acc: 0.1592 - top_6: 0.9992 - val_loss: 13.4754 - val_acc: 0.1640 - val_top_6: 1.0000
 
 
 """
