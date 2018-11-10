@@ -66,8 +66,8 @@ def top_6(y_true, y_pred):
     return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
-#conv_base = ResNet50(weights='imagenet', include_top=False, input_tensor=input_tensor)
+#conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
+conv_base = ResNet50(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = VGG19(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = DenseNet121(weights='imagenet', include_top=False, input_tensor=input_tensor)
 
