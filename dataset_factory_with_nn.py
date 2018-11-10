@@ -344,8 +344,8 @@ class GoodsDataset:
             dataset = self._augment_dataset(dataset, self.multiply, self.train_batch)
         with tf.device("/device:GPU:0"):            
             #dataset = dataset.map(self._produce_bottlenecks)
-            dataset = dataset.map(lambda filename, label: 
-                tuple(tf.py_func(self._produce_bottlenecks_py_func, [filename, label], [tf.uint8, label.dtype])))
+            dataset = dataset.map(lambda images, label: 
+                tuple(tf.py_func(self._produce_bottlenecks_py_func, [images, label])))
 
 
         return dataset
