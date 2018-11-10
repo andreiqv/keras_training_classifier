@@ -297,6 +297,7 @@ class GoodsDataset:
         return dataset
 
 
+    """
     def _produce_bottlenecks(self, images, labels):
 
         input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
@@ -309,7 +310,29 @@ class GoodsDataset:
         images = initial_layers_model.predict(images, steps=77)
 
         return images, labels
-        
+    """     
+
+
+    def _produce_bottlenecks_py_func(self, images, labels):
+
+        output_size = settings.num_classes
+
+        inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
+        #outputs = tf.placeholder(tf.float32, [None, output_size])
+
+        num_n = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+
+        x = tf.reshape(inputs, [-1, num_n])
+        W1 = weight_variable([num_n, output_size], name='W1')
+        b1 = tf.Variable(tf.zeros([output_size]))
+        outputs = tf.nn.relu(tf.matmul(x, W1) + b1)
+
+        with tf.Session() as sess:
+            init = tf.global_variables_initializer()
+            sess.run(init)
+            y = outputs.eval(feed_dict={inputs:images})
+
+        return y, labels        
 
     def get_train_dataset(self):
         with tf.device("/device:CPU:0"):
@@ -319,6 +342,9 @@ class GoodsDataset:
             dataset = self._augment_dataset(dataset, self.multiply, self.train_batch)
         with tf.device("/device:GPU:0"):            
             dataset = dataset.map(self._produce_bottlenecks)
+            dataset = dataset.map(lambda filename, label: 
+                tuple(tf.py_func(self._produce_bottlenecks_py_func, [filename, label], [tf.uint8, label.dtype])))
+
 
         return dataset
 
