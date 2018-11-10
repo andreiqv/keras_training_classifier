@@ -86,7 +86,7 @@ x = Flatten()(x)
 #predictions = Dense(settings.num_classes, activation="softmax")(x)
 
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
-model = Model(input=conv_base.input, output=predictions)
+model = Model(inputs=conv_base.input, outputs=predictions)
 
 
 num_layers = len(model.layers)
