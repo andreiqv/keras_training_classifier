@@ -435,7 +435,7 @@ if __name__ == '__main__':
           #callbacks=callbacks,
           epochs=30,
           steps_per_epoch=1157,
-          validation_data=valid_dataset,
+          #validation_data=valid_dataset,
           validation_steps=77,
           )
 
