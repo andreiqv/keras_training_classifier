@@ -409,6 +409,10 @@ if __name__ == '__main__':
         settings.valid_percentage)
     #
 
+
+    train_ds = goods_dataset.get_train_dataset()
+
+    """
     tf.enable_eager_execution()
 
     for i, (images, labels) in enumerate(goods_dataset.get_train_dataset()):
@@ -419,5 +423,5 @@ if __name__ == '__main__':
         	sys.exit(0)
           #plot_random_nine(images, labels, labels_list)
     #     q = 2
-
+    """
 
