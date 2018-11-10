@@ -257,6 +257,15 @@ Epoch 12/30 - loss: 0.4717 - acc: 0.8482 - top_6: 0.9913 - val_loss: 2.3134 - va
 6) обучение всех слоёв:
 num_layers: 313
 model.trainable_weights: 190
+780s 674ms/step 
+
+Epoch 1/200 - loss: 3.6082 - acc: 0.2315 - top_6: 0.5345 - val_loss: 3.3145 - val_acc: 0.2094 - val_top_6: 0.5231
+Epoch 2/200 - loss: 2.7468 - acc: 0.3339 - top_6: 0.7116 - val_loss: 2.7756 - val_acc: 0.2929 - val_top_6: 0.6556
+Epoch 3/200 - loss: 2.1463 - acc: 0.4209 - top_6: 0.8144 - val_loss: 2.4420 - val_acc: 0.3348 - val_top_6: 0.7150
+Epoch 10/200 - loss: 1.0646 - acc: 0.6700 - top_6: 0.9528 - val_loss: 2.1334 - val_acc: 0.4259 - val_top_6: 0.8376
+Epoch 48/200 - loss: 0.1470 - acc: 0.9575 - top_6: 0.9999 - val_loss: 1.8343 - val_acc: 0.5905 - val_top_6: 0.9147
+Epoch 50/200 - loss: 0.1341 - acc: 0.9618 - top_6: 0.9997 - val_loss: 2.0035 - val_acc: 0.5743 - val_top_6: 0.8993
+Epoch 51/200 - loss: 0.1314 - acc: 0.9626 - top_6: 0.9998 - val_loss: 2.2363 - val_acc: 0.5426 - val_top_6: 0.8880
 
 
 """
