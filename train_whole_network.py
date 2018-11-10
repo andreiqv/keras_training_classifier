@@ -43,6 +43,7 @@ from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.applications.vgg19 import VGG19
+from tensorflow.keras.applications.vgg16 import VGG16
 
 from tensorflow.keras.optimizers import SGD, Adam, Adagrad
 from dataset_factory import GoodsDataset
@@ -66,8 +67,9 @@ def top_6(y_true, y_pred):
 
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
+#conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = ResNet50(weights='imagenet', include_top=False, input_tensor=input_tensor)
+conv_base = VGG19(weights='imagenet', include_top=False, input_tensor=input_tensor)
 
 """
 model = models.Sequential()

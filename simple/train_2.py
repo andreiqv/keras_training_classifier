@@ -78,7 +78,7 @@ x = Flatten()(x)
 #predictions = Dense(settings.num_classes, activation="softmax")(x)
 
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
-#model = Model(input=conv_base.input, output=predictions)
+#model = Model(input=conv_base.input, output=predictions)  ??????????????
 model = Model(inputs=conv_base.input, outputs=predictions)
 
 print('model.trainable_weights:', len(model.trainable_weights))
@@ -113,8 +113,8 @@ from keras.utils import multi_gpu_model
 model = multi_gpu_model(model, gpus=2)
 
 model.compile(loss='categorical_crossentropy', #loss='binary_crossentropy',
-			optimizer='adagrad', 
-			#optimizer=optimizers.RMSprop(lr=0.01),
+			#optimizer='adagrad', 
+			optimizer=optimizers.RMSprop(lr=0.01),
 			metrics=['accuracy'])
 
 train_steps_per_epoch = math.ceil(train_generator.n / train_generator.batch_size)
