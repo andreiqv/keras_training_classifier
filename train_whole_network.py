@@ -115,8 +115,8 @@ from tensorflow.keras.utils import multi_gpu_model
 model = multi_gpu_model(model, gpus=2)
 """
 
-model.compile(optimizer=Adagrad(lr=0.01), #'adagrad',    #'rmsprop',
-              loss='categorical_crossentropy',
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',  #Adagrad(lr=0.01), #'adagrad',    #'rmsprop',              
               metrics=['accuracy', top_6])
 
 callbacks = [
