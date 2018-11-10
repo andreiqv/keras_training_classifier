@@ -93,13 +93,14 @@ predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = Model(inputs=conv_base.input, outputs=predictions)
 
 
+num_last_trainable_layers = 50
 num_layers = len(model.layers)
 print('num_layers:', num_layers)
-
-#num_last_trainable_layers = 100
-#for layer in model.layers[:num_layers-num_last_trainable_layers]:
-#   layer.trainable = False
-#print('num_last_trainable_layers:', num_last_trainable_layers)
+if num_last_trainable_layers is not None:
+  if num_last_trainable_layers >= 0 and num_last_trainable_layers < num_layers:
+    for layer in model.layers[:num_layers-num_last_trainable_layers]:
+      layer.trainable = False
+print('num_last_trainable_layers:', num_last_trainable_layers)
 
 print('model.trainable_weights:', len(model.trainable_weights))
 
