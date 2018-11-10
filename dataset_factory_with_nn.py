@@ -345,7 +345,7 @@ class GoodsDataset:
         with tf.device("/device:GPU:0"):            
             #dataset = dataset.map(self._produce_bottlenecks)
             dataset = dataset.map(lambda images, label: 
-                tuple(tf.py_func(self._produce_bottlenecks_py_func, [images, label], [images, label])))
+                tuple(tf.py_func(self._produce_bottlenecks_py_func, [images, label], [images.dtype, label.dtype])))
 
 
         return dataset
