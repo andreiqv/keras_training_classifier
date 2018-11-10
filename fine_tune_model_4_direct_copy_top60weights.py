@@ -254,4 +254,9 @@ Epoch 10/30 - loss: 0.5476 - acc: 0.8229 - top_6: 0.9872 - val_loss: 2.4015 - va
 Epoch 12/30 - loss: 0.4717 - acc: 0.8482 - top_6: 0.9913 - val_loss: 2.3134 - val_acc: 0.5154 - val_top_6: 0.8327
 
 
+6) обучение всех слоёв:
+num_layers: 313
+model.trainable_weights: 190
+
+
 """
