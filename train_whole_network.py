@@ -62,15 +62,14 @@ FREEZE_LAYERS = 618
 
 
 def top_6(y_true, y_pred):
-    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, 6)
-
-
+    k = 6
+    return tf.keras.metrics.top_k_categorical_accuracy(y_true, y_pred, k)
 
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-#conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
+conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = ResNet50(weights='imagenet', include_top=False, input_tensor=input_tensor)
 #conv_base = VGG19(weights='imagenet', include_top=False, input_tensor=input_tensor)
-conv_base = DenseNet121(weights='imagenet', include_top=False, input_tensor=input_tensor)
+#conv_base = DenseNet121(weights='imagenet', include_top=False, input_tensor=input_tensor)
 
 
 """
@@ -93,10 +92,10 @@ predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = Model(inputs=conv_base.input, outputs=predictions)
 
 
-num_last_trainable_layers = 50
+num_last_trainable_layers = None
 num_layers = len(model.layers)
 print('num_layers:', num_layers)
-if num_last_trainable_layers is not None:
+if num_last_trainable_layers:
   if num_last_trainable_layers >= 0 and num_last_trainable_layers < num_layers:
     for layer in model.layers[:num_layers-num_last_trainable_layers]:
       layer.trainable = False
