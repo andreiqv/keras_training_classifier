@@ -116,7 +116,7 @@ model = multi_gpu_model(model, gpus=2)
 """
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',  #Adagrad(lr=0.01), #'adagrad',    #'rmsprop',              
+              optimizer=Adam(lr=1e-3), #'adam',  #Adagrad(lr=0.01), #'adagrad',    #'rmsprop',              
               metrics=['accuracy', top_6])
 
 callbacks = [
