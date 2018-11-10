@@ -420,7 +420,7 @@ if __name__ == '__main__':
         layers.Dense(2000, input_shape=(299, 299, 3,)),
         #layers.Activation('relu'),
         layers.Dense(settings.num_classes),
-        layers.Activation('softmax'),
+        #layers.Activation('softmax'),
     ])
 
     model.compile(optimizer='adagrad', #'adagrad',#'adam',
