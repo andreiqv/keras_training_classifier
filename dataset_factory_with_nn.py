@@ -415,11 +415,13 @@ if __name__ == '__main__':
     train_dataset = goods_dataset.get_train_dataset()
     valid_dataset = goods_dataset.get_valid_dataset()    
 
-    model = Sequential([
-        Dense(2000, input_shape=(1000,)),
-        Activation('relu'),
-        Dense(settings.num_classes),
-        Activation('softmax'),
+    from tensorflow.keras import models
+	from tensorflow.keras import layers
+    model = models.Sequential([
+        layers.Dense(2000, input_shape=(1000,)),
+        layers.Activation('relu'),
+        layers.Dense(settings.num_classes),
+        layers.Activation('softmax'),
     ])
 
     model.compile(optimizer='adagrad', #'adagrad',#'adam',
