@@ -15,6 +15,8 @@ from tensorflow.keras.applications.inception_v3 import InceptionV3
 import settings
 from settings import IMAGE_SIZE
 
+INPUT_SHAPE = (8, 8, 1280)
+
 # tfe = tf.contrib.eager
 # slim = tf.contrib.slim
 
@@ -315,7 +317,7 @@ class GoodsDataset:
 
     def _produce_bottlenecks_py_func(self, images, labels):
 
-        output_size = settings.num_classes
+        output_size = 1000
 
         inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
         #outputs = tf.placeholder(tf.float32, [None, output_size])
@@ -410,7 +412,28 @@ if __name__ == '__main__':
     #
 
 
-    train_ds = goods_dataset.get_train_dataset()
+    train_dataset = goods_dataset.get_train_dataset()
+    valid_dataset = goods_dataset.get_valid_dataset()    
+
+    model = Sequential([
+        Dense(2000, input_shape=(1000,)),
+        Activation('relu'),
+        Dense(settings.num_classes),
+        Activation('softmax'),
+    ])
+
+    model.compile(optimizer='adagrad', #'adagrad',#'adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+    model.fit(train_dataset,
+          #callbacks=callbacks,
+          epochs=30,
+          steps_per_epoch=1157,
+          validation_data=valid_dataset,
+          validation_steps=77,
+          )
+
 
     """
     tf.enable_eager_execution()
