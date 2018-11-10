@@ -317,6 +317,7 @@ class GoodsDataset:
 
     def _produce_bottlenecks_py_func(self, images, labels):
 
+    	"""
         output_size = 1000
 
         inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
@@ -333,8 +334,9 @@ class GoodsDataset:
             init = tf.global_variables_initializer()
             sess.run(init)
             y = outputs.eval(feed_dict={inputs:images})
+        """
 
-        return y, labels        
+        return images, labels        
 
     def get_train_dataset(self):
         with tf.device("/device:CPU:0"):
