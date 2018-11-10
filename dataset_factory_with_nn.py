@@ -418,7 +418,7 @@ if __name__ == '__main__':
     from tensorflow.keras import models, layers    
     model = models.Sequential([
         layers.Dense(2000, input_shape=(299, 299, 3,)),
-        layers.Activation('relu'),
+        #layers.Activation('relu'),
         layers.Dense(settings.num_classes),
         layers.Activation('softmax'),
     ])
