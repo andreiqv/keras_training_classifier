@@ -83,13 +83,16 @@ def plot_random_nine(images, labels, names=[]):
 
 
 class GoodsDataset:
+    
     def __init__(self, path_list,
                  labels_list,
                  image_size,
                  train_batch,
                  valid_batch,
                  multiply,
-                 valid_percentage) -> None:
+                 valid_percentage,
+                 aug_dict=None
+                 ) -> None:
         super().__init__()
         self.path_list = path_list
         self.image_size = image_size
