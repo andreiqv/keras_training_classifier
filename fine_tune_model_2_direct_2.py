@@ -71,7 +71,8 @@ goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels",
     settings.valid_percentage)
 
 train_dataset = goods_dataset.get_train_dataset()
-valid_dataset = goods_dataset.get_valid_dataset()    
+#valid_dataset = goods_dataset.get_valid_dataset()    
+valid_dataset = train_dataset
 
 #-------------
 
