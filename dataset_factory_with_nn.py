@@ -330,12 +330,12 @@ class GoodsDataset:
         inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
         #outputs = tf.placeholder(tf.float32, [None, output_size])
 
-        num_n = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+        input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
 
         output_size_1 = 10
         x = inputs
-        x = tf.reshape(x, [-1, num_n])
-        W1 = weight_variable([num_n, output_size_1], name='W1')
+        x = tf.reshape(x, [-1, input_size])
+        W1 = weight_variable([input_size, output_size_1], name='W1')
         b1 = tf.Variable(tf.zeros([output_size_1]))
         outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
 
