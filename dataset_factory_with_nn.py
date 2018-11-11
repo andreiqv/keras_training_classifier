@@ -340,7 +340,6 @@ class GoodsDataset:
             sess.run(init)
             y = outputs.eval(feed_dict={inputs:images})
         
-
         return y, labels     
 
     def get_train_dataset(self):
