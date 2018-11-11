@@ -2,8 +2,8 @@
 IMAGE_SIZE = (299, 299)
 multiply = 5
 valid_percentage = 0.1
-train_batch = 2  # 32
-valid_batch = 2  # 32
+train_batch = 32  # 32
+valid_batch = 32  # 32
 
 # 'sort' or 'shuffle'
 dataset_order = 'shuffle' 
