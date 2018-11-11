@@ -332,12 +332,19 @@ class GoodsDataset:
 
         num_n = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
 
-        x = tf.reshape(inputs, [-1, num_n])
-        W1 = weight_variable([num_n, output_size], name='W1')
-        b1 = tf.Variable(tf.zeros([output_size]))
-        outputs = tf.nn.relu(tf.matmul(x, W1) + b1)
+        output_size_1 = 10
+        x = inputs
+        x = tf.reshape(x, [-1, num_n])
+        W1 = weight_variable([num_n, output_size_1], name='W1')
+        b1 = tf.Variable(tf.zeros([output_size_1]))
+        outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
 
-        outputs = tf.reshape(outputs, [-1, 8, 8, 1280])
+		output_size_2 = output_size     
+        W2 = weight_variable([output_size_1, output_size_2], name='W2')
+        b2 = tf.Variable(tf.zeros([output_size_2]))
+        outputs_2 = tf.nn.relu(tf.matmul(x, W1) + b2)
+
+        outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
 
         with tf.Session() as sess:
             init = tf.global_variables_initializer()
