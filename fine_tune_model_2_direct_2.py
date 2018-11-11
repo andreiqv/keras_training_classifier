@@ -23,8 +23,8 @@ import settings
 from settings import IMAGE_SIZE
 
 #INPUT_SHAPE = (8, 8, 2048)   # top-30
-#INPUT_SHAPE = (8, 8, 1280)   # top-60
-INPUT_SHAPE = (299, 299, 3)   # whole network
+INPUT_SHAPE = (8, 8, 1280)   # top-60
+#INPUT_SHAPE = (299, 299, 3)   # whole network
 
 def top_6(y_true, y_pred):
     k = 6

@@ -318,8 +318,10 @@ class GoodsDataset:
     def _produce_bottlenecks_py_func(self, images, labels):
 
 
-        """
-        output_size = 1000
+    	OUTPUT_SHAPE = (8, 8, 1280)
+    	output_shape =  OUTPUT_SHAPE
+    	output_size = 8 * 8 * 1280
+        #output_size = 1000
 
         inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
         #outputs = tf.placeholder(tf.float32, [None, output_size])
@@ -331,11 +333,13 @@ class GoodsDataset:
         b1 = tf.Variable(tf.zeros([output_size]))
         outputs = tf.nn.relu(tf.matmul(x, W1) + b1)
 
+        outputs = tf.reshape(outputs, [-1, 8, 8, 1280])
+
         with tf.Session() as sess:
             init = tf.global_variables_initializer()
             sess.run(init)
             y = outputs.eval(feed_dict={inputs:images})
-        """
+        
 
         return images, labels     
 
