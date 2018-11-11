@@ -341,7 +341,7 @@ class GoodsDataset:
             y = outputs.eval(feed_dict={inputs:images})
         
 
-        return images, labels     
+        return y, labels     
 
     def get_train_dataset(self):
         with tf.device("/device:CPU:0"):
