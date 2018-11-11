@@ -339,7 +339,7 @@ class GoodsDataset:
         b1 = tf.Variable(tf.zeros([output_size_1]))
         outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
 
-		output_size_2 = output_size     
+	    output_size_2 = output_size     
         W2 = weight_variable([output_size_1, output_size_2], name='W2')
         b2 = tf.Variable(tf.zeros([output_size_2]))
         outputs_2 = tf.nn.relu(tf.matmul(x, W1) + b2)
