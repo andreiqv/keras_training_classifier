@@ -226,7 +226,8 @@ class GoodsDataset:
 
     def _augment_dataset(self, dataset, multiply, batch):
         
-        dataset = dataset.repeat(multiply).batch(batch)
+        dataset = dataset.repeat(multiply)
+        #dataset = dataset.batch(batch)
 
         def _random_distord(images, labels):
             images = tf.image.random_flip_left_right(images)

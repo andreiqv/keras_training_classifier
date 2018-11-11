@@ -70,7 +70,7 @@ goods_dataset = GoodsDataset("dataset-181018.list", "dataset-181018.labels",
     settings.IMAGE_SIZE, settings.train_batch, settings.valid_batch, settings.multiply, 
     settings.valid_percentage)
 
-train_dataset = goods_dataset.get_train_dataset()
+train_dataset = goods_dataset.get_train_dataset().batch(4)
 #valid_dataset = goods_dataset.get_valid_dataset()    
 valid_dataset = train_dataset
 
