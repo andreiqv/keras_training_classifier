@@ -105,6 +105,10 @@ class GoodsDataset:
 		self.load_labels()
 		self.load_images()
 
+		self.aug_session = None
+		self.aug_inputs = None
+		self.aug_outputs = None
+
 		def weight_variable(shape, name=None):
 			initial = tf.truncated_normal(shape, stddev=0.1)
 			return tf.Variable(initial, name=name)
