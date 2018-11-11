@@ -316,9 +316,9 @@ class GoodsDataset:
 
 
     def _produce_bottlenecks_py_func(self, images, labels):
-
-
-    	OUTPUT_SHAPE = (8, 8, 1280)
+        
+        
+        OUTPUT_SHAPE = (8, 8, 1280)
         output_shape =  OUTPUT_SHAPE
         output_size = 8 * 8 * 1280
         #output_size = 1000
