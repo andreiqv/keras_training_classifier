@@ -330,7 +330,7 @@ class GoodsDataset:
         num_n = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
 
         x = tf.reshape(inputs, [-1, num_n])
-        W1 = weight_variable([num_n, output_size], name='W1')
+        W1 = tf.weight_variable([num_n, output_size], name='W1')
         b1 = tf.Variable(tf.zeros([output_size]))
         outputs = tf.nn.relu(tf.matmul(x, W1) + b1)
 
