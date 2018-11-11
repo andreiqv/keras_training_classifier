@@ -366,7 +366,7 @@ class GoodsDataset:
 		
 		#with tf.Session() as sess:
 		#y = self.aug_outputs.eval(feed_dict={self.aug_inputs:images})
-		y = self.aug_sess.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
+		y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 		
 		return y, labels	 
 
