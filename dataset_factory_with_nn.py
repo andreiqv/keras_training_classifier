@@ -179,7 +179,9 @@ class GoodsDataset:
 				outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
 						
 
-			sess = tf.Session()
+			#sess = tf.Session()
+			sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
+                     
 			#sess.run(tf.global_variables_initializer())
 			sess.run(tf.initialize_all_variables())
 			
