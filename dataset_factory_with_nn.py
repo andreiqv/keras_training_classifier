@@ -149,13 +149,14 @@ class GoodsDataset:
 				slim = tf.contrib.slim	
 				from tensorflow.contrib.slim.nets import inception
 				
-				#logits: the pre-softmax activations, a tensor of size [batch_size, num_classes]
-				#end_points: a dictionary from components of the network to the corresponding activation.
-				
+				# logits: the pre-softmax activations, a tensor of size [batch_size, num_classes]
+				# end_points: a dictionary from components of the network to the corresponding activation.
+				# https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/slim/python/slim/nets/inception_v3.py	
+
 				logits, end_points = inception.inception_v3(
 					inputs, num_classes=148, is_training=False)
 
-				x = end_points['Mixed_7a']
+				x = end_points['Mixed_7a']  # mixed_8x8x1280a   | Mixed_7a
 				#x = slim.fully_connected(logits, 8, scope='fc1')
 				#x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
 				x = tf.reshape(x, [-1, 8, 8, 1280])
