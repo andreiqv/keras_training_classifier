@@ -441,7 +441,8 @@ class GoodsDataset:
 		#	y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 		
 		#with tf.Session(graph=self.aug_graph) as sess:
-		y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
+		with tf.device("/device:GPU:3"):
+			y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 
 		return y, labels	 
 
