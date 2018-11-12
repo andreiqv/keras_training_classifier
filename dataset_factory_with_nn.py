@@ -119,100 +119,102 @@ class GoodsDataset:
 			initial = tf.truncated_normal(shape, stddev=0.1)
 			return tf.Variable(initial, name=name, trainable=trainable)
 		
-		graph = tf.Graph() # no necessiry
-		with graph.as_default():
+		with tf.device("/device:GPU:3"):	
 
-			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
+			graph = tf.Graph() # no necessiry
+			with graph.as_default():
 
-			model_number = 2
-			# Use keras InceptionV3 model: 
-			
-			if model_number == 1:
-				input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-				base_model = InceptionV3(weights='imagenet', include_top=False, 
-					pooling='avg', input_tensor=input_tensor)
-				output_layer_number = 248
-				first_layers_model = keras.Model(inputs=base_model.input,
-					outputs=base_model.layers[output_layer_number].output)
-				outputs = first_layers_model(inputs)
+				inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
 
-			elif model_number == 2:
-
-
-				OUTPUT_SHAPE = (8, 8, 1280)
-				output_shape =  OUTPUT_SHAPE
-				output_size = 8 * 8 * 1280			
-				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
-				output_size_1 = 10
-
-
-				slim = tf.contrib.slim	
-				from tensorflow.contrib.slim.nets import inception
+				model_number = 2
+				# Use keras InceptionV3 model: 
 				
-				# logits: the pre-softmax activations, a tensor of size [batch_size, num_classes]
-				# end_points: a dictionary from components of the network to the corresponding activation.
-				# https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/slim/python/slim/nets/inception_v3.py	
+				if model_number == 1:
+					input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+					base_model = InceptionV3(weights='imagenet', include_top=False, 
+						pooling='avg', input_tensor=input_tensor)
+					output_layer_number = 248
+					first_layers_model = keras.Model(inputs=base_model.input,
+						outputs=base_model.layers[output_layer_number].output)
+					outputs = first_layers_model(inputs)
 
-				logits, end_points = inception.inception_v3(
-					inputs, num_classes=148, is_training=False)
+				elif model_number == 2:
 
-				x = end_points['Mixed_7a']  # mixed_8x8x1280a   | Mixed_7a
-				#x = slim.fully_connected(logits, 8, scope='fc1')
-				#x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
-				x = tf.reshape(x, [-1, 8, 8, 1280])
-				outputs = x				
 
-			elif model_number == 3:
-				OUTPUT_SHAPE = (8, 8, 1280)
-				output_shape =  OUTPUT_SHAPE
-				output_size = 8 * 8 * 1280			
-				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
-				output_size_1 = 10
+					OUTPUT_SHAPE = (8, 8, 1280)
+					output_shape =  OUTPUT_SHAPE
+					output_size = 8 * 8 * 1280			
+					input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+					output_size_1 = 10
 
-				slim = tf.contrib.slim	
-				x = inputs			
-				x = tf.reshape(x, [-1, input_size])
-				x = slim.fully_connected(x, 8, scope='fc1')
-				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
-				x = tf.reshape(x, [-1, 8, 8, 1280])
-				outputs = x
 
-			elif model_number == 4:
-				model = Sequential()
-				model.add(layers.Dense(5, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
-				model.add(layers.Dense(8*8*1280, activation='softmax'))
-				model.add(layers.Reshape((-1, 8, 8, 1280)))
-				outputs = model(inputs)
+					slim = tf.contrib.slim	
+					from tensorflow.contrib.slim.nets import inception
+					
+					# logits: the pre-softmax activations, a tensor of size [batch_size, num_classes]
+					# end_points: a dictionary from components of the network to the corresponding activation.
+					# https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/slim/python/slim/nets/inception_v3.py	
 
-			elif model_number == 5:
-				OUTPUT_SHAPE = (8, 8, 1280)
-				output_shape =  OUTPUT_SHAPE
-				output_size = 8 * 8 * 1280			
-				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
-				output_size_1 = 10
-				x = inputs
-				x = tf.reshape(x, [-1, input_size])
-				W1 = weight_variable([input_size, output_size_1], name='W1')
-				b1 = tf.Variable(tf.zeros([output_size_1]), trainable=trainable)
-				outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
+					logits, end_points = inception.inception_v3(
+						inputs, num_classes=148, is_training=False)
 
-				output_size_2 = output_size	 
-				W2 = weight_variable([output_size_1, output_size_2], name='W2')
-				b2 = tf.Variable(tf.zeros([output_size_2]), trainable=trainable)
-				outputs_2 = tf.nn.relu(tf.matmul(outputs_1, W2) + b2)
+					x = end_points['Mixed_7a']  # mixed_8x8x1280a   | Mixed_7a
+					#x = slim.fully_connected(logits, 8, scope='fc1')
+					#x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
+					x = tf.reshape(x, [-1, 8, 8, 1280])
+					outputs = x				
 
-				outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
-						
+				elif model_number == 3:
+					OUTPUT_SHAPE = (8, 8, 1280)
+					output_shape =  OUTPUT_SHAPE
+					output_size = 8 * 8 * 1280			
+					input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+					output_size_1 = 10
 
-			#sess = tf.Session()
-			sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
-                     
-			sess.run(tf.global_variables_initializer())
-			
-			self.aug_graph = graph
-			self.aug_session = sess
-			self.aug_inputs = inputs
-			self.aug_outputs = outputs
+					slim = tf.contrib.slim	
+					x = inputs			
+					x = tf.reshape(x, [-1, input_size])
+					x = slim.fully_connected(x, 8, scope='fc1')
+					x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
+					x = tf.reshape(x, [-1, 8, 8, 1280])
+					outputs = x
+
+				elif model_number == 4:
+					model = Sequential()
+					model.add(layers.Dense(5, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
+					model.add(layers.Dense(8*8*1280, activation='softmax'))
+					model.add(layers.Reshape((-1, 8, 8, 1280)))
+					outputs = model(inputs)
+
+				elif model_number == 5:
+					OUTPUT_SHAPE = (8, 8, 1280)
+					output_shape =  OUTPUT_SHAPE
+					output_size = 8 * 8 * 1280			
+					input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+					output_size_1 = 10
+					x = inputs
+					x = tf.reshape(x, [-1, input_size])
+					W1 = weight_variable([input_size, output_size_1], name='W1')
+					b1 = tf.Variable(tf.zeros([output_size_1]), trainable=trainable)
+					outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
+
+					output_size_2 = output_size	 
+					W2 = weight_variable([output_size_1, output_size_2], name='W2')
+					b2 = tf.Variable(tf.zeros([output_size_2]), trainable=trainable)
+					outputs_2 = tf.nn.relu(tf.matmul(outputs_1, W2) + b2)
+
+					outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
+							
+
+				#sess = tf.Session()
+				sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
+					
+				sess.run(tf.global_variables_initializer())
+				
+				self.aug_graph = graph
+				self.aug_session = sess
+				self.aug_inputs = inputs
+				self.aug_outputs = outputs
 
 
 	def load_labels(self):
