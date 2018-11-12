@@ -117,6 +117,8 @@ class GoodsDataset:
 		graph = tf.Graph() # no necessiry
 		with graph.as_default():
 
+			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
+
 			input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 			base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
                              input_tensor=input_tensor)
@@ -132,8 +134,7 @@ class GoodsDataset:
 			output_shape =  OUTPUT_SHAPE
 			output_size = 8 * 8 * 1280
 			#output_size = 1000
-
-			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
+			
 			#outputs = tf.placeholder(tf.float32, [None, output_size])
 			
 			input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
