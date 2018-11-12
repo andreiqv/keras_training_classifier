@@ -59,7 +59,7 @@ print('num_classes:', settings.num_classes)
 
 x = conv_base.output
 x = Flatten()(x)
-predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
+predictions = layers.Dense(148, activation='softmax')(x)
 model = Model(inputs=conv_base.input, outputs=predictions)
 
 
