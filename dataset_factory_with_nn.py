@@ -147,8 +147,8 @@ class GoodsDataset:
 				slim = tf.contrib.slim	
 				x = inputs			
 				x = tf.reshape(x, [-1, input_size])
-				x = slim.fully_connected(x, 8, scope='fc4')
-				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc5')
+				x = slim.fully_connected(x, 8, scope='fc1')
+				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
 				x = tf.reshape(x, [-1, 8, 8, 1280])
 				outputs = x
 
@@ -180,7 +180,9 @@ class GoodsDataset:
 						
 
 			sess = tf.Session()
-			sess.run(tf.global_variables_initializer())
+			#sess.run(tf.global_variables_initializer())
+			sess.run(tf.initialize_all_variables())
+			
 			self.aug_graph = graph
 			self.aug_session = sess
 			self.aug_inputs = inputs
