@@ -135,7 +135,7 @@ class GoodsDataset:
 					outputs=base_model.layers[output_layer_number].output)
 				outputs = first_layers_model(inputs)
 
-			elif model_numbr == 2:
+			elif model_number == 2:
 
 				model = Sequential()
 				model.add(Dense(32, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
