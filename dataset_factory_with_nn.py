@@ -124,7 +124,7 @@ class GoodsDataset:
 
 			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
 
-			model_number = 1
+			model_number = 2
 			# Use keras InceptionV3 model: 
 			
 			if model_number == 1:
@@ -138,6 +138,25 @@ class GoodsDataset:
 
 			elif model_number == 2:
 
+
+				OUTPUT_SHAPE = (8, 8, 1280)
+				output_shape =  OUTPUT_SHAPE
+				output_size = 8 * 8 * 1280			
+				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+				output_size_1 = 10
+
+
+				slim = tf.contrib.slim	
+				from tensorflow.contrib.slim.nets import inception
+				
+				x, end_points = inception.inception_v3(
+					inputs, num_classes=148, is_training=False)
+				x = slim.fully_connected(x, 8, scope='fc1')
+				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc2')
+				x = tf.reshape(x, [-1, 8, 8, 1280])
+				outputs = x				
+
+			elif model_number == 3:
 				OUTPUT_SHAPE = (8, 8, 1280)
 				output_shape =  OUTPUT_SHAPE
 				output_size = 8 * 8 * 1280			
@@ -152,14 +171,14 @@ class GoodsDataset:
 				x = tf.reshape(x, [-1, 8, 8, 1280])
 				outputs = x
 
-			elif model_number == 3:
+			elif model_number == 4:
 				model = Sequential()
 				model.add(layers.Dense(5, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
 				model.add(layers.Dense(8*8*1280, activation='softmax'))
 				model.add(layers.Reshape((-1, 8, 8, 1280)))
 				outputs = model(inputs)
 
-			elif model_number == 4:
+			elif model_number == 5:
 				OUTPUT_SHAPE = (8, 8, 1280)
 				output_shape =  OUTPUT_SHAPE
 				output_size = 8 * 8 * 1280			
