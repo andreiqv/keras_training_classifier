@@ -8,6 +8,7 @@ import sys
 import sklearn
 import math
 
+from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
@@ -134,7 +135,15 @@ class GoodsDataset:
 					outputs=base_model.layers[output_layer_number].output)
 				outputs = first_layers_model(inputs)
 
-			elif model_number == 2:
+			elif model_numbr == 2:
+
+				model = Sequential()
+    			model.add(Dense(32, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
+    			model.add(Dense(8*8*1280, activation='softmax'))
+    			model.add(Reshape((-1, 8, 8, 1280)))
+    			outputs = model(inputs)
+
+			elif model_number == 3:
 
 				OUTPUT_SHAPE = (8, 8, 1280)
 				output_shape =  OUTPUT_SHAPE
