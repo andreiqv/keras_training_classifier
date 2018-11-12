@@ -138,14 +138,27 @@ class GoodsDataset:
 
 			elif model_number == 2:
 
+				OUTPUT_SHAPE = (8, 8, 1280)
+				output_shape =  OUTPUT_SHAPE
+				output_size = 8 * 8 * 1280			
+				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
+				output_size_1 = 10
+
+				slim = tf.contrib.slim				
+				x = tf.reshape(x, [-1, input_size])
+				x = slim.fully_connected(x, 8, scope='fc4')
+				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc5')
+				x = tf.reshape(x, [-1, 8, 8, 1280])
+
+
+			elif model_number == 3:
 				model = Sequential()
 				model.add(layers.Dense(5, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
 				model.add(layers.Dense(8*8*1280, activation='softmax'))
 				model.add(layers.Reshape((-1, 8, 8, 1280)))
 				outputs = model(inputs)
 
-			elif model_number == 3:
-
+			elif model_number == 4:
 				OUTPUT_SHAPE = (8, 8, 1280)
 				output_shape =  OUTPUT_SHAPE
 				output_size = 8 * 8 * 1280			
