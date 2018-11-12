@@ -117,6 +117,17 @@ class GoodsDataset:
 		graph = tf.Graph() # no necessiry
 		with graph.as_default():
 
+			input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
+			base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
+                             input_tensor=input_tensor)
+
+			output_layer_number = 248
+			first_layers_model = keras.Model(inputs=base_model.input,
+                                           outputs=base_model.layers[output_layer_number].output)
+
+			outputs = first_layers_model(inputs)
+
+			"""
 			OUTPUT_SHAPE = (8, 8, 1280)
 			output_shape =  OUTPUT_SHAPE
 			output_size = 8 * 8 * 1280
@@ -126,17 +137,8 @@ class GoodsDataset:
 			#outputs = tf.placeholder(tf.float32, [None, output_size])
 			
 			input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
-			output_size_1 = 10						
+			output_size_1 = 10	
 
-			input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
-			base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
-                             input_tensor=input_tensor)
-			first_layers_model = keras.Model(inputs=base_model.input,
-                                           outputs=base_model.layers[output_layer_number].output)
-
-			outputs = first_layers_model(inputs)
-
-			"""
 			x = inputs
 			x = tf.reshape(x, [-1, input_size])
 			W1 = weight_variable([input_size, output_size_1], name='W1')
