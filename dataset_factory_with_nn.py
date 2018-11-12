@@ -108,10 +108,10 @@ class GoodsDataset:
 		self.load_images()
 
 		# Create a session and a graph for augmentation
+		self.aug_graph = None
 		self.aug_session = None
 		self.aug_inputs = None
 		self.aug_outputs = None
-
 
 		trainable = False
 
@@ -159,7 +159,7 @@ class GoodsDataset:
 
 				output_size_2 = output_size	 
 				W2 = weight_variable([output_size_1, output_size_2], name='W2')
-				b2 = tf.Variable(tf.zeros([output_size_2]),trainable=trainable)
+				b2 = tf.Variable(tf.zeros([output_size_2]), trainable=trainable)
 				outputs_2 = tf.nn.relu(tf.matmul(outputs_1, W2) + b2)
 
 				outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
@@ -167,6 +167,7 @@ class GoodsDataset:
 
 			sess = tf.Session()
 			sess.run(tf.global_variables_initializer())
+			self.aug_graph = graph
 			self.aug_session = sess
 			self.aug_inputs = inputs
 			self.aug_outputs = outputs
@@ -391,7 +392,8 @@ class GoodsDataset:
 		#with tf.Session() as sess:
 		#y = self.aug_outputs.eval(feed_dict={self.aug_inputs:images})
 
-		y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
+		with self.aug_graph.as_default():
+			y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 		
 		return y, labels	 
 
