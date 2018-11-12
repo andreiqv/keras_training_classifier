@@ -138,10 +138,10 @@ class GoodsDataset:
 			elif model_numbr == 2:
 
 				model = Sequential()
-    			model.add(Dense(32, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
-    			model.add(Dense(8*8*1280, activation='softmax'))
-    			model.add(Reshape((-1, 8, 8, 1280)))
-    			outputs = model(inputs)
+				model.add(Dense(32, activation='relu', input_dim=IMAGE_SIZE[0]*IMAGE_SIZE[1]*3))
+				model.add(Dense(8*8*1280, activation='softmax'))
+				model.add(Reshape((-1, 8, 8, 1280)))
+				outputs = model(inputs)
 
 			elif model_number == 3:
 
