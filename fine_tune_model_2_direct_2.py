@@ -13,7 +13,7 @@ from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 #from dataset_factory import GoodsDataset
-from dataset_factory_with_nn import GoodsDataset
+from dataset_factory_with_nn import GoodsDataset  # 
 
 import numpy as np
 from inceptionv3_partial import InceptionV3_top60, InceptionV3_top30
@@ -76,13 +76,16 @@ valid_dataset = train_dataset
 
 #-------------
 
-inputs = keras.layers.Input(shape=INPUT_SHAPE)
+load_saved_model = True
+if load_saved_model:
+    hdf5_file = './output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5'
+    model = keras.models.load_model(
+        hdf5_file, custom_objects={'top_6': top_6})
+    print('Model was loaded from file', hdf5_file)
+else:
+  inputs = keras.layers.Input(shape=INPUT_SHAPE)
+  model = InceptionV3_top60(inputs, 148)
 
-# parent_model = keras.models.load_model(
-#     "./output/inceptionv3-top30-0.83.hdf5",
-#     custom_objects={'top_6': top_6})
-
-model = InceptionV3_top60(inputs, 148)
 print(model.summary())
 for i, layer in enumerate(model.layers):
     print(i, layer.name)

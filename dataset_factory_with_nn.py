@@ -126,7 +126,16 @@ class GoodsDataset:
 			#outputs = tf.placeholder(tf.float32, [None, output_size])
 			
 			input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
-			output_size_1 = 10			
+			output_size_1 = 10						
+
+			base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
+                             input_tensor=input_tensor)
+			first_layers_model = keras.Model(inputs=base_model.input,
+                                           outputs=base_model.layers[output_layer_number].output)
+
+			outputs = first_layers_model(inputs)
+
+			"""
 			x = inputs
 			x = tf.reshape(x, [-1, input_size])
 			W1 = weight_variable([input_size, output_size_1], name='W1')
@@ -143,6 +152,9 @@ class GoodsDataset:
 			sess = tf.Session()
 			sess.run(tf.global_variables_initializer())
 			#y = outputs.eval(feed_dict={inputs:images})
+			"""
+
+			y = outputs.eval(feed_dict={inputs:images})
 
 			self.aug_session = sess
 			self.aug_inputs = inputs
