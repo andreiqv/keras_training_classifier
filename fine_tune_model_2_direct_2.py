@@ -76,7 +76,7 @@ valid_dataset = train_dataset
 
 #-------------
 
-load_saved_model = False
+load_saved_model = True
 if load_saved_model:
     hdf5_file = './output/top60_181018-03-0.869-0.700[0.950]_rnd_adam.hdf5'
     model = keras.models.load_model(
