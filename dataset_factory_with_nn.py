@@ -110,26 +110,30 @@ class GoodsDataset:
 		self.aug_inputs = None
 		self.aug_outputs = None
 
+
+		trainable = False
+
 		def weight_variable(shape, name=None):
 			initial = tf.truncated_normal(shape, stddev=0.1)
-			return tf.Variable(initial, name=name)
+			return tf.Variable(initial, name=name, trainable=trainable)
 		
 		graph = tf.Graph() # no necessiry
 		with graph.as_default():
 
 			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
 
+			# Use keras InceptionV3 model: 
+			"""
 			input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 			base_model = InceptionV3(weights='imagenet', include_top=False, pooling='avg',
                              input_tensor=input_tensor)
-
 			output_layer_number = 248
 			first_layers_model = keras.Model(inputs=base_model.input,
                                            outputs=base_model.layers[output_layer_number].output)
-
 			outputs = first_layers_model(inputs)
 
 			"""
+
 			OUTPUT_SHAPE = (8, 8, 1280)
 			output_shape =  OUTPUT_SHAPE
 			output_size = 8 * 8 * 1280
@@ -143,18 +147,17 @@ class GoodsDataset:
 			x = inputs
 			x = tf.reshape(x, [-1, input_size])
 			W1 = weight_variable([input_size, output_size_1], name='W1')
-			b1 = tf.Variable(tf.zeros([output_size_1]))
+			b1 = tf.Variable(tf.zeros([output_size_1]), trainable=trainable)
 			outputs_1 = tf.nn.relu(tf.matmul(x, W1) + b1)
 
 			output_size_2 = output_size	 
 			W2 = weight_variable([output_size_1, output_size_2], name='W2')
-			b2 = tf.Variable(tf.zeros([output_size_2]))
+			b2 = tf.Variable(tf.zeros([output_size_2]),trainable=trainable)
 			outputs_2 = tf.nn.relu(tf.matmul(outputs_1, W2) + b2)
 
 			outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
 
-			#y = outputs.eval(feed_dict={inputs:images})
-			"""
+						
 
 			sess = tf.Session()
 			sess.run(tf.global_variables_initializer())
