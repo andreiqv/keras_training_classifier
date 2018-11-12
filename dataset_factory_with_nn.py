@@ -144,7 +144,8 @@ class GoodsDataset:
 				input_size = IMAGE_SIZE[0]*IMAGE_SIZE[1]*3
 				output_size_1 = 10
 
-				slim = tf.contrib.slim				
+				slim = tf.contrib.slim	
+				x = inputs			
 				x = tf.reshape(x, [-1, input_size])
 				x = slim.fully_connected(x, 8, scope='fc4')
 				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc5')
