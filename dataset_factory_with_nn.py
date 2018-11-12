@@ -150,7 +150,7 @@ class GoodsDataset:
 				x = slim.fully_connected(x, 8, scope='fc4')
 				x = slim.fully_connected(x, output_size, activation_fn=None, scope='fc5')
 				x = tf.reshape(x, [-1, 8, 8, 1280])
-
+				outputs = x
 
 			elif model_number == 3:
 				model = Sequential()
