@@ -153,11 +153,11 @@ class GoodsDataset:
 
 			outputs = tf.reshape(outputs_2, [-1, 8, 8, 1280])
 
-			sess = tf.Session()
-			sess.run(tf.global_variables_initializer())
 			#y = outputs.eval(feed_dict={inputs:images})
 			"""
 
+			sess = tf.Session()
+			sess.run(tf.global_variables_initializer())
 			self.aug_session = sess
 			self.aug_inputs = inputs
 			self.aug_outputs = outputs
