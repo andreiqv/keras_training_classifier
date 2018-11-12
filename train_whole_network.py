@@ -3,33 +3,7 @@
 """
 Прямой проход без хеширования промежуточных данных.
 Последние 60 слоев берутся из inceptionv3_partial.py
-Замораживаются первые 249 слоев сети InceptionV3.
-
-Epoch 1/300
-1157/1157 [==============================] - 1105s 955ms/step 
-- loss: 1.5288 - acc: 0.5829 - top_6: 0.8920 
-- val_loss: 3.2239 - val_acc: 0.3697 - val_top_6: 0.6985
-
-
-
---
-all false trainable:
-[1.639923135439555, 0.3680555572112401, 0.9791666666666666]
-Epoch 1/50 - 1055s 912ms/step - loss: 2.1915 - acc: 0.4807 - top_6: 0.8107 
- - val_loss: 1.0686 - val_acc: 0.6972 - val_top_6: 0.9501
-Epoch 2/50 - 992s 857ms/step - loss: 2.1883 - acc: 0.4818 - top_6: 0.8103 
- - val_loss: 1.0649 - val_acc: 0.6983 - val_top_6: 0.9505
-Epoch 3/50 - 994s 859ms/step - loss: 2.2185 - acc: 0.4771 - top_6: 0.8094 
- - val_loss: 1.0639 - val_acc: 0.6995 - val_top_6: 0.9509
-
-
-обучать последние 10 слоев:
-Epoch 1/50 - loss: 1.6911 - acc: 0.5556 - top_6: 0.8710 - val_loss: 1.1406 - val_acc: 0.6757 - val_top_6: 0.9351
-Epoch 2/50 - loss: 1.4247 - acc: 0.5921 - top_6: 0.8971 - val_loss: 1.1161 - val_acc: 0.6742 - val_top_6: 0.9357
-Epoch 3/50 - loss: 1.3506 - acc: 0.6108 - top_6: 0.9057 - val_loss: 1.1025 - val_acc: 0.6754 - val_top_6: 0.9378
-Epoch 4/50 - loss: 1.3249 - acc: 0.6150 - top_6: 0.9090 - val_loss: 1.0839 - val_acc: 0.6823 - val_top_6: 0.9390
-Epoch 5/50 - loss: 1.3133 - acc: 0.6145 - top_6: 0.9110 - val_loss: 1.0971 - val_acc: 0.6823 - val_top_6: 0.9365
-
+Замораживаются первые несколько слоев сети.
 """
 
 # https://github.com/tensorflow/tensorflow/issues/22837#issuecomment-428327601
@@ -81,13 +55,10 @@ model.add(layers.Dense(settings.num_classes, activation='softmax'))
 print(model.summary())
 """
 
+print('num_classes:', settings.num_classes)
+
 x = conv_base.output
 x = Flatten()(x)
-#x = Dense(1024, activation="relu")(x)
-#x = Dropout(0.5)(x)
-#x = Dense(1024, activation="relu")(x)
-#predictions = Dense(settings.num_classes, activation="softmax")(x)
-
 predictions = layers.Dense(settings.num_classes, activation='softmax')(x)
 model = Model(inputs=conv_base.input, outputs=predictions)
 
