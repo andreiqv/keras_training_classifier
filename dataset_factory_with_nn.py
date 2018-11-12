@@ -123,7 +123,7 @@ class GoodsDataset:
 
 			inputs = tf.placeholder(tf.float32, [None, IMAGE_SIZE[0], IMAGE_SIZE[1], 3])
 
-			model_number = 1
+			model_number = 2
 			# Use keras InceptionV3 model: 
 			
 			if model_number == 1:
