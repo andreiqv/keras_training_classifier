@@ -413,8 +413,8 @@ class GoodsDataset:
 		#with self.aug_graph.as_default():
 		#	y = self.aug_session.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 		
-		with tf.Session(graph=self.aug_graph) as sess:
-			y = sess.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
+		#with tf.Session(graph=self.aug_graph) as sess:
+		y = self.aug_sess.run(self.aug_outputs, feed_dict={self.aug_inputs: images})
 
 		return y, labels	 
 
