@@ -158,8 +158,6 @@ class GoodsDataset:
 			#y = outputs.eval(feed_dict={inputs:images})
 			"""
 
-			#y = outputs.eval(feed_dict={inputs:images})
-
 			self.aug_session = sess
 			self.aug_inputs = inputs
 			self.aug_outputs = outputs
