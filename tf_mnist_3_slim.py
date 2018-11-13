@@ -144,6 +144,12 @@ with graph.as_default():
 	with tf.Session() as sess:						# Connect to the TF runtime.
 		init = tf.global_variables_initializer()
 		sess.run(init)		# Randomly initialize weights.
+
+		model_path = 'path/to/vgg_16.ckpt'
+		variables_to_restore = slim.get_variables_to_restore(exclude=['fc8'])
+		restorer = tf.train.Saver(variables_to_restore)
+		restorer.restore(sess,model_path)
+
 		for step in range(NUM_STEPS):				# Train iteratively for NUM_STEPS.			
 			x_data, y_data = mnist.train.next_batch(BATCH_SIZE) # Load one batch of input data
 			sess.run(train_op, {x: x_data, y: y_data}) 	 # Perform one training step.
