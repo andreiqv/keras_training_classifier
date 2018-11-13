@@ -8,7 +8,8 @@ import sys
 import numpy as np
 np.set_printoptions(precision=4, suppress=True)
 
-from tensorflow.contrib.slim.nets import inception
+import models.inception_v3 as inception
+#from tensorflow.contrib.slim.nets import inception
 slim = tf.contrib.slim
 
 from tensorflow.examples.tutorials.mnist import input_data
