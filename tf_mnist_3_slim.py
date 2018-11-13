@@ -145,7 +145,7 @@ with graph.as_default():
 		init = tf.global_variables_initializer()
 		sess.run(init)		# Randomly initialize weights.
 
-		model_path = 'path/to/vgg_16.ckpt'
+		model_path = 'models/inception_v3.ckpt'
 		variables_to_restore = slim.get_variables_to_restore(exclude=['fc8'])
 		restorer = tf.train.Saver(variables_to_restore)
 		restorer.restore(sess,model_path)
