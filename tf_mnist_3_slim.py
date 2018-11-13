@@ -62,7 +62,6 @@ with graph.as_default():
 		logits, end_points = inception.inception_v3(
 			x_images, num_classes=10, is_training=True)
 
-
 	if NN == 2:  # SLIM simple NN
 
 		print('use slim')
@@ -145,10 +144,10 @@ with graph.as_default():
 		init = tf.global_variables_initializer()
 		sess.run(init)		# Randomly initialize weights.
 
-		model_path = 'models/inception_v3.ckpt'
-		variables_to_restore = slim.get_variables_to_restore(exclude=['fc8'])
-		restorer = tf.train.Saver(variables_to_restore)
-		restorer.restore(sess,model_path)
+		#model_path = 'models/inception_v3.ckpt'
+		#variables_to_restore = slim.get_variables_to_restore(exclude=['fc8'])
+		#restorer = tf.train.Saver(variables_to_restore)
+		#restorer.restore(sess,model_path)
 
 		for step in range(NUM_STEPS):				# Train iteratively for NUM_STEPS.			
 			x_data, y_data = mnist.train.next_batch(BATCH_SIZE) # Load one batch of input data
