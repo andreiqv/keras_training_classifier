@@ -112,10 +112,10 @@ callbacks = [
     )
 ]
 
-model.fit(train_dataset,   # goods_dataset.train_set.prefetch(10).repeat(),
+model.fit(train_dataset.repeat(),   # goods_dataset.train_set.prefetch(10).repeat(),
           callbacks=callbacks,
           epochs=100,
           steps_per_epoch=1157,
-          validation_data=valid_dataset,    #goods_dataset.valid_set.repeat(),
+          validation_data=valid_dataset.repeat(),    #goods_dataset.valid_set.repeat(),
           validation_steps=77,
           )
