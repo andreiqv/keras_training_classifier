@@ -86,9 +86,12 @@ print('model.trainable_weights:', len(model.trainable_weights))
 
 num_layers = len(model.layers)
 print('num_layers:', num_layers)
+
+"""
 num_last_trainable_layers = 60
 for layer in model.layers[:num_layers-num_last_trainable_layers]:
     layer.trainable = False
+"""
 
 print('model.trainable_weights:', len(model.trainable_weights))
 #  if num_last_trainable_layers = 60
