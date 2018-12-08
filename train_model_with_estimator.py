@@ -4,7 +4,7 @@ https://github.com/mnoukhov/tf-estimator-mnist
 """
 
 import tensorflow as tf
-import mnist_dataset as dataset
+#import mnist_dataset as dataset
 from utils.timer import timer
 
 IMAGE_SIZE = (299, 299)
@@ -47,6 +47,12 @@ def eval_data():
 	return valid_dataset.repeat().batch(BATCH_SIZE)
 
 #-----------
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.layers import Dropout, Flatten, Dense, GlobalAveragePooling2D
+from tensorflow.keras.models import Sequential, Model
+
 input_tensor = keras.layers.Input(shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3))
 conv_base = InceptionV3(weights='imagenet', include_top=False, input_tensor=input_tensor)
 x = conv_base.output
