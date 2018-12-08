@@ -7,6 +7,7 @@ import tensorflow as tf
 #import mnist_dataset as dataset
 from utils.timer import timer
 
+import settings
 IMAGE_SIZE = (299, 299)
 BATCH_SIZE = 32
 
@@ -37,14 +38,14 @@ def train_data():
 	#data = data.cache()
 	#data = data.batch(FLAGS.batch_size)
 	#return data
-	return train_dataset.prefetch(2).repeat().batch(BATCH_SIZE)
+	return train_dataset.prefetch(2).repeat()
 
 def eval_data():
 	#data = dataset.test(FLAGS.data_dir)
 	#data = data.cache()
 	#data = data.batch(FLAGS.batch_size)
 	#return data
-	return valid_dataset.repeat().batch(BATCH_SIZE)
+	return valid_dataset.repeat()
 
 #-----------
 from tensorflow.keras.applications.inception_v3 import InceptionV3
